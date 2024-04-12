@@ -24,7 +24,7 @@ export default {
         codeFlash: {
           "0%, 60%": { opacity: 1 },
           "61%, 75%": { opacity: 0 },
-          "76%": { opacit: 1 }
+          "76%": { opacity: 1 }
         }
       },
       animation: {

@@ -586,6 +586,24 @@ video {
   width: 100%;
 }
 
+@keyframes codeFlash {
+  0%, 60% {
+    opacity: 1;
+  }
+
+  61%, 75% {
+    opacity: 0;
+  }
+
+  76% {
+    opacity: 1;
+  }
+}
+
+.animate-codeFlash {
+  animation: codeFlash 6s step-start infinite;
+}
+
 .resize {
   resize: both;
 }
@@ -616,14 +634,31 @@ video {
   padding: 1.5rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
 
 .font-open-sans {
@@ -642,6 +677,12 @@ video {
 .text-neutral-200 {
   --tw-text-opacity: 1;
   color: rgb(229 229 229 / var(--tw-text-opacity));
+}
+
+.shadow-top-shadow {
+  --tw-shadow: 0 -1px 4px rgba(0, 0, 0, 0.3);
+  --tw-shadow-colored: 0 -1px 4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .nav-link {

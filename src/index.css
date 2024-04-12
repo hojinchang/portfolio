@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .nav-link {
-    @apply flex flex-col items-end w-fit
+    @apply flex flex-col items-end w-fit transform transition duration-300 lg:hover:scale-105
 }
 
 .nav-top-text {
@@ -11,5 +11,5 @@
 }
 
 .nav-bottom-text {
-    @apply leading-snug font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg
+    @apply leading-snug font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg transform transition duration-300 lg:group-hover:text-neutral-500
 }
