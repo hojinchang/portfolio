@@ -1,11 +1,12 @@
-import { useState } from 'react'
 
-function App() {
+import AppRouter from "./routers/AppRouter"
+
+function App(): React.ReactElement {
 
   return (
-    <div>
-      Hey
-    </div>
+    <>
+      <AppRouter /> 
+    </>
   )
 }
 
