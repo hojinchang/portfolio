@@ -19,6 +19,16 @@ export default {
       },
       boxShadow: {
         "top-shadow": "0 -1px 4px rgba(0, 0, 0, 0.3)"
+      },
+      keyframes: {
+        codeFlash: {
+          "0%, 60%": { opacity: 1 },
+          "61%, 75%": { opacity: 0 },
+          "76%": { opacit: 1 }
+        }
+      },
+      animation: {
+        codeFlash: "codeFlash 6s step-start infinite"
       }
     },
   },
