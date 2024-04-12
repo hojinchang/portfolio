@@ -7,9 +7,9 @@
 }
 
 .nav-top-text {
-    @apply leading-none font-semibold text-neutral-500 text-xs lg:text-sm
+    @apply leading-none font-semibold text-neutral-500 text-2xs md:text-xs lg:text-sm
 }
 
 .nav-bottom-text {
-    @apply leading-snug font-medium text-neutral-200 text-base lg:text-lg
+    @apply leading-snug font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg
 }

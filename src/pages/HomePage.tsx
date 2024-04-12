@@ -7,6 +7,7 @@ const HomePage = () => {
 
     const dispatch = useDispatch();
 
+    // Update the isMobile global state
     useEffect(() => {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
