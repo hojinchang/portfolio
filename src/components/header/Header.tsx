@@ -8,9 +8,9 @@ const Header: FC = () => {
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
     return (
-        <div className={`relative flex bg-neutral-800 z-100 ${isMobile ? "p-6" : "px-6 pt-10 pb-5"}`}>
-            <header className="w-full">
-                <NavLink to="/">
+        <div className={`relative`}>
+            <header className={`fixed left-6 ${isMobile ? "top-6" : "top-10"}`}>
+                <NavLink to="/" className="z-100">
                     <h1 className="text-3xl text-neutral-200 font-semibold"><span>{"< h "}</span><span className="animate-codeFlash">{"/>"}</span></h1>
                 </NavLink>
             </header>

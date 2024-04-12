@@ -9,7 +9,7 @@ const AppRouter: FC = () => {
 
     return (
         <BrowserRouter>
-            <div className="relative bg-neutral-800 min-h-screen font-open-sans">
+            <div className="relative bg-neutral-800 text-neutral-200 min-h-screen font-open-sans overflow-hidden px-4">
                 <Header />
                 <Nav />
                 <Routes>

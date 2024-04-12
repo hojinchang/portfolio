@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { setIsMobile } from "../features/isMobile/isMobileSlice";
+import HomeSection from "../sections/HomeSection";
 
-const HomePage = () => {
+const HomePage: FC = () => {
 
     const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ const HomePage = () => {
 
     return (
         <main>
-            
+            <HomeSection />
         </main>
     )
 }
