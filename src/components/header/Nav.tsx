@@ -1,40 +1,39 @@
 import { FC } from "react"
-import { NavLink } from "react-router-dom";
 
 const Nav:FC = () => {
 
     return (
-        <nav className="flex justify-center">
+        <nav className="flex justify-center absolute top-0 w-full">
             <ul className="flex gap-6 lg:gap-16">
                 <li>
-                    <NavLink to="/" className="nav-link">
+                    <a href="#" className="nav-link">
                         <p className="nav-top-text">00</p>
                         <p className="nav-bottom-text"><span>//</span> HOME</p>
-                    </NavLink>
+                    </a>
                 </li>
                 <li>
-                    <NavLink to="/projects" className="nav-link">
+                    <a href="#" className="nav-link">
                         <p className="nav-top-text">01</p>
                         <p className="nav-bottom-text"><span>//</span> PROJECTS</p>
-                    </NavLink>
+                    </a>
                 </li>
                 <li>
-                    <NavLink to="/about" className="nav-link">
+                    <a href="#" className="nav-link">
                         <p className="nav-top-text">02</p>
                         <p className="nav-bottom-text"><span>//</span> ABOUT</p>
-                    </NavLink>
+                    </a>
                 </li>
                 <li>
-                    <NavLink to="/tech-stack" className="nav-link">
+                    <a href="#" className="nav-link">
                         <p className="nav-top-text">03</p>
                         <p className="nav-bottom-text"><span>//</span> TECH STACK</p>
-                    </NavLink>
+                    </a>
                 </li>
                 <li>
-                    <NavLink to="/contact"  className="nav-link">
+                    <a href="#"  className="nav-link">
                         <p className="nav-top-text">04</p>
                         <p className="nav-bottom-text"><span>//</span> CONTACT</p>
-                    </NavLink>
+                    </a>
                 </li>
             </ul>
         </nav>
