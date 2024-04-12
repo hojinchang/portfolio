@@ -1,12 +1,15 @@
+import { FC } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Header from "../components/header/Header";
 import HomePage from "../pages/HomePage";
 
-const AppRouter = () => {
+const AppRouter: FC = () => {
 
     return (
         <BrowserRouter>
-            <div>
+            <div className="bg-neutral-800 min-h-screen font-open-sans">
+                <Header />
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                 </Routes>

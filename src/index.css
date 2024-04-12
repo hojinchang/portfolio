@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.nav-link {
+    @apply flex flex-col items-end w-fit
+}
+
+.nav-top-text {
+    @apply leading-none font-semibold text-neutral-500 text-xs lg:text-sm
+}
+
+.nav-bottom-text {
+    @apply leading-snug font-medium text-neutral-200 text-base lg:text-lg
+}
