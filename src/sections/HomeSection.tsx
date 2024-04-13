@@ -1,8 +1,20 @@
 import { FC } from "react"
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import marqueeAnimation from "../global/marquee";
 
 const HomeSection: FC = () => {
+
+    // fade in animation for job titles
+    useGSAP(() => {
+        gsap.from(".job-titles", {
+            opacity: 0,
+            y: 80,
+            duration: 1,
+            ease: "ease"
+        })
+    });
 
     marqueeAnimation();
 
@@ -28,7 +40,7 @@ const HomeSection: FC = () => {
                 </div>
 
                 <div>
-                    <h2 className="text-base xs:text-lg font-semi text-neutral-400 mt-4 text-center 2xs:mt-8 md:text-xl md:mt-12 lg:text-2xl lg:mt-14">FULL STACK DEVELOPER, COMPUTER VISION & MACHINE LEARNING ENGINEER</h2>
+                    <h2 className="job-titles text-base xs:text-lg font-semi text-neutral-400 mt-4 text-center 2xs:mt-8 md:text-xl md:mt-12 lg:text-2xl lg:mt-14">FULL STACK DEVELOPER, COMPUTER VISION & MACHINE LEARNING ENGINEER</h2>
                 </div>
             </div>
 
