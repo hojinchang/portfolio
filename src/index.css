@@ -11,9 +11,21 @@
 }
 
 .nav-bottom-text {
-    @apply leading-snug font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg transform transition duration-300 lg:group-hover:text-neutral-500
+    @apply leading-none font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg transform transition duration-300 lg:group-hover:text-neutral-500
 }
 
 .name-marquee {
     @apply text-[70px] 2xs:text-8xl font-semibold text-neutral-200 whitespace-nowrap md:text-[120px] lg:text-[160px]
+}
+
+.scroll-indicator {
+    @apply block w-5 h-5 border-b-2 border-r-2 border-neutral-200 transform rotate-45 -my-2.5 animate-scrollDown
+}
+
+.scroll-indicator:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.scroll-indicator:nth-child(1) {
+    animation-delay: 0.4s;
 }

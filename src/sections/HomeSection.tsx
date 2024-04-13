@@ -1,10 +1,14 @@
 import { FC } from "react"
+import { useSelector } from "react-redux";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import { RootState } from "../store/store";
 import marqueeAnimation from "../global/marquee";
+import ScrollDown from "../components/header/ScrollDown";
 
 const HomeSection: FC = () => {
+    const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
     // fade in animation for job titles
     useGSAP(() => {
@@ -22,7 +26,7 @@ const HomeSection: FC = () => {
         <section className="h-screen relative">
             <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-5xl mx-auto">
                 <div className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
-                    <div className="marquee-content flex gap-52 main-text w-full leading-normal">
+                    <div className="marquee-content flex gap-52 main-text w-full">
                         <div className="name-marquee w-full">
                             <span className="marquee-letter inline-block">H</span>
                             <span className="marquee-letter inline-block">o</span>
@@ -40,10 +44,11 @@ const HomeSection: FC = () => {
                 </div>
 
                 <div>
-                    <h2 className="job-titles text-base xs:text-lg font-semi text-neutral-400 mt-4 text-center 2xs:mt-8 md:text-xl md:mt-12 lg:text-2xl lg:mt-14">FULL STACK DEVELOPER, COMPUTER VISION & MACHINE LEARNING ENGINEER</h2>
+                    <h2 className="job-titles text-base xs:text-lg font-semibold text-neutral-400 mt-4 text-center 2xs:mt-8 md:text-xl md:mt-12 lg:text-2xl lg:mt-14">FULL STACK DEVELOPER, COMPUTER VISION & MACHINE LEARNING ENGINEER</h2>
                 </div>
             </div>
 
+            {!isMobile && <ScrollDown />}
         </section>
     )
 }

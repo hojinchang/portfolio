@@ -25,10 +25,22 @@ export default {
           "0%, 60%": { opacity: 1 },
           "61%, 70%": { opacity: 0 },
           "71%": { opacity: 1 }
+        },
+        scrollDown: {
+          "0%": { 
+            opacity: 0,
+            transform: "rotate(45deg) translate(-15px, -15px)"
+          },
+          "50%": { opacity: 1 },
+          "100%": { 
+            opacity: 0,
+            transform: "rotate(45deg) translate(15px, 15px)"
+          }
         }
       },
       animation: {
-        codeFlash: "codeFlash 4s step-start infinite"
+        codeFlash: "codeFlash 4s step-start infinite",
+        scrollDown: "scrollDown 2s infinite"
       }
     },
   },
