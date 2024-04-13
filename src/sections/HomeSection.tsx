@@ -1,15 +1,11 @@
 import { FC } from "react"
-import { useSelector } from "react-redux";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { RootState } from "../store/store";
 import marqueeAnimation from "../global/marquee";
 import ScrollDown from "../components/header/ScrollDown";
 
 const HomeSection: FC = () => {
-    const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
-
     // fade in animation for job titles
     useGSAP(() => {
         gsap.from(".job-titles", {
@@ -40,6 +36,19 @@ const HomeSection: FC = () => {
                             <span className="marquee-letter inline-block">n</span>
                             <span className="marquee-letter inline-block">g</span>
                         </div>
+                        <div className="name-marquee w-full">
+                            <span className="marquee-letter inline-block">H</span>
+                            <span className="marquee-letter inline-block">o</span>
+                            <span className="marquee-letter inline-block">j</span>
+                            <span className="marquee-letter inline-block">i</span>
+                            <span className="marquee-letter inline-block">n</span>
+                            <span className="marquee-letter inline-block mx-4 sm:mx-8"></span>
+                            <span className="marquee-letter inline-block">C</span>
+                            <span className="marquee-letter inline-block">h</span>
+                            <span className="marquee-letter inline-block">a</span>
+                            <span className="marquee-letter inline-block">n</span>
+                            <span className="marquee-letter inline-block">g</span>
+                        </div>
                     </div>
                 </div>
 
@@ -48,7 +57,7 @@ const HomeSection: FC = () => {
                 </div>
             </div>
 
-            {!isMobile && <ScrollDown />}
+            <ScrollDown />
         </section>
     )
 }

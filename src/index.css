@@ -19,7 +19,7 @@
 }
 
 .scroll-indicator {
-    @apply block w-5 h-5 border-b-2 border-r-2 border-neutral-200 transform rotate-45 -my-2.5 animate-scrollDown
+    @apply block w-4 h-4 md:w-5 md:h-5 border-b-2 border-r-2 border-neutral-200 transform rotate-45 -my-2.5 animate-scrollDown
 }
 
 .scroll-indicator:nth-child(2) {

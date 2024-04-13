@@ -21,10 +21,6 @@ const marqueeAnimation = () => {
         const marqueeContent = marquee?.firstChild as HTMLElement;     
         
         if (marquee && marqueeContent) {
-            // Close the marquee content
-            const marqueeContentClone = marqueeContent?.cloneNode(true);
-            marquee.append(marqueeContentClone);
-            
             let tween: gsap.core.Tween;
             const playMarquee = () => {
                 let progress = tween ? tween.progress() : 0;
@@ -49,7 +45,7 @@ const marqueeAnimation = () => {
             gsap.from(".marquee-letter", {
                 opacity: 0,
                 y: 150,
-                stagger: 0.05,
+                stagger: 0.075,
                 duration: 0.75,
                 // Animate the marquee scrolling
                 onComplete: () => {
@@ -58,6 +54,11 @@ const marqueeAnimation = () => {
             });
         
             window.addEventListener("resize", debounce(playMarquee));
+    
+            // Clean up the event listener
+            return () => {
+                window.removeEventListener("resize", debounce(playMarquee));
+            };
         }
     });
 }
