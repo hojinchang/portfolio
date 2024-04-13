@@ -50,10 +50,12 @@ const marqueeAnimation = () => {
             gsap.from(".marquee-letter", {
                 opacity: 0,
                 y: 150,
-                stagger: 0.1,
+                stagger: 0.05,
                 duration: 0.75,
                 // Animate the marquee scrolling
-                onComplete: playMarquee
+                onComplete: () => {
+                    playMarquee();
+                }
             });
         
             window.addEventListener("resize", debounce(playMarquee));
