@@ -27,7 +27,7 @@ const HomePage: FC = () => {
     }, [dispatch]);
 
     return (
-        <main className={isMobile ? "pb-20" : ""}>
+        <main className={`px-4 ${isMobile ? "pb-20" : ""}`}>
             <HomeSection />
             <ProjectSection />
         </main>

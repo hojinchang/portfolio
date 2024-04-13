@@ -18,7 +18,8 @@ export default {
         "xs": "550px"
       },
       boxShadow: {
-        "top-shadow": "0 -1px 4px rgba(0, 0, 0, 0.3)"
+        "top-shadow": "0 -2px 8px rgba(0, 0, 0, 0.4)",
+        "bot-shadow": "0 5px 8px rgba(0, 0, 0, 0.4)"
       },
       keyframes: {
         codeFlash: {
