@@ -14,13 +14,17 @@ const marqueeAnimation = () => {
             }, 500, event) as any; // Casting to any to satisfy the types
         };
     }
-
+    
     useGSAP(() => {
         // Get the marquee and marqueeContent
         const marquee = document.querySelector(".marquee");
         const marqueeContent = marquee?.firstChild as HTMLElement;     
         
         if (marquee && marqueeContent) {
+            // Clone the marquee content
+            const marqueeContentClone = marqueeContent?.cloneNode(true);
+            marquee.append(marqueeContentClone);
+            
             let tween: gsap.core.Tween;
             const playMarquee = () => {
                 let progress = tween ? tween.progress() : 0;
@@ -28,7 +32,7 @@ const marqueeAnimation = () => {
         
                 const width = parseInt(getComputedStyle(marqueeContent).getPropertyValue("width"), 10);
                 const gap = parseInt(getComputedStyle(marqueeContent).getPropertyValue("column-gap"), 10);
-        
+                
                 const distanceToTranslate = -1 * (gap + width);
         
                 // Animate the marquee scrolling

@@ -15,7 +15,7 @@ const HomeSection: FC = () => {
             ease: "ease"
         })
     });
-
+    
     marqueeAnimation();
 
     return (
@@ -23,19 +23,6 @@ const HomeSection: FC = () => {
             <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-5xl mx-auto">
                 <div className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
                     <div className="marquee-content flex gap-52 main-text w-full">
-                        <div className="name-marquee w-full">
-                            <span className="marquee-letter inline-block">H</span>
-                            <span className="marquee-letter inline-block">o</span>
-                            <span className="marquee-letter inline-block">j</span>
-                            <span className="marquee-letter inline-block">i</span>
-                            <span className="marquee-letter inline-block">n</span>
-                            <span className="marquee-letter inline-block mx-4 sm:mx-8"></span>
-                            <span className="marquee-letter inline-block">C</span>
-                            <span className="marquee-letter inline-block">h</span>
-                            <span className="marquee-letter inline-block">a</span>
-                            <span className="marquee-letter inline-block">n</span>
-                            <span className="marquee-letter inline-block">g</span>
-                        </div>
                         <div className="name-marquee w-full">
                             <span className="marquee-letter inline-block">H</span>
                             <span className="marquee-letter inline-block">o</span>

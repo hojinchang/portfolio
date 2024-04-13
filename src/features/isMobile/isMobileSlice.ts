@@ -5,7 +5,7 @@ interface isMobileState {
 }
 
 const initialState: isMobileState = {
-    isMobile: false
+    isMobile: true
 }
 
 const isMobileSlice = createSlice({
