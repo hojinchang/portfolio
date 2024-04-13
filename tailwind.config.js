@@ -23,12 +23,12 @@ export default {
       keyframes: {
         codeFlash: {
           "0%, 60%": { opacity: 1 },
-          "61%, 75%": { opacity: 0 },
-          "76%": { opacity: 1 }
+          "61%, 70%": { opacity: 0 },
+          "71%": { opacity: 1 }
         }
       },
       animation: {
-        codeFlash: "codeFlash 6s step-start infinite"
+        codeFlash: "codeFlash 4s step-start infinite"
       }
     },
   },
