@@ -19,7 +19,7 @@ const ScrollDown: FC = () => {
     }
 
     return (
-        <button className="absolute bottom-28 md:bottom-20 right-5" onClick={handleClick}>
+        <button className="p-3 absolute bottom-28 md:bottom-20 right-5" onClick={handleClick}>
             <span className="scroll-indicator"></span>
             <span className="scroll-indicator"></span>
             <span className="scroll-indicator"></span>

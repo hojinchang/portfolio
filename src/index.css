@@ -32,6 +32,12 @@
     animation-delay: 0.4s;
 }
 
+body {
+    cursor: none;
+    overflow-x: hidden;
+    user-select: none;
+}
+
 /* Cursor dot */
 .dot {
     @apply h-4 w-4 rounded-full absolute transform -translate-x-1/2 -translate-y-1/2 bg-neutral-300 z-30 pointer-events-none
@@ -43,12 +49,11 @@
 }
 
 .halo.hovered {
-    @apply h-8 w-8 opacity-100 cursor-none;
+    @apply h-10 w-10 opacity-100 cursor-none;
 }
 
-body {
+a, button {
     cursor: none;
-    overflow-x: hidden;
 }
 
 /* Chrome, Edge, and Safari scrollbar styles */
