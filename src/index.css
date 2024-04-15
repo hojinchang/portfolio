@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Nav styles */
 .nav-link {
     @apply flex flex-col items-end w-fit transform transition duration-300 lg:hover:scale-105
 }
@@ -18,6 +19,7 @@
     @apply text-[70px] 2xs:text-8xl font-semibold text-neutral-200 whitespace-nowrap md:text-[120px] lg:text-[160px]
 }
 
+/* Scroll down indicator */
 .scroll-indicator {
     @apply block w-4 h-4 md:w-5 md:h-5 border-b-2 border-r-2 border-neutral-200 transform rotate-45 -my-2.5 animate-scrollDown
 }
@@ -28,4 +30,37 @@
 
 .scroll-indicator:nth-child(1) {
     animation-delay: 0.4s;
+}
+
+/* Cursor dot */
+.dot {
+    @apply h-4 w-4 rounded-full absolute transform -translate-x-1/2 -translate-y-1/2 bg-neutral-300 z-30 pointer-events-none
+}
+
+/* Cursor halo */
+.halo {
+    @apply h-4 w-5 rounded-full absolute transform -translate-x-1/2 -translate-y-1/2  border-2 border-neutral-100 opacity-0 transition-all duration-500 ease-out z-20 pointer-events-none
+}
+
+.halo.hovered {
+    @apply h-8 w-8 opacity-100 cursor-none;
+}
+
+body {
+    cursor: none;
+    overflow-x: hidden;
+}
+
+/* Chrome, Edge, and Safari scrollbar styles */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #171717;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #525252;
+    border-radius: 6px;
 }
