@@ -39,8 +39,8 @@ const DotCursor: FC = () => {
 
     return (
         <>
-            <div className="dot" ref={ dotRef } />
-            <div className={`halo ${isHovered ? "hovered" : ""}`} ref={ haloRef } />
+            <div className="dot z-50" ref={ dotRef } />
+            <div className={`halo z-50 ${isHovered ? "hovered" : ""}`} ref={ haloRef } />
         </>
     );
 };

@@ -4,7 +4,7 @@
 
 /* Nav styles */
 .nav-link {
-    @apply flex flex-col items-end w-fit transform transition duration-300 lg:hover:scale-105
+    @apply flex flex-col items-end w-fit py-2 transform transition duration-300 lg:hover:scale-105
 }
 
 .nav-top-text {
