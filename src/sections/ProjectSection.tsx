@@ -28,7 +28,7 @@ const ProjectSection: FC = () => {
             <h2 className="section-title">// FEATURED PROJECTS</h2>
             {projects.length > 0 && (
                 projects.map((project) => (
-                    <ProjectArticle project={project} />
+                    <ProjectArticle key={ project.title.rendered }  project={ project } />
                 ))
             )}
         </section>

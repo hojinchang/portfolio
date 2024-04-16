@@ -19,20 +19,25 @@ const DotCursor: FC = () => {
     // Add event listeners on links and buttons to set a hover state on mouseover/mouseout
     // This creates the effect where the halo only shows on hover state
     useEffect(() => {
-        const links = document.querySelectorAll("a");
-        const buttons = document.querySelectorAll("button");
+        const handleMouseOver = (e: Event) => {
+            if ((e.target as Element).closest('a, button')) {
+                setIsHovered(true);
+            }
+        };
 
-        const hoverElements = [links, buttons];
-        hoverElements.forEach((elements) => {
-            elements.forEach((element) => {
-                element.addEventListener("mouseover", () => {console.log("HOVERED");   setIsHovered(true)});
-                element.addEventListener("mouseout", () => setIsHovered(false));
-            });
-        });
+        const handleMouseOut = (e: Event) => {
+            if ((e.target as Element).closest('a, button')) {
+                setIsHovered(false);
+            }
+        };
 
+        document.addEventListener('mouseover', handleMouseOver);
+        document.addEventListener('mouseout', handleMouseOut);
         document.addEventListener('mousemove', moveDot);
 
         return () => {
+            document.removeEventListener('mouseover', handleMouseOver);
+            document.removeEventListener('mouseout', handleMouseOut);
             document.removeEventListener('mousemove', moveDot);
         };
     }, []);

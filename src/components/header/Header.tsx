@@ -11,7 +11,7 @@ const Header: FC = () => {
 
     return (
         <header className={`absolute top-0 left-0 right-0 z-10 pl-6 pb-6 ${isMobile ? "pt-6" : "pt-10 bg-neutral-900 border-b border-neutral-700 shadow-bot-shadow"}`}>
-            <NavLink to="/" className="z-10 group">
+            <NavLink to="/" className="logo z-10 group">
                 <p className="inline text-3xl font-semibold text-neutral-200 transition duration-300 lg:group-hover:text-neutral-500"><span>{"< h "}</span><span className="animate-codeFlash">{"/>"}</span></p>
             </NavLink>
             <Nav />
