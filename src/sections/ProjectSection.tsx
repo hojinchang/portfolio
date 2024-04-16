@@ -1,18 +1,18 @@
 import { FC, useState, useEffect, useRef } from "react";
 import axios from "axios";
-import gsap from "gsap";
 
 import { featuredProjectsAPIPath} from "../global/wpAPIPath";
+import { handleHeaderIntersect } from "../global/utilityFunctions";
 import { Project } from "../interfaces/interfaces";
 import ProjectArticle from "../components/ProjectArticle";
 
 
 const ProjectSection: FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [hasAnimated, setHasAnimated] = useState(false);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const titleBorderRef = useRef<HTMLDivElement>(null);
 
-    const [hasAnimated, setHasAnimated] = useState(false);
 
     // Fetch the featured projects
     useEffect(() => {
@@ -29,38 +29,16 @@ const ProjectSection: FC = () => {
     }, []);
     
     useEffect(() => {
-        // Function to handle intersection changes
-        const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-            entries.forEach((entry) => {
-                // Check if the element is intersecting the viewport and the animation hasn't played yet
-                if (entry.isIntersecting && !hasAnimated) {
-                    // Play the animation using GSAP
-                    gsap.fromTo(titleBorderRef.current, {
-                        width: "0%" 
-                    }, {
-                        width: "100%",
-                        duration: 2,
-                        ease: "ease"
-                    }).then(() => {
-                        setHasAnimated(true);
-                    });
-
-                    gsap.from(titleRef.current, {
-                        opacity: 0,
-                        x: -40,
-                        duration: 2,
-                        ease: "ease"
-                    });
-                } 
-                // Check if the element is no longer intersecting and the animation has played
-                else if (!entry.isIntersecting && hasAnimated) {
-                    setHasAnimated(false);
-                }
-            });
-        };
-    
         // Create a new IntersectionObserver
-        const observer = new IntersectionObserver(handleIntersect, {
+        const observer = new IntersectionObserver((entries) => {
+            handleHeaderIntersect(
+                entries,
+                titleBorderRef,
+                titleRef,
+                hasAnimated,
+                setHasAnimated
+            )
+        }, {
             root: null, // Use the viewport as the root
             rootMargin: "0px", // No margin around the root
             threshold: 0.1 // Trigger when 10% of the element is visible
