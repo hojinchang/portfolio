@@ -1,9 +1,9 @@
 import { FC } from "react"
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import { RootState } from "../../store/store";
 import NavItem from "./NavItem";
 
 const Nav:FC = () => {
