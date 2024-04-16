@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.link-hover {
+    @apply transform transition duration-300 lg:hover:scale-105
+}
+
 /* Nav styles */
 .nav-link {
-    @apply flex flex-col items-end w-fit py-2 transform transition duration-300 lg:hover:scale-105
+    @apply flex flex-col items-end w-fit py-2
 }
 
 .nav-top-text {
@@ -12,7 +16,7 @@
 }
 
 .nav-bottom-text {
-    @apply leading-none font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg transform transition duration-300 lg:group-hover:text-neutral-500
+    @apply leading-none font-medium text-neutral-200 text-2xs xs:text-xs md:text-base lg:text-lg lg:group-hover:text-neutral-500
 }
 
 .name-marquee {
@@ -39,7 +43,7 @@
 
 /* Section titles */
 .section-title {
-    @apply font-semibold text-2xl mb-8 border-b-2 border-neutral-100 lg:text-3xl
+    @apply font-semibold text-2xl mb-2 lg:text-3xl
 }
 
 
