@@ -46,8 +46,6 @@
     @apply font-semibold text-2xl mb-2 lg:text-3xl
 }
 
-
-
 body {
     cursor: none;
     overflow-x: hidden;
@@ -56,12 +54,12 @@ body {
 
 /* Cursor dot */
 .dot {
-    @apply h-4 w-4 rounded-full absolute transform -translate-x-1/2 -translate-y-1/2 bg-neutral-300 z-30 pointer-events-none
+    @apply h-4 w-4 rounded-full fixed top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-300 z-30 pointer-events-none
 }
 
 /* Cursor halo */
 .halo {
-    @apply h-4 w-5 rounded-full absolute transform -translate-x-1/2 -translate-y-1/2  border-2 border-neutral-100 opacity-0 transition-all duration-500 ease-out z-20 pointer-events-none
+    @apply h-4 w-5 rounded-full fixed top-0 left-0 transform -translate-x-1/2 -translate-y-1/2  border-2 border-neutral-100 opacity-0 transition-all duration-[600ms] ease-out z-20 pointer-events-none
 }
 
 .halo.hovered {
