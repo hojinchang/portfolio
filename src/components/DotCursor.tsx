@@ -25,7 +25,7 @@ const DotCursor: FC = () => {
         const hoverElements = [links, buttons];
         hoverElements.forEach((elements) => {
             elements.forEach((element) => {
-                element.addEventListener("mouseover", () => setIsHovered(true));
+                element.addEventListener("mouseover", () => {console.log("HOVERED");   setIsHovered(true)});
                 element.addEventListener("mouseout", () => setIsHovered(false));
             });
         });

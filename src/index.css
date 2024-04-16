@@ -32,6 +32,18 @@
     animation-delay: 0.4s;
 }
 
+/* Article Feature Image */
+.article-feature {
+    height: clamp(200px, 350px, 471px);
+}
+
+/* Section titles */
+.section-title {
+    @apply font-semibold text-2xl mb-8 border-b-2 border-neutral-100 lg:text-3xl
+}
+
+
+
 body {
     cursor: none;
     overflow-x: hidden;

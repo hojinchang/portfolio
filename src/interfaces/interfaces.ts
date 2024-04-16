@@ -55,3 +55,17 @@ export interface Embedded {
     "acf:post": AcfPost[];
     "wp:featuredmedia": FeaturedMedia[];
 }
+
+// Define the structure of the Project object
+export interface Project {
+    title: {
+        rendered: string;
+    };
+    featured_media: number;
+    acf: {
+        sub_title: string;
+        live_site_link: string;
+        github_repo_link: string;
+    };
+    _embedded: Embedded;
+}

@@ -12,7 +12,6 @@ const AppRouter: FC = () => {
             <div className="relative bg-neutral-900 text-neutral-200 min-h-screen font-open-sans overflow-hidden">
                 <DotCursor />
                 <Header />
-                {/* <Nav /> */}
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                 </Routes>
