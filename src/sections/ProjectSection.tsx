@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { featuredProjectsAPIPath} from "../global/wpAPIPath";
-import { handleHeaderIntersect } from "../global/utilityFunctions";
+import { handleHeadingIntersect } from "../global/utilityFunctions";
 import { Project } from "../interfaces/interfaces";
 import ProjectArticle from "../components/ProjectArticle";
 
 
 interface ActiveProject {
+    [projectKey: string]: boolean;   // Index signature, tells TypeScript ActiveProject can be indexed with a string
     project1: boolean;
     project2: boolean;
     project3: boolean;
@@ -21,11 +22,14 @@ const ProjectSection: FC = () => {
         project2: false,
         project3: false
     });
-    const [hasAnimated, setHasAnimated] = useState(false);
+    const projectKeys = Object.keys(activeProject);
+    const [hasTitleAnimated, setHasTitleAnimated] = useState(false);
 
     const titleRef = useRef<HTMLHeadingElement>(null);
     const titleBorderRef = useRef<HTMLDivElement>(null);
     const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);
+    const projectArticleRef = useRef<HTMLDivElement>(null);
+
 
     // Set the active project when user clicks pagination dots
     const handlePaginationDots = ( projectNumber: string ) => {
@@ -51,17 +55,18 @@ const ProjectSection: FC = () => {
         fetchProjects();
     }, []);
     
-    // Watch where the scroll is
+    // Watch where the scroll is based on the title border
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver((entries) => {
-            handleHeaderIntersect(
+            handleHeadingIntersect(
                 entries,
                 titleBorderRef,
                 titleRef,
                 viewAllProjectsRef,
-                hasAnimated,
-                setHasAnimated
+                projectArticleRef,
+                hasTitleAnimated,
+                setHasTitleAnimated
             )
         }, {
             root: null, // Use the viewport as the root
@@ -80,45 +85,40 @@ const ProjectSection: FC = () => {
                 observer.unobserve(titleBorderRef.current);
             }
         };
-    }, [hasAnimated]); // Re-run the effect when hasAnimated changes
+    }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
 
 
     return (
-        <section id="projectSection" className="flex flex-col pt-10 min-h-screen max-w-[1280px] mx-auto">
-            <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
-            <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-200 mb-6"></div>
-            <p ref={viewAllProjectsRef} className="self-end">
-                <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
-            </p>
-            <div className="flex flex-col gap-6">
-                <div>
-                    {/* {projects.length > 0 && (
-                        projects.map((project) => (
-                            <ProjectArticle key={ project.title.rendered }  project={ project } />
-                        ))
-                    )} */}
-                    {projects.length > 0 && (
-                        
-                        <ProjectArticle key={ projects[0].title.rendered }  project={ projects[0] } />
-                    
-                    )}
+        <>
+            <section id="projectSection" className="flex flex-col pt-10 min-h-screen max-w-[1280px] mx-auto">
+                <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
+                <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-200 mb-6"></div>
+                <p ref={viewAllProjectsRef} className="self-end">
+                    <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
+                </p>
+                <div ref={projectArticleRef} className="flex flex-col gap-6">
+                    <div className="flex">
+                        {projects.length > 0 && (
+                            projects.map((project, i) => (
+                                <div key={project.title.rendered} className="flex-grow h-full">
+                                    <ProjectArticle project={ project } active={ activeProject[projectKeys[i]] }/>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                    <div className="flex items-center gap-5 self-center">
+                        {projectKeys.map((projectKey, i) => (
+                            <button
+                                key={i}
+                                className={`pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : ""}`}
+                                onClick={ () => handlePaginationDots(projectKey) }
+                            ></button>
+                        ))}
+                    </div>
                 </div>
-                <div className="flex items-center gap-5 self-center">
-                    <button 
-                        className={`pagination-dot ${activeProject.project1 === true ? "active-pagination-dot" : ""}`}
-                        onClick={ () => handlePaginationDots("project1") }
-                    ></button>
-                    <button 
-                        className={`pagination-dot ${activeProject.project2 === true ? "active-pagination-dot" : ""}`}
-                        onClick={ () => handlePaginationDots("project2") }
-                    ></button>
-                    <button 
-                        className={`pagination-dot ${activeProject.project3 === true ? "active-pagination-dot" : ""}`}
-                        onClick={ () => handlePaginationDots("project3") }
-                    ></button>
-                </div>
-            </div>
-        </section>
+            </section>
+            <section className="min-h-screen"></section>
+        </>
     )
 }
 

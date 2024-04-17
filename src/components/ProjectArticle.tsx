@@ -8,25 +8,22 @@ import { Project } from "../interfaces/interfaces";
 
 
 interface ProjectArticleProps {
-    project: Project
+    project: Project;
+    active: boolean;
 }
 
-const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
+const ProjectArticle: FC<ProjectArticleProps> = ({ project, active }) => {
     
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
     return (
         <article 
-            // className={
-            //     `bg-neutral-800 p-3 rounded-lg
-            //     hidden
-            //     md:gap-6 ${isMobile ? "flex-col" : "flex-row"}`
-            // }>
             className={
-                `bg-neutral-800 p-3 rounded-lg
-                flex
+                `bg-neutral-800 p-3 rounded-lg h-full
+                ${active ? "flex" : "hidden"}
                 md:gap-6 ${isMobile ? "flex-col" : "flex-row"}`
-            }>
+            }
+        >
             {project.featured_media !== 0 && project._embedded && 
                 <div className={`${isMobile ? "" : "w-1/2"}`}>
                     <figure>
