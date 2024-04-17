@@ -71,7 +71,7 @@ const ProjectSection: FC = () => {
         }, {
             root: null, // Use the viewport as the root
             rootMargin: "0px", // No margin around the root
-            threshold: 0.1 // Trigger when 10% of the element is visible
+            threshold: 0.3 // Trigger when 10% of the element is visible
         });
     
         // Observe the titleBorderRef element

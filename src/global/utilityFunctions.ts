@@ -1,6 +1,8 @@
 import React from "react";
 import gsap from "gsap";
 
+let lastScrollY = window.scrollY;  // Initialize lastScrollY at the top of your component
+
 // Function to handle intersection changes
 const handleHeadingIntersect = (
     entries: IntersectionObserverEntry[],
@@ -12,6 +14,9 @@ const handleHeadingIntersect = (
     setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
     entries.forEach((entry) => {
+        const currentScrollY = window.scrollY;
+        const isScrollingUp = currentScrollY < lastScrollY;
+
         // Check if the element is intersecting the viewport and the animation hasn't played yet
         if (entry.isIntersecting && !hasAnimated) {
             gsap.set([titleBorderRef.current, titleRef.current, viewAllProjectsRef.current, projectArticleRef.current], { clearProps: "all" });
@@ -45,15 +50,17 @@ const handleHeadingIntersect = (
             // Play the animation using GSAP
             gsap.from(projectArticleRef.current, {
                 opacity: 0,
-                y: 60,
+                y: 64,
                 duration: 2,
                 ease: "ease"
             })
         } 
         // Check if the element is no longer intersecting and the animation has played
-        else if (!entry.isIntersecting && hasAnimated) {
+        else if (!entry.isIntersecting && hasAnimated && isScrollingUp) {
             setHasAnimated(false);
         }
+
+        lastScrollY = currentScrollY;  // Update lastScrollY at the end of the function
     });
 };
 
