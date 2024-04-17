@@ -6,6 +6,7 @@ const handleHeaderIntersect = (
     entries: IntersectionObserverEntry[],
     titleBorderRef: React.RefObject<HTMLHeadingElement>,
     titleRef: React.RefObject<HTMLHeadingElement>,
+    viewAllProjectsRef: React.RefObject<HTMLParagraphElement>,
     hasAnimated: boolean,
     setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
 
@@ -18,7 +19,7 @@ const handleHeaderIntersect = (
                 width: "0%" 
             }, {
                 width: "100%",
-                duration: 2,
+                duration: 1.75,
                 ease: "ease"
             }).then(() => {
                 setHasAnimated(true);
@@ -27,6 +28,13 @@ const handleHeaderIntersect = (
             gsap.from(titleRef.current, {
                 opacity: 0,
                 x: -40,
+                duration: 2,
+                ease: "ease"
+            });
+
+            gsap.from(viewAllProjectsRef.current, {
+                opacity: 0,
+                x: 40,
                 duration: 2,
                 ease: "ease"
             });

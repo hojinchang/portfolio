@@ -1,4 +1,5 @@
 import { FC, useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { featuredProjectsAPIPath} from "../global/wpAPIPath";
@@ -12,6 +13,7 @@ const ProjectSection: FC = () => {
     const [hasAnimated, setHasAnimated] = useState(false);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const titleBorderRef = useRef<HTMLDivElement>(null);
+    const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);
 
 
     // Fetch the featured projects
@@ -35,6 +37,7 @@ const ProjectSection: FC = () => {
                 entries,
                 titleBorderRef,
                 titleRef,
+                viewAllProjectsRef,
                 hasAnimated,
                 setHasAnimated
             )
@@ -59,14 +62,19 @@ const ProjectSection: FC = () => {
 
 
     return (
-        <section id="projectSection" className="pt-10 min-h-screen max-w-[1280px] mx-auto">
+        <section id="projectSection" className="flex flex-col pt-10 min-h-screen max-w-[1280px] mx-auto">
             <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
-            <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-100 mb-8"></div>
-            {projects.length > 0 && (
-                projects.map((project) => (
-                    <ProjectArticle key={ project.title.rendered }  project={ project } />
-                ))
-            )}
+            <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-200 mb-6"></div>
+            <p ref={viewAllProjectsRef} className="self-end">
+                <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
+            </p>
+            <div>
+                {projects.length > 0 && (
+                    projects.map((project) => (
+                        <ProjectArticle key={ project.title.rendered }  project={ project } />
+                    ))
+                )}
+            </div>
         </section>
     )
 }
