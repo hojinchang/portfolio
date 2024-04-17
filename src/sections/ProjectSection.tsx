@@ -32,17 +32,24 @@ const ProjectSection: FC = () => {
     const projectWrapperRef = useRef<HTMLDivElement>(null);                         // Reference to project wrapper div
     const projectArticleRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);       // Reference to individual project artilces
 
+    // useEffect(() => {
+    //     // Adjust the refs array to match the number of projects
+    //     projectArticleRefs.current = projects.map((_, i) => projectArticleRefs.current[i] || React.createRef<HTMLDivElement>());
+    // }, [projects.length]); // Dependency on projects.length ensures ref array is updated when project count changes
+
     useEffect(() => {
-        // Adjust the refs array to match the number of projects
-        projectArticleRefs.current = projects.map((_, i) => projectArticleRefs.current[i] || React.createRef<HTMLDivElement>());
-    }, [projects.length]); // Dependency on projects.length ensures ref array is updated when project count changes
+        // Adjust the refs array to match the number of projects, ensuring each is a proper ref object
+        projectArticleRefs.current = projects.map((_, i) => 
+            projectArticleRefs.current[i] || React.createRef<HTMLDivElement>()
+        );
+    }, [projects.length]);
 
     // Slide in animation for project articles
     const animateProjectArticle = (
         direction: "left" | "right",
         projectArticleRef: React.RefObject<HTMLDivElement>
     ) => {
-        gsap.fromTo(projectArticleRef, 
+        gsap.fromTo(projectArticleRef.current, 
             { x: direction === "left" ? "-100%" : "100%", opacity: 0 },
             { x: "0", opacity: 1, duration: 1, ease: "easeInOut" }
         );
@@ -126,7 +133,7 @@ const ProjectSection: FC = () => {
                         {projects.length > 0 && (
                             projects.map((project, i) => {
                                 return (
-                                    <div ref={el => projectArticleRefs.current[i] = el} key={project.title.rendered} className="flex-grow h-full">
+                                    <div ref={projectArticleRefs.current[i]} key={project.title.rendered} className="flex-grow h-full">
                                         <ProjectArticle  project={ project } active={ activeProject[projectKeys[i]] } />
                                     </div>
                                 )
