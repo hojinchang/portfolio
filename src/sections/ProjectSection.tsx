@@ -8,13 +8,34 @@ import { Project } from "../interfaces/interfaces";
 import ProjectArticle from "../components/ProjectArticle";
 
 
+interface ActiveProject {
+    project1: boolean;
+    project2: boolean;
+    project3: boolean;
+}
+
 const ProjectSection: FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [activeProject, setActiveProject] = useState<ActiveProject>({
+        project1: true,
+        project2: false,
+        project3: false
+    });
     const [hasAnimated, setHasAnimated] = useState(false);
+
     const titleRef = useRef<HTMLHeadingElement>(null);
     const titleBorderRef = useRef<HTMLDivElement>(null);
     const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);
 
+    // Set the active project when user clicks pagination dots
+    const handlePaginationDots = ( projectNumber: string ) => {
+        setActiveProject({
+            ...activeProject, 
+            project1: projectNumber === "project1" ? true : false,
+            project2: projectNumber === "project2" ? true : false,
+            project3: projectNumber === "project3" ? true : false,
+        });
+    }
 
     // Fetch the featured projects
     useEffect(() => {
@@ -30,6 +51,7 @@ const ProjectSection: FC = () => {
         fetchProjects();
     }, []);
     
+    // Watch where the scroll is
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver((entries) => {
@@ -68,12 +90,33 @@ const ProjectSection: FC = () => {
             <p ref={viewAllProjectsRef} className="self-end">
                 <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
             </p>
-            <div>
-                {projects.length > 0 && (
-                    projects.map((project) => (
-                        <ProjectArticle key={ project.title.rendered }  project={ project } />
-                    ))
-                )}
+            <div className="flex flex-col gap-6">
+                <div>
+                    {/* {projects.length > 0 && (
+                        projects.map((project) => (
+                            <ProjectArticle key={ project.title.rendered }  project={ project } />
+                        ))
+                    )} */}
+                    {projects.length > 0 && (
+                        
+                        <ProjectArticle key={ projects[0].title.rendered }  project={ projects[0] } />
+                    
+                    )}
+                </div>
+                <div className="flex items-center gap-5 self-center">
+                    <button 
+                        className={`pagination-dot ${activeProject.project1 === true ? "active-pagination-dot" : ""}`}
+                        onClick={ () => handlePaginationDots("project1") }
+                    ></button>
+                    <button 
+                        className={`pagination-dot ${activeProject.project2 === true ? "active-pagination-dot" : ""}`}
+                        onClick={ () => handlePaginationDots("project2") }
+                    ></button>
+                    <button 
+                        className={`pagination-dot ${activeProject.project3 === true ? "active-pagination-dot" : ""}`}
+                        onClick={ () => handlePaginationDots("project3") }
+                    ></button>
+                </div>
             </div>
         </section>
     )

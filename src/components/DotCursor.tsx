@@ -63,7 +63,7 @@ const DotCursor: FC = () => {
     return (
         <>
             <motion.div 
-                className="dot z-50" 
+                className="cursor-dot z-50" 
                 style={{
                     translateX: cursorPosition.x,
                     translateY: cursorPosition.y,

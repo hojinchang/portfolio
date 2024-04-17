@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+    cursor: none;
+    overflow-x: hidden;
+    user-select: none;
+}
+
 .link-hover {
     @apply transform transition duration-300 lg:hover:text-neutral-500
 }
@@ -50,14 +57,8 @@
     @apply font-semibold text-2xl mb-2 lg:text-3xl
 }
 
-body {
-    cursor: none;
-    overflow-x: hidden;
-    user-select: none;
-}
-
 /* Cursor dot */
-.dot {
+.cursor-dot {
     @apply h-4 w-4 rounded-full fixed top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-300 z-30 pointer-events-none
 }
 
@@ -73,6 +74,17 @@ body {
 a, button {
     cursor: none;
 }
+
+/* Project section */
+.pagination-dot {
+    @apply w-3 h-3 bg-neutral-500 rounded-full transform transition duration-300
+}
+
+.active-pagination-dot {
+    @apply scale-[1.4] bg-neutral-200;
+}
+
+
 
 /* Chrome, Edge, and Safari scrollbar styles */
 *::-webkit-scrollbar {
