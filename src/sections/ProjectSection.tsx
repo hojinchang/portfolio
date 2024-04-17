@@ -39,7 +39,7 @@ const ProjectSection: FC = () => {
 
     useEffect(() => {
         // Adjust the refs array to match the number of projects, ensuring each is a proper ref object
-        projectArticleRefs.current = projects.map((_, i) => 
+        projectArticleRefs.current = projects.map(( _, i ) => 
             projectArticleRefs.current[i] || React.createRef<HTMLDivElement>()
         );
     }, [projects.length]);
@@ -90,7 +90,7 @@ const ProjectSection: FC = () => {
     // Watch where the scroll is based on the title border
     useEffect(() => {
         // Create a new IntersectionObserver
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(( entries ) => {
             handleHeadingIntersect(
                 entries,
                 titleBorderRef,
@@ -131,9 +131,13 @@ const ProjectSection: FC = () => {
                 <div ref={projectWrapperRef} className="flex flex-col gap-6">
                     <div className="flex">
                         {projects.length > 0 && (
-                            projects.map((project, i) => {
+                            projects.map(( project, i ) => {
                                 return (
-                                    <div ref={projectArticleRefs.current[i]} key={project.title.rendered} className="flex-grow h-full">
+                                    <div 
+                                        ref={ projectArticleRefs.current[i] } 
+                                        key={project.title.rendered} 
+                                        className="flex-grow h-full"
+                                    >
                                         <ProjectArticle  project={ project } active={ activeProject[projectKeys[i]] } />
                                     </div>
                                 )
