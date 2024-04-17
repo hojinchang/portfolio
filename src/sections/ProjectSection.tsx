@@ -1,6 +1,7 @@
-import { FC, useState, useEffect, useRef } from "react";
+import React, { FC, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import gsap from "gsap";
 
 import { featuredProjectsAPIPath} from "../global/wpAPIPath";
 import { handleHeadingIntersect } from "../global/utilityFunctions";
@@ -25,14 +26,38 @@ const ProjectSection: FC = () => {
     const projectKeys = Object.keys(activeProject);
     const [hasTitleAnimated, setHasTitleAnimated] = useState(false);
 
-    const titleRef = useRef<HTMLHeadingElement>(null);
-    const titleBorderRef = useRef<HTMLDivElement>(null);
-    const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);
-    const projectArticleRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);                              // Reference to section heading
+    const titleBorderRef = useRef<HTMLDivElement>(null);                            // Reference to section heading bottom border
+    const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);                  // Reference to view all projects link
+    const projectWrapperRef = useRef<HTMLDivElement>(null);                         // Reference to project wrapper div
+    const projectArticleRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);       // Reference to individual project artilces
 
+    useEffect(() => {
+        // Adjust the refs array to match the number of projects
+        projectArticleRefs.current = projects.map((_, i) => projectArticleRefs.current[i] || React.createRef<HTMLDivElement>());
+    }, [projects.length]); // Dependency on projects.length ensures ref array is updated when project count changes
+
+    // Slide in animation for project articles
+    const animateProjectArticle = (
+        direction: "left" | "right",
+        projectArticleRef: React.RefObject<HTMLDivElement>
+    ) => {
+        gsap.fromTo(projectArticleRef, 
+            { x: direction === "left" ? "-100%" : "100%", opacity: 0 },
+            { x: "0", opacity: 1, duration: 1, ease: "easeInOut" }
+        );
+    };
 
     // Set the active project when user clicks pagination dots
     const handlePaginationDots = ( projectNumber: string ) => {
+        const currentIdx = projectKeys.findIndex(key => activeProject[key]);
+        const targetIdx = projectKeys.findIndex(key => key === projectNumber);
+
+        const direction = (currentIdx > targetIdx) ? "left" : "right";
+        const ref = projectArticleRefs.current[targetIdx];
+
+        animateProjectArticle(direction, ref);
+
         setActiveProject({
             ...activeProject, 
             project1: projectNumber === "project1" ? true : false,
@@ -64,7 +89,7 @@ const ProjectSection: FC = () => {
                 titleBorderRef,
                 titleRef,
                 viewAllProjectsRef,
-                projectArticleRef,
+                projectWrapperRef,
                 hasTitleAnimated,
                 setHasTitleAnimated
             )
@@ -96,14 +121,16 @@ const ProjectSection: FC = () => {
                 <p ref={viewAllProjectsRef} className="self-end">
                     <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
                 </p>
-                <div ref={projectArticleRef} className="flex flex-col gap-6">
+                <div ref={projectWrapperRef} className="flex flex-col gap-6">
                     <div className="flex">
                         {projects.length > 0 && (
-                            projects.map((project, i) => (
-                                <div key={project.title.rendered} className="flex-grow h-full">
-                                    <ProjectArticle project={ project } active={ activeProject[projectKeys[i]] }/>
-                                </div>
-                            ))
+                            projects.map((project, i) => {
+                                return (
+                                    <div ref={el => projectArticleRefs.current[i] = el} key={project.title.rendered} className="flex-grow h-full">
+                                        <ProjectArticle  project={ project } active={ activeProject[projectKeys[i]] } />
+                                    </div>
+                                )
+                            })
                         )}
                     </div>
                     <div className="flex items-center gap-5 self-center">
