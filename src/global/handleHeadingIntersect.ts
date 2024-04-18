@@ -20,6 +20,7 @@ const handleHeadingIntersect = (
         // Check if the element is intersecting the viewport and the animation hasn't played yet
         if (entry.isIntersecting && !hasAnimated) {
             gsap.set([titleBorderRef.current, titleRef.current, viewAllProjectsRef.current, projectWrapperRef.current], { clearProps: "all" });
+            
             // Play the animation using GSAP
             gsap.fromTo(
                 titleBorderRef.current, {
@@ -51,7 +52,7 @@ const handleHeadingIntersect = (
             // Play the animation using GSAP
             gsap.from(projectWrapperRef.current, {
                 opacity: 0,
-                y: 64,
+                y: 40,
                 duration: 2,
                 ease: "ease"
             })
@@ -66,7 +67,4 @@ const handleHeadingIntersect = (
 };
 
 
-export {
-    handleHeadingIntersect
- 
-}
+export default handleHeadingIntersect;

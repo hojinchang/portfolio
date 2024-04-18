@@ -1,10 +1,10 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import gsap from "gsap";
 
 import { featuredProjectsAPIPath} from "../global/wpAPIPath";
-import { handleHeadingIntersect } from "../global/utilityFunctions";
+import handleHeadingIntersect  from "../global/handleHeadingIntersect";
+import animateProjectArticle from "../global/animateProjectArticle";
 import { Project } from "../interfaces/interfaces";
 import ProjectArticle from "../components/ProjectArticle";
 
@@ -14,6 +14,11 @@ interface ActiveProject {
     project1: boolean;
     project2: boolean;
     project3: boolean;
+}
+
+interface ProjectRefs {
+    imageRef: React.RefObject<HTMLDivElement>;
+    detailsRef: React.RefObject<HTMLDivElement>;
 }
 
 const ProjectSection: FC = () => {
@@ -30,41 +35,32 @@ const ProjectSection: FC = () => {
     const titleBorderRef = useRef<HTMLDivElement>(null);                            // Reference to section heading bottom border
     const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);                  // Reference to view all projects link
     const projectWrapperRef = useRef<HTMLDivElement>(null);                         // Reference to project wrapper div
-    const projectArticleRefs = useRef<React.RefObject<HTMLDivElement>[]>([]);       // Reference to individual project artilces
 
-    // useEffect(() => {
-    //     // Adjust the refs array to match the number of projects
-    //     projectArticleRefs.current = projects.map((_, i) => projectArticleRefs.current[i] || React.createRef<HTMLDivElement>());
-    // }, [projects.length]); // Dependency on projects.length ensures ref array is updated when project count changes
+    // Stores an array of refs for each project
+    const projectRefs = useRef<ProjectRefs[]>([]);
 
+    // Update refs when the projects data changes
     useEffect(() => {
-        // Adjust the refs array to match the number of projects, ensuring each is a proper ref object
-        projectArticleRefs.current = projects.map(( _, i ) => 
-            projectArticleRefs.current[i] || React.createRef<HTMLDivElement>()
-        );
-    }, [projects.length]);
+        // Initialize or re-initialize the refs when projects data changes
+        projectRefs.current = projects.map(() => ({
+            imageRef: React.createRef<HTMLDivElement>(),
+            detailsRef: React.createRef<HTMLDivElement>()
+        }));
+    }, [projects]);
 
-    // Slide in animation for project articles
-    const animateProjectArticle = (
-        direction: "left" | "right",
-        projectArticleRef: React.RefObject<HTMLDivElement>
-    ) => {
-        gsap.fromTo(projectArticleRef.current, 
-            { x: direction === "left" ? "-100%" : "100%", opacity: 0 },
-            { x: "0", opacity: 1, duration: 1, ease: "easeInOut" }
-        );
-    };
 
     // Set the active project when user clicks pagination dots
     const handlePaginationDots = ( projectNumber: string ) => {
-        const currentIdx = projectKeys.findIndex(key => activeProject[key]);
-        const targetIdx = projectKeys.findIndex(key => key === projectNumber);
+        const currentIdx = projectKeys.findIndex(key => activeProject[key]);        // Get the current project pagination idx
+        const targetIdx = projectKeys.findIndex(key => key === projectNumber);      // Get the desired project pagination idx
 
-        const direction = (currentIdx > targetIdx) ? "left" : "right";
-        const ref = projectArticleRefs.current[targetIdx];
+        const direction = (currentIdx > targetIdx) ? "left" : "right";              // Set the direction in which the project will slide in
+        const ref = projectRefs.current[targetIdx];                                 // Get the selected project ref
 
+        // Run the slide in animation
         animateProjectArticle(direction, ref);
 
+        // Set active project
         setActiveProject({
             ...activeProject, 
             project1: projectNumber === "project1" ? true : false,
@@ -103,8 +99,8 @@ const ProjectSection: FC = () => {
         }, {
             root: null, // Use the viewport as the root
             rootMargin: "0px", // No margin around the root
-            threshold: 0.3 // Trigger when 10% of the element is visible
-        });
+            threshold: 0.1 // Trigger when 10% of the element is visible
+         });
     
         // Observe the titleBorderRef element
         if (titleBorderRef.current) {
@@ -119,7 +115,6 @@ const ProjectSection: FC = () => {
         };
     }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
 
-
     return (
         <>
             <section id="projectSection" className="flex flex-col pt-10 min-h-screen max-w-[1280px] mx-auto">
@@ -131,24 +126,25 @@ const ProjectSection: FC = () => {
                 <div ref={projectWrapperRef} className="flex flex-col gap-6">
                     <div className="flex">
                         {projects.length > 0 && (
-                            projects.map(( project, i ) => {
+                            projects.map(( project, idx ) => {
+                                const projectRef = projectRefs.current[idx];
                                 return (
-                                    <div 
-                                        ref={ projectArticleRefs.current[i] } 
-                                        key={project.title.rendered} 
-                                        className="flex-grow h-full"
-                                    >
-                                        <ProjectArticle  project={ project } active={ activeProject[projectKeys[i]] } />
-                                    </div>
+                                    <ProjectArticle
+                                        key={project.title.rendered}
+                                        project={project}
+                                        active={activeProject[projectKeys[idx]]}
+                                        imageRef={projectRef?.imageRef}
+                                        detailsRef={projectRef?.detailsRef}
+                                    />
                                 )
                             })
                         )}
                     </div>
                     <div className="flex items-center gap-5 self-center">
-                        {projectKeys.map((projectKey, i) => (
+                        {projectKeys.map((projectKey, idx) => (
                             <button
-                                key={i}
-                                className={`pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : ""}`}
+                                key={ idx }
+                                className={ `pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : "" }`}
                                 onClick={ () => handlePaginationDots(projectKey) }
                             ></button>
                         ))}
@@ -156,6 +152,7 @@ const ProjectSection: FC = () => {
                 </div>
             </section>
             <section className="min-h-screen"></section>
+                
         </>
     )
 }
