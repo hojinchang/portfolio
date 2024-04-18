@@ -54,7 +54,7 @@ body {
 
 /* Sections */
 .section {
-    @apply flex flex-col max-w-[1280px] mx-auto min-h-screen justify-center
+    @apply flex flex-col w-full max-w-[1280px] mx-auto min-h-screen
 }
 
 .section-title {
@@ -62,7 +62,27 @@ body {
 }
 
 .section-border {
-    @apply border-b-2 border-neutral-200 mb-6;
+    @apply border-b-2 border-neutral-200 mb-6
+}
+
+.text-highlight {
+    @apply text-neutral-100 font-medium
+}
+
+.accordion {
+    @apply flex justify-between items-center p-4 text-left w-full bg-neutral-800 transition duration-300 lg:hover:bg-neutral-750
+}
+
+.accordion-content {
+    @apply overflow-hidden 
+}
+
+.content-text {
+    @apply p-4 opacity-0 transition-opacity duration-1000 ease-in-out
+}
+
+.content-text.show {
+    @apply opacity-100
 }
 
 /* Cursor dot */

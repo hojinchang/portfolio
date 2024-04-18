@@ -40,7 +40,7 @@ const HomeSection: FC = () => {
                 </div>
 
                 <div>
-                    <h2 className="job-titles text-base xs:text-lg font-semibold text-neutral-400 mt-4 text-center 2xs:mt-8 md:text-xl md:mt-12 lg:text-2xl lg:mt-14">FULL STACK DEVELOPER, COMPUTER VISION & MACHINE LEARNING ENGINEER</h2>
+                    <h2 className="job-titles text-base xs:text-lg font-semibold text-neutral-400 mt-4 text-center 2xs:mt-8 md:text-xl md:mt-12 lg:text-2xl lg:mt-14">FULL-STACK DEVELOPER, COMPUTER VISION & MACHINE LEARNING ENGINEER</h2>
                 </div>
             </div>
 

@@ -17,9 +17,15 @@ export default {
         "2xs": "450px",
         "xs": "550px"
       },
+      colors: {
+        neutral: {
+          750: "#2b2b2b"
+        }
+      },
       boxShadow: {
         "top-shadow": "0 -2px 8px rgba(0, 0, 0, 0.4)",
-        "bot-shadow": "0 5px 8px rgba(0, 0, 0, 0.4)"
+        "bot-shadow": "0 5px 8px rgba(0, 0, 0, 0.4)",
+        "accordion-shadow": "0 0 6px 3px rgba(0, 0, 0, 0.5)"
       },
       keyframes: {
         codeFlash: {
