@@ -118,7 +118,7 @@ const ProjectSection: FC = () => {
 
     return (
         <>
-            <section id="projectSection" className="flex flex-col min-h-screen max-w-[1280px] mx-auto">
+            <section id="projectSection" className="flex flex-col max-w-[1280px] mx-auto">
                 <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
                 <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-200 mb-6"></div>
                 <p ref={viewAllProjectsRef} className="self-end">
@@ -143,13 +143,20 @@ const ProjectSection: FC = () => {
                             })
                         )}
                     </div>
-                    <div className="flex items-center gap-5 self-center">
+                    <div className="flex items-center gap-2 self-center">
                         {projectKeys.map((projectKey, idx) => (
+                            // <button
+                            //     key={ idx }
+                            //     className={ `pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : "" }`}
+                            //     onClick={ () => handlePaginationDots(projectKey) }
+                            // ></button>
                             <button
-                                key={ idx }
-                                className={ `pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : "" }`}
-                                onClick={ () => handlePaginationDots(projectKey) }
-                            ></button>
+                                key={idx}
+                                className="pagination-wrapper" // Wrapper for the clickable area
+                                onClick={() => handlePaginationDots(projectKey)}
+                            >
+                                <div className={`pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : ""}`}></div>
+                            </button>
                         ))}
                     </div>
                 </div>
