@@ -10,10 +10,17 @@ const ScrollDown: FC = () => {
         const projectSection = document.getElementById("projectSection");
 
         if (projectSection) {
-            projectSection.scrollIntoView({ 
-                behavior: "smooth",
-                block: "start",
-                inline: "nearest" 
+            // Base offset and adjustment factor
+            const adjustmentFactor = 0.1; // how much of the viewport height to add
+
+            // Calculate dynamic offset
+            const dynamicOffset = window.innerHeight * adjustmentFactor;
+
+            const sectionPosition = (projectSection.getBoundingClientRect().top ) - dynamicOffset;
+
+            window.scrollTo({
+                top: sectionPosition,
+                behavior: "smooth"
             });
         }
     }

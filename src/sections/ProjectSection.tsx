@@ -40,17 +40,6 @@ const ProjectSection: FC = () => {
     // Stores an array of refs for each project
     const projectRefs = useRef<ProjectRefs[]>([]);
 
-    // Update refs when the projects data changes
-    useEffect(() => {
-        // Initialize or re-initialize the refs when projects data changes
-        projectRefs.current = projects.map(() => ({
-            articleRef: React.createRef<HTMLElement>(),
-            imageRef: React.createRef<HTMLDivElement>(),
-            detailsRef: React.createRef<HTMLDivElement>()
-        }));
-    }, [projects]);
-
-
     // Set the active project when user clicks pagination dots
     const handlePaginationDots = ( projectNumber: string ) => {
         const currentIdx = projectKeys.findIndex(key => activeProject[key]);        // Get the current project pagination idx
@@ -70,6 +59,16 @@ const ProjectSection: FC = () => {
             project3: projectNumber === "project3" ? true : false,
         });
     }
+
+    // Update refs when the projects data changes
+    useEffect(() => {
+        // Initialize or re-initialize the refs when projects data changes
+        projectRefs.current = projects.map(() => ({
+            articleRef: React.createRef<HTMLElement>(),
+            imageRef: React.createRef<HTMLDivElement>(),
+            detailsRef: React.createRef<HTMLDivElement>()
+        }));
+    }, [projects]);
 
     // Fetch the featured projects
     useEffect(() => {
@@ -119,7 +118,7 @@ const ProjectSection: FC = () => {
 
     return (
         <>
-            <section id="projectSection" className="flex flex-col pt-10 min-h-screen max-w-[1280px] mx-auto">
+            <section id="projectSection" className="flex flex-col min-h-screen max-w-[1280px] mx-auto">
                 <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
                 <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-200 mb-6"></div>
                 <p ref={viewAllProjectsRef} className="self-end">
