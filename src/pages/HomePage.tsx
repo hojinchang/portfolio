@@ -31,8 +31,10 @@ const HomePage: FC = () => {
     return (
         <main className={`flex flex-col gap-40 px-4 ${isMobile ? "pb-20" : ""}`}>
             <HomeSection />
-            <ProjectSection />
-            <AboutSection />
+            {/* <div className="flex flex-col gap-60 "> */}
+                <ProjectSection />
+                <AboutSection />
+            {/* </div> */}
         </main>
     )
 }

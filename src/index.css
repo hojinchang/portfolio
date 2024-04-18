@@ -54,7 +54,7 @@ body {
 
 /* Sections */
 .section {
-    @apply flex flex-col max-w-[1280px] mx-auto
+    @apply flex flex-col max-w-[1280px] mx-auto min-h-screen justify-center
 }
 
 .section-title {

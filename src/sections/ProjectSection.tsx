@@ -32,10 +32,11 @@ const ProjectSection: FC = () => {
     const projectKeys = Object.keys(activeProject);
     const [hasTitleAnimated, setHasTitleAnimated] = useState(false);
 
+    // References for GSAP animation
     const titleRef = useRef<HTMLHeadingElement>(null);                       // Reference to section heading
     const titleBorderRef = useRef<HTMLDivElement>(null);                     // Reference to section heading bottom border
     const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);           // Reference to view all projects link
-    const projectWrapperRef = useRef<HTMLDivElement>(null);                  // Reference to project wrapper div
+    const contentWrapperRef = useRef<HTMLDivElement>(null);                  // Reference to project wrapper div
 
     // Stores an array of refs for each project
     const projectRefs = useRef<ProjectRefs[]>([]);
@@ -93,7 +94,7 @@ const ProjectSection: FC = () => {
                 titleBorderRef,
                 titleRef,
                 viewAllProjectsRef,
-                projectWrapperRef,
+                contentWrapperRef,
                 hasTitleAnimated,
                 setHasTitleAnimated
             )
@@ -124,7 +125,7 @@ const ProjectSection: FC = () => {
                 <p ref={viewAllProjectsRef} className="self-end">
                     <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
                 </p>
-                <div ref={projectWrapperRef} className="flex flex-col gap-6">
+                <div ref={contentWrapperRef} className="flex flex-col gap-6">
                     <div className="flex">
                         {projects.length > 0 && (
                             projects.map(( project, idx ) => {

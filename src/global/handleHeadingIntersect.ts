@@ -8,7 +8,7 @@ const handleHeadingIntersect = (
     entries: IntersectionObserverEntry[],
     titleBorderRef: React.RefObject<HTMLHeadingElement>,
     titleRef: React.RefObject<HTMLHeadingElement>,
-    viewAllProjectsRef: React.RefObject<HTMLParagraphElement>,
+    viewAllProjectsRef: React.RefObject<HTMLParagraphElement> | null,
     contentWrapperRef: React.RefObject<HTMLDivElement>,
     hasAnimated: boolean,
     setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
@@ -52,11 +52,10 @@ const handleHeadingIntersect = (
                 });
             }
 
-
             // Play the animation using GSAP
             gsap.from(contentWrapperRef.current, {
                 opacity: 0,
-                y: 40,
+                y: 70,
                 duration: 2,
                 ease: "ease"
             })

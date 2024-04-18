@@ -16,7 +16,9 @@ const ScrollDown: FC = () => {
             // Calculate dynamic offset
             const dynamicOffset = window.innerHeight * adjustmentFactor;
 
-            const sectionPosition = (projectSection.getBoundingClientRect().top ) - dynamicOffset;
+            const offset = 30;
+            // const sectionPosition = (projectSection.getBoundingClientRect().top ) - dynamicOffset;
+            const sectionPosition = projectSection.getBoundingClientRect().top - offset;
 
             window.scrollTo({
                 top: sectionPosition,
