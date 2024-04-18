@@ -10,16 +10,18 @@ import { Project } from "../interfaces/interfaces";
 interface ProjectArticleProps {
     project: Project;
     active: boolean;
+    articleRef: React.RefObject<HTMLElement>;
     imageRef: React.RefObject<HTMLDivElement>;
     detailsRef: React.RefObject<HTMLDivElement>;
 }
 
-const ProjectArticle: FC<ProjectArticleProps> = ({ project, active, imageRef, detailsRef }) => {
+const ProjectArticle: FC<ProjectArticleProps> = ({ project, active, articleRef, imageRef, detailsRef }) => {
 
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
     return (
-        <article 
+        <article
+            ref={ articleRef }
             className={
                 `bg-neutral-800 p-3 rounded-lg h-full
                 ${active ? "flex" : "hidden"}

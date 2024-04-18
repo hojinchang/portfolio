@@ -17,6 +17,7 @@ interface ActiveProject {
 }
 
 interface ProjectRefs {
+    articleRef: React.RefObject<HTMLElement>,
     imageRef: React.RefObject<HTMLDivElement>;
     detailsRef: React.RefObject<HTMLDivElement>;
 }
@@ -31,10 +32,10 @@ const ProjectSection: FC = () => {
     const projectKeys = Object.keys(activeProject);
     const [hasTitleAnimated, setHasTitleAnimated] = useState(false);
 
-    const titleRef = useRef<HTMLHeadingElement>(null);                              // Reference to section heading
-    const titleBorderRef = useRef<HTMLDivElement>(null);                            // Reference to section heading bottom border
-    const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);                  // Reference to view all projects link
-    const projectWrapperRef = useRef<HTMLDivElement>(null);                         // Reference to project wrapper div
+    const titleRef = useRef<HTMLHeadingElement>(null);                       // Reference to section heading
+    const titleBorderRef = useRef<HTMLDivElement>(null);                     // Reference to section heading bottom border
+    const viewAllProjectsRef = useRef<HTMLParagraphElement>(null);           // Reference to view all projects link
+    const projectWrapperRef = useRef<HTMLDivElement>(null);                  // Reference to project wrapper div
 
     // Stores an array of refs for each project
     const projectRefs = useRef<ProjectRefs[]>([]);
@@ -43,6 +44,7 @@ const ProjectSection: FC = () => {
     useEffect(() => {
         // Initialize or re-initialize the refs when projects data changes
         projectRefs.current = projects.map(() => ({
+            articleRef: React.createRef<HTMLElement>(),
             imageRef: React.createRef<HTMLDivElement>(),
             detailsRef: React.createRef<HTMLDivElement>()
         }));
@@ -133,6 +135,7 @@ const ProjectSection: FC = () => {
                                         key={project.title.rendered}
                                         project={project}
                                         active={activeProject[projectKeys[idx]]}
+                                        articleRef={projectRef?.articleRef}
                                         imageRef={projectRef?.imageRef}
                                         detailsRef={projectRef?.detailsRef}
                                     />
