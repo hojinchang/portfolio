@@ -9,13 +9,14 @@ import { Project } from "../interfaces/interfaces";
 
 interface ProjectArticleProps {
     project: Project;
+    idx: number;
     active: boolean;
     articleRef: React.RefObject<HTMLElement>;
     imageRef: React.RefObject<HTMLDivElement>;
     detailsRef: React.RefObject<HTMLDivElement>;
 }
 
-const ProjectArticle: FC<ProjectArticleProps> = ({ project, active, articleRef, imageRef, detailsRef }) => {
+const ProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, articleRef, imageRef, detailsRef }) => {
 
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
@@ -25,7 +26,7 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project, active, articleRef, 
             className={
                 `bg-neutral-800 p-3 rounded-lg h-full
                 ${active ? "flex" : "hidden"}
-                md:gap-6 ${isMobile ? "flex-col" : "flex-row"}`
+                md:gap-6 ${isMobile ? "flex-col" : (idx === 1) ? "flex-row-reverse" : "flex-row"}`
             }
         >
             {project.featured_media !== 0 && project._embedded && 

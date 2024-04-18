@@ -132,12 +132,13 @@ const ProjectSection: FC = () => {
                                 const projectRef = projectRefs.current[idx];
                                 return (
                                     <ProjectArticle
-                                        key={project.title.rendered}
-                                        project={project}
-                                        active={activeProject[projectKeys[idx]]}
-                                        articleRef={projectRef?.articleRef}
-                                        imageRef={projectRef?.imageRef}
-                                        detailsRef={projectRef?.detailsRef}
+                                        key={ project.title.rendered }
+                                        idx={ idx }
+                                        project={ project }
+                                        active={ activeProject[projectKeys[idx]] }
+                                        articleRef={ projectRef?.articleRef }
+                                        imageRef={ projectRef?.imageRef }
+                                        detailsRef={ projectRef?.detailsRef }
                                     />
                                 )
                             })
