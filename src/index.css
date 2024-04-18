@@ -85,13 +85,6 @@ body {
     @apply opacity-100
 }
 
-.accordion-icon {
-    @apply transition duration-300 ease-in-out
-}
-
-.accordion-icon-rotate {
-    @apply transform -rotate-180
-}
 
 /* Cursor dot */
 .cursor-dot {
