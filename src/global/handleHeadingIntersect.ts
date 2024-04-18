@@ -9,7 +9,7 @@ const handleHeadingIntersect = (
     titleBorderRef: React.RefObject<HTMLHeadingElement>,
     titleRef: React.RefObject<HTMLHeadingElement>,
     viewAllProjectsRef: React.RefObject<HTMLParagraphElement>,
-    projectWrapperRef: React.RefObject<HTMLDivElement>,
+    contentWrapperRef: React.RefObject<HTMLDivElement>,
     hasAnimated: boolean,
     setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -19,7 +19,7 @@ const handleHeadingIntersect = (
 
         // Check if the element is intersecting the viewport and the animation hasn't played yet
         if (entry.isIntersecting && !hasAnimated) {
-            gsap.set([titleBorderRef.current, titleRef.current, viewAllProjectsRef.current, projectWrapperRef.current], { clearProps: "all" });
+            gsap.set([titleBorderRef.current, titleRef.current, contentWrapperRef.current], { clearProps: "all" });
             
             // Play the animation using GSAP
             gsap.fromTo(
@@ -42,15 +42,19 @@ const handleHeadingIntersect = (
                 ease: "ease"
             });
 
-            gsap.from(viewAllProjectsRef.current, {
-                opacity: 0,
-                x: 40,
-                duration: 2,
-                ease: "ease"
-            });
+            if (viewAllProjectsRef) {
+                gsap.set(viewAllProjectsRef.current, { clearProps: "all" });
+                gsap.from(viewAllProjectsRef.current, {
+                    opacity: 0,
+                    x: 40,
+                    duration: 2,
+                    ease: "ease"
+                });
+            }
+
 
             // Play the animation using GSAP
-            gsap.from(projectWrapperRef.current, {
+            gsap.from(contentWrapperRef.current, {
                 opacity: 0,
                 y: 40,
                 duration: 2,

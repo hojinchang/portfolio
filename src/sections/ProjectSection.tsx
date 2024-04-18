@@ -118,9 +118,9 @@ const ProjectSection: FC = () => {
 
     return (
         <>
-            <section id="projectSection" className="flex flex-col max-w-[1280px] mx-auto">
+            <section id="projectSection" className="section">
                 <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
-                <div ref={titleBorderRef} className="title-border border-b-2 border-neutral-200 mb-6"></div>
+                <div ref={titleBorderRef} className="section-border"></div>
                 <p ref={viewAllProjectsRef} className="self-end">
                     <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
                 </p>
@@ -145,11 +145,6 @@ const ProjectSection: FC = () => {
                     </div>
                     <div className="flex items-center gap-2 self-center">
                         {projectKeys.map((projectKey, idx) => (
-                            // <button
-                            //     key={ idx }
-                            //     className={ `pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : "" }`}
-                            //     onClick={ () => handlePaginationDots(projectKey) }
-                            // ></button>
                             <button
                                 key={idx}
                                 className="pagination-wrapper" // Wrapper for the clickable area
@@ -161,8 +156,6 @@ const ProjectSection: FC = () => {
                     </div>
                 </div>
             </section>
-            <section className="min-h-screen"></section>
-                
         </>
     )
 }

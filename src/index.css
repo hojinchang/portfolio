@@ -52,9 +52,17 @@ body {
     height: clamp(200px, 350px, 471px);
 }
 
-/* Section titles */
+/* Sections */
+.section {
+    @apply flex flex-col max-w-[1280px] mx-auto
+}
+
 .section-title {
     @apply font-semibold text-2xl mb-2 lg:text-3xl
+}
+
+.section-border {
+    @apply border-b-2 border-neutral-200 mb-6;
 }
 
 /* Cursor dot */
