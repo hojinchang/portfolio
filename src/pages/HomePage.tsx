@@ -7,6 +7,7 @@ import { RootState } from "../store/store";
 import HomeSection from "../sections/HomeSection";
 import ProjectSection from "../sections/ProjectSection";
 import AboutSection from "../sections/AboutSection";
+import TechStackSection from "../sections/TechStackSection";
 
 const HomePage: FC = () => {
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
@@ -31,10 +32,9 @@ const HomePage: FC = () => {
     return (
         <main className={`flex flex-col gap-40 px-4 ${isMobile ? "pb-20" : ""}`}>
             <HomeSection />
-            {/* <div className="flex flex-col gap-60 "> */}
-                <ProjectSection />
-                <AboutSection />
-            {/* </div> */}
+            <ProjectSection />
+            <AboutSection />
+            <TechStackSection />
         </main>
     )
 }

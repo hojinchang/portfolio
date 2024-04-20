@@ -118,46 +118,44 @@ const ProjectSection: FC = () => {
     }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
 
     return (
-        <>
-            <section id="projectSection" className="section justify-center">
-                <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
-                <div ref={titleBorderRef} className="section-border"></div>
-                <p ref={viewAllProjectsRef} className="self-end">
-                    <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
-                </p>
-                <div ref={contentWrapperRef} className="flex flex-col gap-6">
-                    <div className="flex">
-                        {projects.length > 0 && (
-                            projects.map(( project, idx ) => {
-                                const projectRef = projectRefs.current[idx];
-                                return (
-                                    <ProjectArticle
-                                        key={ project.title.rendered }
-                                        idx={ idx }
-                                        project={ project }
-                                        active={ activeProject[projectKeys[idx]] }
-                                        articleRef={ projectRef?.articleRef }
-                                        imageRef={ projectRef?.imageRef }
-                                        detailsRef={ projectRef?.detailsRef }
-                                    />
-                                )
-                            })
-                        )}
-                    </div>
-                    <div className="flex items-center gap-2 self-center">
-                        {projectKeys.map((projectKey, idx) => (
-                            <button
-                                key={idx}
-                                className="pagination-wrapper" // Wrapper for the clickable area
-                                onClick={() => handlePaginationDots(projectKey)}
-                            >
-                                <div className={`pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : ""}`}></div>
-                            </button>
-                        ))}
-                    </div>
+        <section id="projectSection" className="section justify-center">
+            <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
+            <div ref={titleBorderRef} className="section-border"></div>
+            <p ref={viewAllProjectsRef} className="self-end">
+                <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
+            </p>
+            <div ref={contentWrapperRef} className="flex flex-col gap-6">
+                <div className="flex">
+                    {projects.length > 0 && (
+                        projects.map(( project, idx ) => {
+                            const projectRef = projectRefs.current[idx];
+                            return (
+                                <ProjectArticle
+                                    key={ project.title.rendered }
+                                    idx={ idx }
+                                    project={ project }
+                                    active={ activeProject[projectKeys[idx]] }
+                                    articleRef={ projectRef?.articleRef }
+                                    imageRef={ projectRef?.imageRef }
+                                    detailsRef={ projectRef?.detailsRef }
+                                />
+                            )
+                        })
+                    )}
                 </div>
-            </section>
-        </>
+                <div className="flex items-center gap-2 self-center">
+                    {projectKeys.map((projectKey, idx) => (
+                        <button
+                            key={idx}
+                            className="pagination-wrapper" // Wrapper for the clickable area
+                            onClick={() => handlePaginationDots(projectKey)}
+                        >
+                            <div className={`pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : ""}`}></div>
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </section>
     )
 }
 

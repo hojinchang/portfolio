@@ -33,7 +33,7 @@ const AboutAccordion: FC<Props> = ({ activeAccordion, setActiveAccordion }) => {
                 </div>
             </div>
             <div className="hidden lg:block lg:w-1/2">
-                <p className={`heading-hero font-bold opacity-0 transition-opacity duration-1000 ease-in-out ${activeAccordion ? "opacity-100" : "opacity-0"} lg:text-7xl lg:w-1/2 xl:text-8xl`}>
+                <p className={`heading-hero font-bold transition-opacity duration-1000 ease-in-out ${activeAccordion ? "opacity-100" : "opacity-0"} lg:text-7xl lg:w-1/2 xl:text-8xl`}>
                     {activeAccordion === "developer" && "DEVELOPER"
                     || activeAccordion === "leader" && "LEADER"
                     || activeAccordion === "innovator" && "INNOVATOR"

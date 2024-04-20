@@ -10,13 +10,7 @@ const ScrollDown: FC = () => {
         const projectSection = document.getElementById("projectSection");
 
         if (projectSection) {
-            const offset = 30;
-            const sectionPosition = projectSection.getBoundingClientRect().top;
-
-            window.scrollTo({
-                top: sectionPosition,
-                behavior: "smooth"
-            });
+            projectSection.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     }
 
