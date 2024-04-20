@@ -1,7 +1,7 @@
 import { FC, useState, useEffect, useRef } from "react"
 
 import handleHeadingIntersect from "../global/handleHeadingIntersect";
-import AboutAccordion from "../components/AboutAccordion";
+import AboutAccordion from "../components/accordion/AboutAccordion";
 
 const AboutSection: FC = () => {
     const [hasTitleAnimated, setHasTitleAnimated] = useState<boolean>(false);
@@ -69,7 +69,7 @@ const AboutSection: FC = () => {
             <h2 ref={ titleRef } className="section-title">// ABOUT</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 
-            <div ref={ contentWrapperRef } >
+            <div ref={ contentWrapperRef }>
                 <AboutAccordion activeAccordion={ activeAccordion } setActiveAccordion={ setActiveAccordion } />
                 
                 <div className="flex flex-col gap-10 lg:flex-row-reverse">
