@@ -17,10 +17,13 @@ const AboutSection: FC = () => {
     useEffect(() => {
         if (activeAccordion) {
             const timer = setTimeout(() => {
-                const element = document.getElementById(`content-${activeAccordion}`);
+                const accordionContent = document.getElementById(`content-${activeAccordion}`);
+                // const headingHero = document.getElementById(`hero-${activeAccordion}`);
+                const headingHero = document.querySelector(".heading-hero");
 
-                if (element) {
-                    element.classList.add("show");
+                if (accordionContent && headingHero) {
+                    accordionContent.classList.toggle("show");
+                    headingHero.classList.toggle("show");
                 }
             }, 10); // Execute after a short delay to allow the element to be rendered with opacity 0
             
@@ -62,12 +65,13 @@ const AboutSection: FC = () => {
     }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
 
     return (
-        <section id="aboutSection" className="section min-h-screen">
+        <section id="aboutSection" className="section">
             <h2 ref={ titleRef } className="section-title">// ABOUT</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 
             <div ref={ contentWrapperRef } >
                 <AboutAccordion activeAccordion={ activeAccordion } setActiveAccordion={ setActiveAccordion } />
+                
                 <div className="flex flex-col gap-10 lg:flex-row-reverse">
                     <article className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="text-xl font-semibold">{ "< ABOUT ME />" }</h3>

@@ -119,7 +119,7 @@ const ProjectSection: FC = () => {
 
     return (
         <>
-            <section id="projectSection" className="section">
+            <section id="projectSection" className="section justify-center">
                 <h2 ref={titleRef} className="section-title">// FEATURED PROJECTS</h2>
                 <div ref={titleBorderRef} className="section-border"></div>
                 <p ref={viewAllProjectsRef} className="self-end">

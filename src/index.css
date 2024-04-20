@@ -81,7 +81,8 @@ body {
     @apply p-4 opacity-0 transition-opacity duration-1000 ease-in-out
 }
 
-.accordion-content.show {
+.accordion-content.show,
+.heading-hero.show {
     @apply opacity-100
 }
 
