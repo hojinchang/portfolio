@@ -1,6 +1,7 @@
 import { FC, useState, useEffect, useRef } from "react"
 
 import handleHeadingIntersect from "../global/handleHeadingIntersect";
+import AboutAccordion from "../components/AboutAccordion";
 
 const AboutSection: FC = () => {
     const [hasTitleAnimated, setHasTitleAnimated] = useState<boolean>(false);
@@ -10,17 +11,13 @@ const AboutSection: FC = () => {
     const titleBorderRef = useRef<HTMLDivElement>(null);                     // Reference to section heading bottom border
     const contentWrapperRef = useRef<HTMLDivElement>(null);                  // Reference to project wrapper div
 
-    const [activeArticle, setActiveArticle] = useState<string | null>(null);
-
-    const handleAccordionClick = (section: string) => {
-        setActiveArticle(activeArticle === section ? null : section);
-    };
+    const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
 
     // Fade in animation of accordion content
     useEffect(() => {
-        if (activeArticle) {
+        if (activeAccordion) {
             const timer = setTimeout(() => {
-                const element = document.getElementById(`content-${activeArticle}`);
+                const element = document.getElementById(`content-${activeAccordion}`);
 
                 if (element) {
                     element.classList.add("show");
@@ -29,8 +26,7 @@ const AboutSection: FC = () => {
             
             return () => clearTimeout(timer);
         }
-    }, [activeArticle]); // Dependency on activeArticle ensures this effect runs when it changes
-
+    }, [activeAccordion]); // Dependency on activeAccordion ensures this effect runs when it changes
     
     
     // Watch where the scroll is based on the title border
@@ -71,62 +67,7 @@ const AboutSection: FC = () => {
             <div ref={ titleBorderRef } className="section-border"></div>
 
             <div ref={ contentWrapperRef } >
-                <div className="shadow-accordion-shadow lg:w-1/2">
-                    <button className="accordion" onClick={() => handleAccordionClick("developer")}>
-                        <p className="font-semibold">DEVELOPER</p>
-                        {activeArticle === "developer" 
-                            ? (
-                                <svg className="text-netural-100" fill="currentColor" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/>
-                                </svg>
-                            ) : (
-                                <svg className="text-netural-100" fill="currentColor" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M0 10h24v4h-24z"/>
-                                </svg>
-                            )
-                        }
-                    </button>
-                    <div className={`accordion-content-wrapper ${activeArticle === "developer" ? "block" : "hidden"}`}>
-                        <p id="content-developer" className={`accordion-content ${activeArticle === "developer" ? "opacity-100" : "opacity-0"}`}>Analytical, detail-oriented software developer specializing in Full-Stack development, Machine Learning, and Computer Vision.</p>
-                    </div>
-
-                    <button className="accordion" onClick={() => handleAccordionClick("leader")}>
-                        <p className="font-semibold">LEADER</p>
-                        {activeArticle === "leader" 
-                            ? (
-                                <svg className="text-netural-100" fill="currentColor" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/>
-                                </svg>
-                            ) : (
-                                <svg className="text-netural-100" fill="currentColor" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M0 10h24v4h-24z"/>
-                                </svg>
-                            )
-                        }
-                    </button>
-                    <div className={`accordion-content-wrapper ${activeArticle === "leader" ? "block" : "hidden"}`}>
-                        <p id="content-leader" className={`accordion-content ${activeArticle === "leader" ? "opacity-100" : "opacity-0"}`}>Proven leader adept at steering teams toward success through clear direction, collaboration, and a focus on achieving collective goals.</p>
-                    </div>
-
-                    <button className="accordion" onClick={() => handleAccordionClick('innovator')}>
-                        <p className="font-semibold">INNOVATOR</p>
-                        {activeArticle === "innovator" 
-                            ? (
-                                <svg className="text-netural-100" fill="currentColor" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/>
-                                </svg>
-                            ) : (
-                                <svg className="text-netural-100" fill="currentColor" width="10" height="10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path d="M0 10h24v4h-24z"/>
-                                </svg>
-                            )
-                        }
-                    </button>
-                    <div className={`accordion-content-wrapper ${activeArticle === "innovator" ? "block" : "hidden"}`}>
-                        <p id="content-innovator" className={`accordion-content ${activeArticle === "innovator" ? "opacity-100" : "opacity-0"}`}>Creative innovator committed to transforming ideas into practical solutions. Skilled in identifying unique opportunities for technological advancement and implementing cutting-edge approaches.</p>
-                    </div>
-
-                </div>
+                <AboutAccordion activeAccordion={ activeAccordion } setActiveAccordion={ setActiveAccordion } />
                 <div className="flex flex-col gap-10 lg:flex-row-reverse">
                     <article className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="text-xl font-semibold">{ "< ABOUT ME />" }</h3>
@@ -167,7 +108,7 @@ const AboutSection: FC = () => {
                             <article className="flex flex-col gap-1">
                                 <h4 className="font-medium text-neutral-300">Simon Fraser University</h4>
                                 <ul className="list-disc list-inside ml-4">
-                                    <li className="text-neutral-300 leading-relaxed">BASc. Mechatronic Systems Engineering <i>(with distinction)</i> - (Aug 2022)</li>
+                                    <li className="text-neutral-300 leading-relaxed">BASc. Mechatronic Systems Engineering <i>(with Distinction)</i> - (Aug 2022)</li>
                                 </ul>
                             </article>
                         </div>
