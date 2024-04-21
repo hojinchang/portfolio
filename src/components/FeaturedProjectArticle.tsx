@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { RootState } from "../store/store";
-import FeaturedImage from "../components/FeaturedImage";
+import FeaturedImage from "./FeaturedImage";
 import { ProjectInterface } from "../interfaces/interfaces";
 
 
@@ -16,7 +16,7 @@ interface ProjectArticleProps {
     detailsRef: React.RefObject<HTMLDivElement>;
 }
 
-const ProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, articleRef, imageRef, detailsRef }) => {
+const FeaturedProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, articleRef, imageRef, detailsRef }) => {
 
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
@@ -51,4 +51,4 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, article
     )
 }
 
-export default ProjectArticle;
+export default FeaturedProjectArticle;

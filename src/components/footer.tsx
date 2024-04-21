@@ -11,10 +11,10 @@ const Footer: FC = () => {
 
     const handleScrollUp = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        const home = document.getElementById("home");
-        if (home) {
-            home.scrollIntoView({ behavior: "smooth" });
-        }
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     }
 
     return (
@@ -36,7 +36,7 @@ const Footer: FC = () => {
                     {!isMobile && (
                         <div className="border-b-2 border-neutral-200"></div>
                     )}
-                    <div>
+                    <nav>
                         <h4 className="font-semibold mb-2">NAVIGATION</h4>
                         <ul className={ `flex ${isMobile ? "flex-col items-end" : "flex-row items-center gap-16"}` }>
                             {navItems.map(( item, idx ) => (
@@ -50,7 +50,7 @@ const Footer: FC = () => {
                                 />
                             ))}
                         </ul>
-                    </div>
+                    </nav>
                 </div>
                 <div className="flex justify-end mt-16">
                     <a className="scroll-up block p-3" onClick={ handleScrollUp }>

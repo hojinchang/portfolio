@@ -6,7 +6,7 @@ import { featuredProjectsAPIPath} from "../global/wpAPIPath";
 import handleHeadingIntersect  from "../global/handleHeadingIntersect";
 import animateProjectArticle from "../global/animateProjectArticle";
 import { ProjectInterface } from "../interfaces/interfaces";
-import ProjectArticle from "../components/ProjectArticle";
+import FeaturedProjectArticle from "../components/FeaturedProjectArticle";
 
 
 interface ActiveProject {
@@ -121,7 +121,7 @@ const ProjectSection: FC = () => {
             <h2 ref={ titleRef } className="section-title">// FEATURED PROJECTS</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
             <p ref={ viewAllProjectsRef } className="self-end">
-                <Link  to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
+                <Link to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
             </p>
             <div ref={ contentWrapperRef } className="flex flex-col gap-6">
                 <div className="flex">
@@ -129,7 +129,7 @@ const ProjectSection: FC = () => {
                         projects.map(( project, idx ) => {
                             const projectRef = projectRefs.current[idx];
                             return (
-                                <ProjectArticle
+                                <FeaturedProjectArticle
                                     key={ project.title.rendered }
                                     idx={ idx }
                                     project={ project }
