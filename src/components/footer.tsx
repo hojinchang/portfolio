@@ -21,8 +21,8 @@ const Footer: FC = () => {
         <footer id="contact" className={ `relative px-4 pt-12 mt-48 bg-neutral-950 ${isMobile ? "pb-24" : "pb-12"}` }>
             <div className="max-w-[1400px] mx-auto">
                 <div className="mb-10">
-                    <h3 className="h3">Before you go...</h3>
-                    <p>Listen to some of my favourite songs!</p>
+                    <h3 className="h3 mb-2">Before you go...</h3>
+                    <p>Check out my socials to connect with me!</p>
                 </div>
                 <div className={ `flex justify-between gap-12 ${isMobile ? "flex-row" : "flex-col"}` }>
                     <div>
@@ -53,7 +53,7 @@ const Footer: FC = () => {
                     </div>
                 </div>
                 <div className="flex justify-end mt-16">
-                    <a className="p-3" onClick={ handleScrollUp }>
+                    <a className="scroll-up block p-3" onClick={ handleScrollUp }>
                         <svg className="text-neutral-100" width="36" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
                             <path d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"/>
                         </svg>
