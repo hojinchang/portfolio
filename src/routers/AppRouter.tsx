@@ -5,10 +5,8 @@ import { setIsMobile } from "../features/isMobile/isMobileSlice";
 
 
 import DotCursor from "../components/DotCursor";
-import Header from "../components/header/Header";
 import HomePage from "../pages/HomePage";
 import ProjectsPage from "../pages/ProjectsPage";
-import Footer from "../components/footer";
 
 const AppRouter: FC = () => {
     const dispatch = useDispatch();
@@ -33,12 +31,10 @@ const AppRouter: FC = () => {
         <BrowserRouter>
             <div className="relative bg-neutral-900 text-neutral-200 min-h-screen font-open-sans overflow-hidden">
                 <DotCursor />
-                <Header />
                 <Routes>
                     <Route path="/" element={ <HomePage /> } />
                     <Route path="/projects" element={ <ProjectsPage /> } />
                 </Routes>
-                <Footer />
             </div>
         </BrowserRouter>
     )
