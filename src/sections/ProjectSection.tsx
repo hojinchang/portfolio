@@ -81,7 +81,6 @@ const ProjectSection: FC = () => {
                 console.error("Error fetching featured projects:", err);
             }
         }
-
         fetchProjects();
     }, []);
     

@@ -1,13 +1,91 @@
 import { FC, useState, useEffect, useRef } from "react";
+import axios from "axios";
 
 import handleHeadingIntersect from "../global/handleHeadingIntersect";
+import { techStateCategoriesAPIPath, techStackAPIPath } from "../global/wpAPIPath";
+import { TechStack } from "../interfaces/interfaces";
+
+
+interface TechStackState {
+    frontEnd: TechStack[];
+    backEnd: TechStack[];
+    programsAndDesign: TechStack[];
+}
+
+interface Category {
+    id: number;
+    slug: string;
+}
+
+interface CategoryState {
+    [id: number]: string;
+}
 
 const TechStackSection: FC = () => {
     const [hasTitleAnimated, setHasTitleAnimated] = useState<boolean>(false);
+
+    // Tech stack categories
+    const [techStack, setTechStack] = useState<TechStackState>({ frontEnd: [], backEnd: [], programsAndDesign: [] });
+    const [categories, setCategories] = useState<CategoryState>({});
+
     // References for GSAP animation
     const titleRef = useRef<HTMLHeadingElement>(null);
     const titleBorderRef = useRef<HTMLDivElement>(null);
     const contentWrapperRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Fetch the tech stack categories custom taxonomy
+        const fetchCategories = async () => {
+            const response = await axios.get<Category[]>(techStateCategoriesAPIPath);
+            // Create an object containing the taxonomy id and value
+            const categoryMap = response.data.reduce((acc, cat) => ({
+                ...acc,
+                [cat.id]: cat.slug
+            }), {});
+
+            setCategories(categoryMap);
+        };
+
+        fetchCategories();
+    }, []);
+
+    useEffect(() => {
+        // Fetch the tech stack custom post types
+        const fetchTechStack = async () => {
+            const response = await axios.get<TechStack[]>(techStackAPIPath);
+            let posts = response.data;
+
+            // Sort the posts by title in alphabetical order
+            posts = posts.sort((a, b) => {
+                const titleA = a.title.rendered.toUpperCase();    // to ensure case-insensitive comparison
+                const titleB = b.title.rendered.toUpperCase(); 
+                if (titleA < titleB) {
+                    return -1;
+                }
+                if (titleA > titleB) {
+                    return 1;
+                }
+                return 0;
+            });
+
+            // Filter posts array based on their category id
+            const frontEnd = posts.filter(post =>
+                post['portfolio-tech-stack-category'].some((catId: number) => categories[catId] === 'front_end')
+            );
+            const backEnd = posts.filter(post =>
+                post['portfolio-tech-stack-category'].some((catId: number) => categories[catId] === 'back_end')
+            );
+            const programsAndDesign = posts.filter(post =>
+                post['portfolio-tech-stack-category'].some((catId: number) => categories[catId] === 'programs_and_design')
+            );
+
+            setTechStack({ frontEnd, backEnd, programsAndDesign });
+        };
+
+        if (Object.keys(categories).length > 0) {
+            fetchTechStack();
+        }
+    }, [categories]);
 
     // Watch where the scroll is based on the title border
     useEffect(() => {

@@ -69,3 +69,14 @@ export interface Project {
     };
     _embedded: Embedded;
 }
+
+export interface TechStack {
+    title: {
+        rendered: string;
+    };
+    content: {
+        rendered: string;
+    };
+    _embedded: Embedded;
+    "portfolio-tech-stack-category": [number];
+}
