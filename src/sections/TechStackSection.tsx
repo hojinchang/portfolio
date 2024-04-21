@@ -99,28 +99,16 @@ const TechStackSection: FC = () => {
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver(( entries ) => {
-            entries.forEach(( entry ) => {
-                if (entry.target === titleBorderRef.current) {
-                    handleHeadingIntersect(
-                        [entry],
-                        titleBorderRef,
-                        titleRef,
-                        null,
-                        null,
-                        hasTitleAnimated,
-                        setHasTitleAnimated
-                    );
-                } else if (entry.target === frontEndStackRef.current) {
-                    animateTechStack(
-                        [entry],
-                        frontEndStackRef,
-                        backEndStackRef,
-                        programsStackRef,
-                        hasStackAnimated,
-                        setHasStackAnimated
-                    );
-                }
-            });
+            handleHeadingIntersect(
+                entries,
+                titleBorderRef,
+                titleRef,
+                null,
+                null,
+                hasTitleAnimated,
+                setHasTitleAnimated
+            );
+                
         }, {
             root: null, // Use the viewport as the root
             rootMargin: "0px", // No margin around the root
@@ -131,20 +119,45 @@ const TechStackSection: FC = () => {
         if (titleBorderRef.current) {
             observer.observe(titleBorderRef.current);
         }
-        if (frontEndStackRef.current) {
-            observer.observe(frontEndStackRef.current);
-        }
     
         // Cleanup stop observing the element when the component unmounts
         return () => {
             if (titleBorderRef.current) {
                 observer.unobserve(titleBorderRef.current);
             }
+        };
+    }, [hasTitleAnimated]);
+
+    // Watch where the scroll is based on the title border
+    useEffect(() => {
+        const observer = new IntersectionObserver(( entries ) => {
+              
+            animateTechStack(
+                entries,
+                frontEndStackRef,
+                backEndStackRef,
+                programsStackRef,
+                hasStackAnimated,
+                setHasStackAnimated
+            );
+
+        }, {
+            root: null, 
+            rootMargin: "0px", 
+            threshold: 0.1 
+         });
+    
+       
+        if (frontEndStackRef.current) {
+            observer.observe(frontEndStackRef.current);
+        }
+    
+        return () => {
             if (frontEndStackRef.current) {
                 observer.unobserve(frontEndStackRef.current);
             }
         };
-    }, []); // Re-run the effect when hasTitleAnimated changes
+    }, [hasStackAnimated]);
     
 
     return (
