@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { scrollOffset } from "../../global/globals";
 
@@ -18,12 +19,16 @@ const NavItem: FC<Props> = ({
     bottomTextClassName = "nav-bottom-text"
 }) => {
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
     const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
         const sectionId = (item === "tech stack") ? "tech-stack" : item;
         const section = document.getElementById(sectionId);
 
-        if (section) {
+        if (section && location.pathname === "/") {
+            // If we are on the home page and the section exists
             const sectionTop = section.offsetTop;
             const scrollToPosition = sectionTop - scrollOffset;
 
@@ -31,6 +36,9 @@ const NavItem: FC<Props> = ({
                 top: scrollToPosition,
                 behavior: "smooth"
             });
+        } else {
+            // If we are not on the home page or the section does not exist
+            navigate(`/?scrollTo=${sectionId}`);
         }
     };
 
