@@ -9,9 +9,16 @@ const Footer: FC = () => {
 
     const navItems: string[] = ["home", "projects", "about", "tech stack", "contact"];
 
+    const handleScrollUp = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        e.preventDefault();
+        const home = document.getElementById("home");
+        if (home) {
+            home.scrollIntoView({ behavior: "smooth" });
+        }
+    }
 
     return (
-        <footer id="contact" className="pb-40 px-4">
+        <footer id="contact" className={ `relative px-4 pt-12 mt-48 bg-neutral-950 ${isMobile ? "pb-24" : "pb-12"}` }>
             <div className="max-w-[1400px] mx-auto">
                 <div className="mb-10">
                     <h3 className="h3">Before you go...</h3>
@@ -37,13 +44,20 @@ const Footer: FC = () => {
                                     key={ idx } 
                                     idx={ idx } 
                                     item={ item }
-                                    linkClassName="nav-link"
+                                    linkClassName="nav-link group"
                                     topTextClassName="leading-none font-semibold text-neutral-500 text-xs"
-                                    bottomTextClassName="leading-none font-medium text-neutral-200 text-sm"
+                                    bottomTextClassName="leading-none font-medium text-neutral-200 text-sm transition duration-300 lg:group-hover:text-neutral-500"
                                 />
                             ))}
                         </ul>
                     </div>
+                </div>
+                <div className="flex justify-end mt-16">
+                    <a className="p-3" onClick={ handleScrollUp }>
+                        <svg className="text-neutral-100" width="36" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
+                            <path d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </footer>

@@ -26,8 +26,6 @@ const NavItem: FC<Props> = ({
         if (section) {
             const sectionPosition = section.getBoundingClientRect().top - scrollOffset;
 
-            console.log(section)
-
             window.scrollTo({
                 top: sectionPosition,
                 behavior: "smooth"
