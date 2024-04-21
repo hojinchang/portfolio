@@ -145,6 +145,7 @@ const TechStackSection: FC = () => {
             }
         };
     }, []); // Re-run the effect when hasTitleAnimated changes
+    
 
     return (
         <section id="techStackSection" className="section">

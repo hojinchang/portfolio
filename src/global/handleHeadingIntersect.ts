@@ -30,9 +30,10 @@ const handleHeadingIntersect = (
                 width: "100%",
                 opacity: 1,
                 duration: 1.75,
-                ease: "power1.out"
-            }).then(() => {
-                setHasAnimated(true);
+                ease: "power1.out",
+                onComplete: () => {
+                    setHasAnimated(true);
+                }
             });
 
             gsap.from(titleRef.current, {

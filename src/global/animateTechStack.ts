@@ -18,27 +18,15 @@ const animateTechStack = (
         if (entry.isIntersecting && !hasAnimated) {
             gsap.set([frontEndStackRef.current, backEndStackRef.current, programsStackRef.current], { clearProps: "all" });
 
-            gsap.from(frontEndStackRef.current, {
+            gsap.from([frontEndStackRef.current, backEndStackRef.current, programsStackRef.current], {
                 opacity: 0,
                 y: 20,
-                duration: 2,
+                duration: 1,
                 ease: "power1.out",
-            });
-
-            gsap.from(backEndStackRef.current, {
-                opacity: 0,
-                y: 20,
-                duration: 2,
-                ease: "power1.out",
-                delay: 0.5
-            });
-
-            gsap.from(programsStackRef.current, {
-                opacity: 0,
-                y: 20,
-                duration: 2,
-                ease: "power1.out",
-                delay: 1
+                stagger: 0.5,
+                onComplete: () => {
+                    setHasAnimated(true);
+                }
             });
         }
         // Check if the element is no longer intersecting and the animation has played
