@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DotCursor from "../components/DotCursor";
 import Header from "../components/header/Header";
 import HomePage from "../pages/HomePage";
+import Footer from "../components/footer";
 
 const AppRouter: FC = () => {
 
@@ -15,6 +16,7 @@ const AppRouter: FC = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                 </Routes>
+                <Footer />
             </div>
         </BrowserRouter>
     )

@@ -1,5 +1,6 @@
 import { FC } from "react";
 
+import { scrollOffset } from "../../global/globals";
 
 const ScrollDown: FC = () => {
 
@@ -7,10 +8,15 @@ const ScrollDown: FC = () => {
         e.preventDefault();
 
         // Get the ref to the ProjectSection and scroll to it
-        const projectSection = document.getElementById("projectSection");
+        const projectSection = document.getElementById("projects");
 
         if (projectSection) {
-            projectSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            const sectionPosition = projectSection.getBoundingClientRect().top - scrollOffset;
+
+            window.scrollTo({
+                top: sectionPosition,
+                behavior: "smooth"
+            });
         }
     }
 

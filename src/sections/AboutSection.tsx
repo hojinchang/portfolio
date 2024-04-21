@@ -65,7 +65,7 @@ const AboutSection: FC = () => {
     }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
 
     return (
-        <section id="aboutSection" className="section">
+        <section id="about" className="section">
             <h2 ref={ titleRef } className="section-title">// ABOUT</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 

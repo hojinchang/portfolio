@@ -161,7 +161,7 @@ const TechStackSection: FC = () => {
     
 
     return (
-        <section id="techStackSection" className="section">
+        <section id="tech-stack" className="section">
             <h2 ref={ titleRef } className="section-title">// TECH STACK</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 
