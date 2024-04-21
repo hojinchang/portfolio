@@ -18,12 +18,12 @@ const DotCursor: FC = () => {
     useEffect(() => {
         const moveCursor = (e: MouseEvent) => {
             setCursorPosition({ 
-                x: e.clientX - 8, 
+                x: e.clientX - 8,   // subtract the radius
                 y: e.clientY - 8
             });
 
             setHaloPosition({ 
-                x: e.clientX - 20, 
+                x: e.clientX - 20,   // subtract the radius
                 y: e.clientY - 20
             });
         }
@@ -70,7 +70,7 @@ const DotCursor: FC = () => {
                 }} 
             />
             <motion.div 
-                className={`halo z-50 ${isHovered ? "hovered" : ""}`}  
+                className={ `halo z-50 ${isHovered ? "hovered" : ""}` }  
                 style={{
                     translateX: haloPosition.x,
                     translateY: haloPosition.y,

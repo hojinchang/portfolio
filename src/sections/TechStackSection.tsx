@@ -2,6 +2,7 @@ import { FC, useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 import handleHeadingIntersect from "../global/handleHeadingIntersect";
+import animateTechStack from "../global/animateTechStack";
 import { techStateCategoriesAPIPath, techStackAPIPath } from "../global/wpAPIPath";
 import { TechStackInterface } from "../interfaces/interfaces";
 
@@ -25,6 +26,7 @@ interface CategoryState {
 
 const TechStackSection: FC = () => {
     const [hasTitleAnimated, setHasTitleAnimated] = useState<boolean>(false);
+    const [hasStackAnimated, setHasStackAnimated] = useState<boolean>(false);
 
     // Tech stack categories
     const [techStack, setTechStack] = useState<TechStackState>({ frontEnd: [], backEnd: [], programsAndDesign: [] });
@@ -34,6 +36,10 @@ const TechStackSection: FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const titleBorderRef = useRef<HTMLDivElement>(null);
     const contentWrapperRef = useRef<HTMLDivElement>(null);
+
+    const frontEndStackRef = useRef<HTMLElement>(null);
+    const backEndStackRef = useRef<HTMLElement>(null);
+    const programsStackRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         // Fetch the tech stack categories custom taxonomy
@@ -93,15 +99,28 @@ const TechStackSection: FC = () => {
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver(( entries ) => {
-            handleHeadingIntersect(
-                entries,
-                titleBorderRef,
-                titleRef,
-                null,
-                contentWrapperRef,
-                hasTitleAnimated,
-                setHasTitleAnimated
-            )
+            entries.forEach(( entry ) => {
+                if (entry.target === titleBorderRef.current) {
+                    handleHeadingIntersect(
+                        [entry],
+                        titleBorderRef,
+                        titleRef,
+                        null,
+                        null,
+                        hasTitleAnimated,
+                        setHasTitleAnimated
+                    );
+                } else if (entry.target === frontEndStackRef.current) {
+                    animateTechStack(
+                        [entry],
+                        frontEndStackRef,
+                        backEndStackRef,
+                        programsStackRef,
+                        hasStackAnimated,
+                        setHasStackAnimated
+                    );
+                }
+            });
         }, {
             root: null, // Use the viewport as the root
             rootMargin: "0px", // No margin around the root
@@ -112,50 +131,56 @@ const TechStackSection: FC = () => {
         if (titleBorderRef.current) {
             observer.observe(titleBorderRef.current);
         }
+        if (frontEndStackRef.current) {
+            observer.observe(frontEndStackRef.current);
+        }
     
-        // Cleanup: Stop observing the element when the component unmounts
+        // Cleanup stop observing the element when the component unmounts
         return () => {
             if (titleBorderRef.current) {
                 observer.unobserve(titleBorderRef.current);
             }
+            if (frontEndStackRef.current) {
+                observer.unobserve(frontEndStackRef.current);
+            }
         };
-    }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
+    }, []); // Re-run the effect when hasTitleAnimated changes
 
     return (
         <section id="techStackSection" className="section">
-            <h2 ref={titleRef} className="section-title">// TECH STACK</h2>
-            <div ref={titleBorderRef} className="section-border"></div>
+            <h2 ref={ titleRef } className="section-title">// TECH STACK</h2>
+            <div ref={ titleBorderRef } className="section-border"></div>
 
-            <div ref={contentWrapperRef} className="flex flex-col gap-6 mt-2">
+            <div ref={ contentWrapperRef } className="flex flex-col gap-6 mt-2">
                 <div className="flex flex-col gap-8 lg:flex-row">
-                    <article className="flex flex-col gap-2 lg:w-1/2">
+                    <article ref={ frontEndStackRef } className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="h3">{ "< Front-End />" }</h3>
                         {techStack.frontEnd.length > 0 && (
                             <div className="grid gap-2 grid-cols-2">
-                                {techStack.frontEnd.map(( stack, idx ) => (
-                                    <TechStack stack={ stack } />
+                                {techStack.frontEnd.map(( stack ) => (
+                                    <TechStack key={ stack.id } stack={ stack } />
                                 ))}
                             </div>
                         )}
                     </article>
-                    <article className="flex flex-col gap-2 lg:w-1/2">
+                    <article ref={ backEndStackRef } className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="h3">{ "< Back-End />" }</h3>
                         {techStack.backEnd.length > 0 && (
                             <div className="grid gap-2 grid-cols-2">
-                                {techStack.backEnd.map(( stack, idx ) => (
-                                    <TechStack stack={ stack } />
+                                {techStack.backEnd.map(( stack ) => (
+                                    <TechStack key={ stack.id } stack={ stack } />
                                 ))}
                             </div>
                         )}
                     </article>
                 </div>
                 <div>
-                    <article className="flex flex-col gap-2">
+                    <article ref={ programsStackRef } className="flex flex-col gap-2">
                         <h3 className="h3">{ "< Programs and Design />" }</h3>
                         {techStack.programsAndDesign.length > 0 && (
                             <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {techStack.programsAndDesign.map(( stack, idx ) => (
-                                    <TechStack stack={ stack } />
+                                {techStack.programsAndDesign.map(( stack ) => (
+                                    <TechStack key={ stack.id } stack={ stack } />
                                 ))}
                             </div>
                         )}

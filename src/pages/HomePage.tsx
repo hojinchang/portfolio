@@ -10,7 +10,7 @@ import AboutSection from "../sections/AboutSection";
 import TechStackSection from "../sections/TechStackSection";
 
 const HomePage: FC = () => {
-    const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
+    const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);
     const dispatch = useDispatch();
 
     // Update the isMobile global state
@@ -30,7 +30,7 @@ const HomePage: FC = () => {
     }, [dispatch]);
 
     return (
-        <main className={`flex flex-col gap-40 px-4 ${isMobile ? "pb-20" : ""}`}>
+        <main className={ `flex flex-col gap-40 px-4 ${ isMobile ? "pb-20" : "" }` }>
             <HomeSection />
             <ProjectSection />
             <AboutSection />

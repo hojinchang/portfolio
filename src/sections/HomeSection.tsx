@@ -12,7 +12,7 @@ const HomeSection: FC = () => {
             opacity: 0,
             y: 80,
             duration: 1,
-            ease: "ease"
+            ease: "power1.out"
         })
     });
     
@@ -20,7 +20,7 @@ const HomeSection: FC = () => {
 
     return (
         <section className="h-screen relative">
-            <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-5xl mx-auto">
+            <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-6xl mx-auto">
                 <div className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
                     <div className="marquee-content flex gap-52 main-text w-full">
                         <div className="name-marquee w-full">

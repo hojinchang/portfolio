@@ -71,6 +71,7 @@ export interface ProjectInterface {
 }
 
 export interface TechStackInterface {
+    id: number,
     title: {
         rendered: string;
     };

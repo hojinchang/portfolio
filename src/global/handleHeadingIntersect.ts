@@ -9,17 +9,17 @@ const handleHeadingIntersect = (
     titleBorderRef: React.RefObject<HTMLHeadingElement>,
     titleRef: React.RefObject<HTMLHeadingElement>,
     viewAllProjectsRef: React.RefObject<HTMLParagraphElement> | null,
-    contentWrapperRef: React.RefObject<HTMLDivElement>,
+    contentWrapperRef: React.RefObject<HTMLDivElement> | null,
     hasAnimated: boolean,
     setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-    entries.forEach((entry) => {
+    entries.forEach(( entry ) => {
         const currentScrollY = window.scrollY;
         const isScrollingUp = currentScrollY < lastScrollY;
 
         // Check if the element is intersecting the viewport and the animation hasn't played yet
         if (entry.isIntersecting && !hasAnimated) {
-            gsap.set([titleBorderRef.current, titleRef.current, contentWrapperRef.current], { clearProps: "all" });
+            gsap.set([titleBorderRef.current, titleRef.current], { clearProps: "all" });
             
             // Play the animation using GSAP
             gsap.fromTo(
@@ -30,7 +30,7 @@ const handleHeadingIntersect = (
                 width: "100%",
                 opacity: 1,
                 duration: 1.75,
-                ease: "ease"
+                ease: "power1.out"
             }).then(() => {
                 setHasAnimated(true);
             });
@@ -39,7 +39,7 @@ const handleHeadingIntersect = (
                 opacity: 0,
                 x: -40,
                 duration: 2,
-                ease: "ease"
+                ease: "power1.out"
             });
 
             if (viewAllProjectsRef) {
@@ -48,17 +48,19 @@ const handleHeadingIntersect = (
                     opacity: 0,
                     x: 40,
                     duration: 2,
-                    ease: "ease"
+                    ease: "power1.out"
                 });
             }
 
-            // Play the animation using GSAP
-            gsap.from(contentWrapperRef.current, {
-                opacity: 0,
-                y: 70,
-                duration: 2,
-                ease: "ease"
-            })
+            if (contentWrapperRef) {
+                gsap.set(contentWrapperRef.current, { clearProps: "all" });
+                gsap.from(contentWrapperRef.current, {
+                    opacity: 0,
+                    y: 40,
+                    duration: 2,
+                    ease: "power1.out"
+                }); 
+            }
         } 
         // Check if the element is no longer intersecting and the animation has played
         else if (!entry.isIntersecting && hasAnimated && isScrollingUp) {
