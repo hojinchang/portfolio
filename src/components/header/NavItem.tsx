@@ -10,10 +10,10 @@ interface Props {
     bottomTextClassName?: string // Custom class names for the bottom text
 }
 
-const NavItem: FC<Props> = ({ 
-    idx, 
+const NavItem: FC<Props> = ({
+    idx,
     item,
-    linkClassName = "nav-link nav-link-hover group", // Default class if none provided
+    linkClassName = "nav-link nav-link-hover group",
     topTextClassName = "nav-top-text",
     bottomTextClassName = "nav-bottom-text"
 }) => {
@@ -24,23 +24,24 @@ const NavItem: FC<Props> = ({
         const section = document.getElementById(sectionId);
 
         if (section) {
-            const sectionPosition = section.getBoundingClientRect().top - scrollOffset;
+            const sectionTop = section.offsetTop;
+            const scrollToPosition = sectionTop - scrollOffset;
 
             window.scrollTo({
-                top: sectionPosition,
+                top: scrollToPosition,
                 behavior: "smooth"
-            })
+            });
         }
     };
 
     return (
         <li>
-            <a onClick={ handleNavigate } className={ linkClassName }>
-                <p className={ topTextClassName }>{`0${idx}`}</p>
-                <p className={ bottomTextClassName }><span>//</span>{item.toUpperCase()}</p>
+            <a onClick={handleNavigate} className={linkClassName}>
+                <p className={topTextClassName}>{`0${idx}`}</p>
+                <p className={bottomTextClassName}><span>//</span>{item.toUpperCase()}</p>
             </a>
         </li>
-    )
+    );
 }
 
 export default NavItem;
