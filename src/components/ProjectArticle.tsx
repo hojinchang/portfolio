@@ -30,13 +30,13 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, article
             }
         >
             {project.featured_media !== 0 && project._embedded && 
-                <div ref={ imageRef } className={ `${isMobile ? "" : "w-1/2"}` }>
+                <div ref={ imageRef } className={ `${isMobile ? "" : "w-3/5"}` }>
                     <figure>
                         <FeaturedImage featuredImageObject={ project._embedded["wp:featuredmedia"][0] } />
                     </figure>
                 </div>
             }
-            <div ref={ detailsRef } className={`flex flex-col gap-8 p-4 pb-2 md:justify-end md:pb-6 ${isMobile ? "" : "w-1/2"}`}>
+            <div ref={ detailsRef } className={`flex flex-col gap-8 p-4 pb-2 md:justify-end md:pb-6 ${isMobile ? "" : "w-2/5"}`}>
                 <div className="flex flex-col gap-2">
                     <h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl 2xl:text-5xl">{ project.title.rendered }</h3>
                     <p className="text-base lg:text-lg">{ project.acf.sub_title }</p>

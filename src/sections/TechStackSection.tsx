@@ -131,7 +131,7 @@ const TechStackSection: FC = () => {
                     <article className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="h3">{ "< Front-End />" }</h3>
                         {techStack.frontEnd.length > 0 && (
-                            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
+                            <div className="grid gap-2 grid-cols-2">
                                 {techStack.frontEnd.map(( stack, idx ) => (
                                     <TechStack stack={ stack } />
                                 ))}
@@ -141,7 +141,7 @@ const TechStackSection: FC = () => {
                     <article className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="h3">{ "< Back-End />" }</h3>
                         {techStack.backEnd.length > 0 && (
-                            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
+                            <div className="grid gap-2 grid-cols-2">
                                 {techStack.backEnd.map(( stack, idx ) => (
                                     <TechStack stack={ stack } />
                                 ))}
@@ -153,7 +153,7 @@ const TechStackSection: FC = () => {
                     <article className="flex flex-col gap-2">
                         <h3 className="h3">{ "< Programs and Design />" }</h3>
                         {techStack.programsAndDesign.length > 0 && (
-                            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                 {techStack.programsAndDesign.map(( stack, idx ) => (
                                     <TechStack stack={ stack } />
                                 ))}

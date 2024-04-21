@@ -22,6 +22,10 @@ export default {
           750: "#2b2b2b"
         }
       },
+      width: {
+        "3/5": "60%",
+        "2/5": "40%"
+      },
       boxShadow: {
         "top-shadow": "0 -2px 8px rgba(0, 0, 0, 0.4)",
         "bot-shadow": "0 5px 8px rgba(0, 0, 0, 0.4)",
