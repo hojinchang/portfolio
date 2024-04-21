@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FeaturedMedia } from "../interfaces/interfaces";
+import { FeaturedMedia } from "../../interfaces/interfaces";
 
 interface FeaturedImageProps {
     featuredImageObject: FeaturedMedia;

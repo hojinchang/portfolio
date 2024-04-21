@@ -51,9 +51,9 @@ body {
     animation-delay: 0.4s;
 }
 
-/* Article Feature Image */
-.article-feature {
-    height: clamp(200px, 350px, 471px);
+/* Project Article */
+.project-article {
+    @apply bg-neutral-800 p-3 rounded-lg h-full shadow-all-shadow
 }
 
 /* Sections */

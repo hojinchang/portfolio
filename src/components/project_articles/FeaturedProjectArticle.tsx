@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { RootState } from "../../store/store";
-import FeaturedImage from "../FeaturedImage";
+import FeaturedImage from "./FeaturedImage";
 import { ProjectInterface } from "../../interfaces/interfaces";
 
 
@@ -24,7 +24,7 @@ const FeaturedProjectArticle: FC<FeaturedProjectArticleProps> = ({ project, idx,
         <article
             ref={ articleRef }
             className={
-                `bg-neutral-800 p-3 rounded-lg h-full
+                `project-article
                 ${active ? "flex" : "hidden"}
                 md:gap-6 ${isMobile ? "flex-col" : (idx === 1) ? "flex-row-reverse" : "flex-row"}`
             }

@@ -16,7 +16,7 @@ const AboutAccordion: FC<Props> = ({ activeAccordion, setActiveAccordion }) => {
 
     return (
         <div className="mt-5 mb-10 lg:flex lg:items-center lg:gap-10">
-            <div className="shadow-accordion-shadow lg:w-1/2">
+            <div className="shadow-all-shadow lg:w-1/2">
                 <AccordionButton accordionName={ "developer" } activeAccordion={ activeAccordion }  handleAccordionClick={ handleAccordionClick }/>
                 <div className={ `accordion-content-wrapper ${activeAccordion === "developer" ? "block" : "hidden"}` }>
                     <p id="content-developer" className={`accordion-content ${activeAccordion === "developer" ? "opacity-100" : "opacity-0"}`}>Analytical, detail-oriented software developer specializing in Full-Stack development, Machine Learning, and Computer Vision.</p>
