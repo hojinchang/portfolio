@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 import { RootState } from "../store/store";
 import FeaturedImage from "../components/FeaturedImage";
-import { Project } from "../interfaces/interfaces";
+import { ProjectInterface } from "../interfaces/interfaces";
 
 
 interface ProjectArticleProps {
-    project: Project;
+    project:ProjectInterface;
     idx: number;
     active: boolean;
     articleRef: React.RefObject<HTMLElement>;
@@ -40,7 +40,7 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, article
                 <div className="flex flex-col gap-2">
                     <h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl 2xl:text-5xl">{ project.title.rendered }</h3>
                     <p className="text-base lg:text-lg">{ project.acf.sub_title }</p>
-                    <p className="text-neutral-500 text-sm leading-normal lg:text-base">{project._embedded["acf:post"].map((techStack) => techStack.title.rendered).join(" | ")}</p>
+                    <p className="text-neutral-400 text-sm leading-normal lg:text-base">{project._embedded["acf:post"].map((techStack) => techStack.title.rendered).join(" | ")}</p>
                 </div>
                 <div className="flex justify-center gap-8 2xs:gap-20 xs:gap-28 sm:gap-36 md:flex-col md:gap-0 md:items-end">
                     <Link to="/" target="_blank" className="underline p-2 lg:text-lg link-hover">VIEW MORE</Link>

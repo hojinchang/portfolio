@@ -5,7 +5,7 @@ import axios from "axios";
 import { featuredProjectsAPIPath} from "../global/wpAPIPath";
 import handleHeadingIntersect  from "../global/handleHeadingIntersect";
 import animateProjectArticle from "../global/animateProjectArticle";
-import { Project } from "../interfaces/interfaces";
+import { ProjectInterface } from "../interfaces/interfaces";
 import ProjectArticle from "../components/ProjectArticle";
 
 
@@ -23,7 +23,7 @@ interface ProjectRefs {
 }
 
 const ProjectSection: FC = () => {
-    const [projects, setProjects] = useState<Project[]>([]);
+    const [projects, setProjects] = useState<ProjectInterface[]>([]);
     const [activeProject, setActiveProject] = useState<ActiveProject>({
         project1: true,
         project2: false,

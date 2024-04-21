@@ -74,7 +74,7 @@ const AboutSection: FC = () => {
                 
                 <div className="flex flex-col gap-10 lg:flex-row-reverse">
                     <article className="flex flex-col gap-2 lg:w-1/2">
-                        <h3 className="text-xl font-semibold">{ "< ABOUT ME />" }</h3>
+                        <h3 className="h3">{ "< ABOUT ME />" }</h3>
                         <div>
                             <p className="text-neutral-300 leading-relaxed">
                                 Hello, my name is <span className="text-highlight">Hojin</span>! I'm a <span className="text-highlight">Full-Stack Developer</span> with a background in <span className="text-highlight">Machine Learning</span> and <span className="text-highlight">Computer Vision</span>. I bring an <span className="text-highlight">analytical</span>, <span className="text-highlight">detail-oriented</span> approach to development and constantly pursue excellence through <span className="text-highlight">continuous learning</span>. My engineering education honed my <span className="text-highlight">problem-solving skills</span>, and I love applying them while leveraging cutting-edge technology to craft end-to-end solutions.
@@ -85,7 +85,7 @@ const AboutSection: FC = () => {
                     </article>
                     <div className="flex flex-col gap-6 lg:w-1/2">
                         <article className="flex flex-col gap-2">
-                            <h3 className="text-xl font-semibold">{ "< WORK EXPERIENCE />" }</h3>
+                            <h3 className="h3">{ "< WORK EXPERIENCE />" }</h3>
                             <div className="flex flex-col gap-1">
                                 <h4 className="font-medium text-neutral-200">Metrized Consulting Inc</h4>
                                 <ul className="list-disc list-inside ml-4">
@@ -102,7 +102,7 @@ const AboutSection: FC = () => {
                             </div>
                         </article>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-xl font-semibold">{ "< EDUCATION />" }</h3>
+                            <h3 className="h3">{ "< EDUCATION />" }</h3>
                             <article className="flex flex-col gap-1">
                                 <h4 className="font-medium text-neutral-300">British Columbia Institute of Technology</h4>
                                 <ul className="list-disc list-inside ml-4">

@@ -57,7 +57,7 @@ export interface Embedded {
 }
 
 // Define the structure of the Project object
-export interface Project {
+export interface ProjectInterface {
     title: {
         rendered: string;
     };
@@ -70,7 +70,7 @@ export interface Project {
     _embedded: Embedded;
 }
 
-export interface TechStack {
+export interface TechStackInterface {
     title: {
         rendered: string;
     };

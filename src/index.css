@@ -9,6 +9,10 @@ body {
     user-select: none;
 }
 
+.h3 {
+    @apply text-xl font-semibold
+}
+
 .link-hover {
     @apply transform transition duration-300 lg:hover:text-neutral-500
 }
@@ -54,7 +58,7 @@ body {
 
 /* Sections */
 .section {
-    @apply flex flex-col w-full max-w-[1280px] mx-auto min-h-screen
+    @apply flex flex-col w-full max-w-[1400px] mx-auto min-h-screen
 }
 
 .section-title {

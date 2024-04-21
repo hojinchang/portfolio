@@ -15,7 +15,7 @@ const AboutAccordion: FC<Props> = ({ activeAccordion, setActiveAccordion }) => {
     };
 
     return (
-        <div className="pt-5 pb-10 lg:flex lg:items-center lg:gap-10">
+        <div className="mt-5 mb-10 lg:flex lg:items-center lg:gap-10">
             <div className="shadow-accordion-shadow lg:w-1/2">
                 <AccordionButton accordionName={ "developer" } activeAccordion={ activeAccordion }  handleAccordionClick={ handleAccordionClick }/>
                 <div className={`accordion-content-wrapper ${activeAccordion === "developer" ? "block" : "hidden"}`}>
@@ -33,7 +33,7 @@ const AboutAccordion: FC<Props> = ({ activeAccordion, setActiveAccordion }) => {
                 </div>
             </div>
             <div className="hidden lg:block lg:w-1/2">
-                <p className={`heading-hero font-bold transition-opacity duration-1000 ease-in-out ${activeAccordion ? "opacity-100" : "opacity-0"} lg:text-7xl lg:w-1/2 xl:text-8xl`}>
+                <p className={`heading-hero font-bold transition-opacity text-center duration-1000 ease-in-out ${activeAccordion ? "opacity-100" : "opacity-0"} lg:text-7xl xl:text-8xl`}>
                     {activeAccordion === "developer" && "DEVELOPER"
                     || activeAccordion === "leader" && "LEADER"
                     || activeAccordion === "innovator" && "INNOVATOR"

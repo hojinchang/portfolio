@@ -3,13 +3,15 @@ import axios from "axios";
 
 import handleHeadingIntersect from "../global/handleHeadingIntersect";
 import { techStateCategoriesAPIPath, techStackAPIPath } from "../global/wpAPIPath";
-import { TechStack } from "../interfaces/interfaces";
+import { TechStackInterface } from "../interfaces/interfaces";
+
+import TechStack from "../components/TechStack";
 
 
 interface TechStackState {
-    frontEnd: TechStack[];
-    backEnd: TechStack[];
-    programsAndDesign: TechStack[];
+    frontEnd: TechStackInterface[];
+    backEnd: TechStackInterface[];
+    programsAndDesign: TechStackInterface[];
 }
 
 interface Category {
@@ -52,7 +54,7 @@ const TechStackSection: FC = () => {
     useEffect(() => {
         // Fetch the tech stack custom post types
         const fetchTechStack = async () => {
-            const response = await axios.get<TechStack[]>(techStackAPIPath);
+            const response = await axios.get<TechStackInterface[]>(techStackAPIPath);
             let posts = response.data;
 
             // Sort the posts by title in alphabetical order
@@ -124,8 +126,41 @@ const TechStackSection: FC = () => {
             <h2 ref={titleRef} className="section-title">// TECH STACK</h2>
             <div ref={titleBorderRef} className="section-border"></div>
 
-            <div ref={contentWrapperRef}>
-
+            <div ref={contentWrapperRef} className="flex flex-col gap-6 mt-2">
+                <div className="flex flex-col gap-8 lg:flex-row">
+                    <article className="flex flex-col gap-2 lg:w-1/2">
+                        <h3 className="h3">{ "< Front-End />" }</h3>
+                        {techStack.frontEnd.length > 0 && (
+                            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
+                                {techStack.frontEnd.map(( stack, idx ) => (
+                                    <TechStack stack={ stack } />
+                                ))}
+                            </div>
+                        )}
+                    </article>
+                    <article className="flex flex-col gap-2 lg:w-1/2">
+                        <h3 className="h3">{ "< Back-End />" }</h3>
+                        {techStack.backEnd.length > 0 && (
+                            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
+                                {techStack.backEnd.map(( stack, idx ) => (
+                                    <TechStack stack={ stack } />
+                                ))}
+                            </div>
+                        )}
+                    </article>
+                </div>
+                <div>
+                    <article className="flex flex-col gap-2">
+                        <h3 className="h3">{ "< Programs and Design />" }</h3>
+                        {techStack.programsAndDesign.length > 0 && (
+                            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                                {techStack.programsAndDesign.map(( stack, idx ) => (
+                                    <TechStack stack={ stack } />
+                                ))}
+                            </div>
+                        )}
+                    </article>
+                </div>
             </div>
         </section>
     )
