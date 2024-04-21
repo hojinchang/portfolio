@@ -62,20 +62,7 @@ const TechStackSection: FC = () => {
         const fetchTechStack = async () => {
             const response = await axios.get<TechStackInterface[]>(techStackAPIPath);
             let posts = response.data;
-
-            // Sort the posts by title in alphabetical order
-            posts = posts.sort((a, b) => {
-                const titleA = a.title.rendered.toUpperCase();    // to ensure case-insensitive comparison
-                const titleB = b.title.rendered.toUpperCase(); 
-                if (titleA < titleB) {
-                    return -1;
-                }
-                if (titleA > titleB) {
-                    return 1;
-                }
-                return 0;
-            });
-
+            
             // Filter posts array based on their category id
             const frontEnd = posts.filter(post =>
                 post['portfolio-tech-stack-category'].some((catId: number) => categories[catId] === 'front_end')

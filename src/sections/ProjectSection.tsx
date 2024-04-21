@@ -2,11 +2,11 @@ import React, { FC, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import { featuredProjectsAPIPath} from "../global/wpAPIPath";
+import { featuredProjectsAPIPath } from "../global/wpAPIPath";
 import handleHeadingIntersect  from "../global/handleHeadingIntersect";
 import animateProjectArticle from "../global/animateProjectArticle";
 import { ProjectInterface } from "../interfaces/interfaces";
-import FeaturedProjectArticle from "../components/FeaturedProjectArticle";
+import FeaturedProjectArticle from "../components/project_articles/FeaturedProjectArticle";
 
 
 interface ActiveProject {

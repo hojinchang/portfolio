@@ -2,13 +2,13 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { RootState } from "../store/store";
-import FeaturedImage from "./FeaturedImage";
-import { ProjectInterface } from "../interfaces/interfaces";
+import { RootState } from "../../store/store";
+import FeaturedImage from "../FeaturedImage";
+import { ProjectInterface } from "../../interfaces/interfaces";
 
 
-interface ProjectArticleProps {
-    project:ProjectInterface;
+interface FeaturedProjectArticleProps {
+    project: ProjectInterface;
     idx: number;
     active: boolean;
     articleRef: React.RefObject<HTMLElement>;
@@ -16,7 +16,7 @@ interface ProjectArticleProps {
     detailsRef: React.RefObject<HTMLDivElement>;
 }
 
-const FeaturedProjectArticle: FC<ProjectArticleProps> = ({ project, idx, active, articleRef, imageRef, detailsRef }) => {
+const FeaturedProjectArticle: FC<FeaturedProjectArticleProps> = ({ project, idx, active, articleRef, imageRef, detailsRef }) => {
 
     const isMobile = useSelector((state: RootState) => state.isMobile.isMobile);
 
