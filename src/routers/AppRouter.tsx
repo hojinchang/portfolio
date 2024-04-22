@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setIsMobile } from "../features/isMobile/isMobileSlice";
 
-
 import DotCursor from "../components/DotCursor";
 import HomePage from "../pages/HomePage";
 import ProjectsPage from "../pages/ProjectsPage";
+import ErrorPage from "../pages/ErrorPage";
 
 const AppRouter: FC = () => {
     const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const AppRouter: FC = () => {
                 <Routes>
                     <Route path="/" element={ <HomePage /> } />
                     <Route path="/projects" element={ <ProjectsPage /> } />
+                    <Route path="*" element={ <ErrorPage /> } />
                 </Routes>
             </div>
         </BrowserRouter>
