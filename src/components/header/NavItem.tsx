@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { scrollOffset } from "../../global/globals";
@@ -31,7 +31,7 @@ const NavItem: FC<Props> = ({
             // If we are on the home page and the section exists
             const sectionTop = section.offsetTop;
             const scrollToPosition = sectionTop - scrollOffset;
-
+            // Scroll to that section with some offset
             window.scrollTo({
                 top: scrollToPosition,
                 behavior: "smooth"
@@ -41,6 +41,29 @@ const NavItem: FC<Props> = ({
             navigate(`/?scrollTo=${sectionId}`);
         }
     };
+
+    useEffect(() => {
+        // If there is a section specified in the query string, scroll to it
+        const scrollToElement = () => {
+            const params = new URLSearchParams(location.search);
+            const scrollTo = params.get('scrollTo');
+            if (scrollTo) {
+                const element = document.getElementById(scrollTo);
+                if (element) {
+                    // Scroll to the top of the specified section with some offset
+                    const sectionTop = element.offsetTop;
+                    const scrollToPosition = sectionTop - scrollOffset;
+                    
+                    window.scrollTo({
+                        top: scrollToPosition,
+                        behavior: "smooth"
+                    });
+                }
+            }
+        };
+
+        scrollToElement();
+    }, [location]);
 
     return (
         <li>

@@ -7,7 +7,7 @@ import gsap from "gsap";
 import Header from "../components/header/Header";
 import ProjectArticle from "../components/project_articles/ProjectArticle";
 import Loading from "../components/Loading";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 import { RootState } from "../store/store";
 import { ProjectInterface } from "../interfaces/interfaces";
@@ -38,8 +38,6 @@ const ProjectsPage: FC = () => {
                 const response = await axios.get(projectsAPIPath);
                 setProjects(response.data);
                 projectRefs.current = response.data.map(() => React.createRef<HTMLDivElement>());
-
-                console.log(projectRefs);
             } catch(err) {
                 console.error("Error fetching projects:", err);
                 setLoading(false);

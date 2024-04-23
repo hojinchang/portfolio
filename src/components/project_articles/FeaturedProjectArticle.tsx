@@ -43,7 +43,7 @@ const FeaturedProjectArticle: FC<FeaturedProjectArticleProps> = ({ project, idx,
                     <p className="text-neutral-400 text-sm leading-normal lg:text-base">{project._embedded["acf:post"].map((techStack) => techStack.title.rendered).join(" | ")}</p>
                 </div>
                 <div className="flex justify-center gap-8 2xs:gap-20 xs:gap-28 sm:gap-36 md:flex-col md:gap-0 md:items-end">
-                    <Link to="/" target="_blank" className="underline p-2 lg:text-lg link-hover">VIEW MORE</Link>
+                    <Link to={ `/project/${project.slug}` } className="underline p-2 lg:text-lg link-hover">VIEW MORE</Link>
                     <Link to={ project.acf.live_site_link } target="_blank" className="underline p-2 lg:text-lg link-hover">LIVE SITE</Link>
                 </div>
             </div>

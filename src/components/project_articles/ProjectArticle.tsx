@@ -7,7 +7,6 @@ interface ProjectArticleProps {
     project: ProjectInterface;
 }
 
-
 const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
 
     // Function which decodes special characters
@@ -35,7 +34,7 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
                     <p className="text-neutral-400 text-sm leading-normal">{project._embedded["acf:post"].map((techStack) => techStack.title.rendered).join(" | ")}</p>
                 </div>
                 <div className="flex justify-center gap-8">
-                    <Link to="/" target="_blank" className="underline p-2 link-hover">VIEW MORE</Link>
+                    <Link to={ `/project/${project.slug}` } className="underline p-2 link-hover">VIEW MORE</Link>
                     <Link to={ project.acf.live_site_link } target="_blank" className="underline p-2 link-hover">LIVE SITE</Link>
                 </div>
             </div>

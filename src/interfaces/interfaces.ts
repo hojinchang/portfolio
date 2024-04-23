@@ -58,6 +58,7 @@ export interface Embedded {
 
 // Define the structure of the Project object
 export interface ProjectInterface {
+    slug: string;
     title: {
         rendered: string;
     };

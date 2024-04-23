@@ -8,7 +8,7 @@ import HomeSection from "../sections/HomeSection";
 import ProjectSection from "../sections/ProjectSection";
 import AboutSection from "../sections/AboutSection";
 import TechStackSection from "../sections/TechStackSection";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 
 const HomePage: FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);

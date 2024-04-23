@@ -6,6 +6,7 @@ import { setIsMobile } from "../features/isMobile/isMobileSlice";
 import DotCursor from "../components/DotCursor";
 import HomePage from "../pages/HomePage";
 import ProjectsPage from "../pages/ProjectsPage";
+import SingleProjectPage from "../pages/SingleProjectPage";
 import ErrorPage from "../pages/ErrorPage";
 
 const AppRouter: FC = () => {
@@ -34,6 +35,7 @@ const AppRouter: FC = () => {
                 <Routes>
                     <Route path="/" element={ <HomePage /> } />
                     <Route path="/projects" element={ <ProjectsPage /> } />
+                    <Route path="/project/:projectName" element={ <SingleProjectPage /> } />
                     <Route path="*" element={ <ErrorPage /> } />
                 </Routes>
             </div>

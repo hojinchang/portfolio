@@ -21,7 +21,7 @@ const animateTechStack = (
             gsap.from([frontEndStackRef.current, backEndStackRef.current, programsStackRef.current], {
                 opacity: 0,
                 y: 20,
-                duration: 1,
+                duration: 1.25,
                 ease: "power1.out",
                 stagger: 0.5,
                 onComplete: () => {
