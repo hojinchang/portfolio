@@ -23,7 +23,6 @@ const ProjectsPage: FC = () => {
     // References for GSAP animation
     const titleRef = useRef<HTMLHeadingElement>(null);
     const descriptionRef = useRef<HTMLParagraphElement>(null);
-    // const projectRefs = useRef<HTMLDivElement[]>([]);
     const projectRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([]);
 
     // Scroll to the top of the page when the page mounts
@@ -36,8 +35,10 @@ const ProjectsPage: FC = () => {
         const fetchProjects = async() => {
             try {
                 const response = await axios.get(projectsAPIPath);
-                setProjects(response.data);
-                projectRefs.current = response.data.map(() => React.createRef<HTMLDivElement>());
+                if (response.data && response.data.length > 0) {
+                    setProjects(response.data);
+                    projectRefs.current = response.data.map(() => React.createRef<HTMLDivElement>());
+                }
             } catch(err) {
                 console.error("Error fetching projects:", err);
                 setLoading(false);
@@ -100,13 +101,15 @@ const ProjectsPage: FC = () => {
                 </section>
                 <section className="max-w-5xl mx-auto">
                     <div className="mx-auto grid gap-4 grid-cols-1 max-w-[400px] sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
-                        {projects.length > 0 && (
+                        {projects.length > 0 ? (
                             projects.map(( project, idx ) => (
                                 <div ref={ projectRefs.current[idx]} key={ project.title.rendered }>
                                     <ProjectArticle project={ project } />
                                 </div>
-                            ))
-                        )}
+                            ))) : (
+                                <h2 className="font-bold text-center text-2xl">NO PROJECTS FOUND</h2>
+                            )
+                    }
                     </div>
                 </section>
             </main>

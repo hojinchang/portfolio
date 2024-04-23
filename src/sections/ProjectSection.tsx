@@ -76,7 +76,9 @@ const ProjectSection: FC = () => {
         const fetchProjects = async() => {
             try {
                 const response = await axios.get(featuredProjectsAPIPath);
-                setProjects(response.data);
+                if (response.data && response.data.length > 0) {
+                    setProjects(response.data);
+                }
             } catch(err) {
                 console.error("Error fetching featured projects:", err);
             }
@@ -125,7 +127,7 @@ const ProjectSection: FC = () => {
             </p>
             <div ref={ contentWrapperRef } className="flex flex-col gap-6">
                 <div className="flex">
-                    {projects.length > 0 && (
+                    {projects.length > 0 ? (
                         projects.map(( project, idx ) => {
                             const projectRef = projectRefs.current[idx];
                             return (
@@ -139,8 +141,10 @@ const ProjectSection: FC = () => {
                                     detailsRef={ projectRef?.detailsRef }
                                 />
                             )
-                        })
-                    )}
+                        })) : (
+                            <h2 className="font-bold text-center text-2xl">NO PROJECTS FOUND</h2>
+                        )
+                    }
                 </div>
                 <div className="flex items-center gap-2 self-center">
                     {projectKeys.map(( projectKey, idx ) => (
