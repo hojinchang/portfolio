@@ -10,6 +10,8 @@ import Footer from "../components/Footer";
 import { RootState } from "../store/store";
 import { projectsAPIPath } from "../global/wpAPIPath";
 import { ProjectInterface } from "../interfaces/interfaces";
+import { useMarqueeAnimation } from "../hooks/useMarquee";
+
 
 const SingleProjectPage:FC = () => {
     // Get project slug from query string
@@ -18,10 +20,13 @@ const SingleProjectPage:FC = () => {
 
     const [project, setProject] = useState<ProjectInterface | null>(null);
 
+    const marqueeRef = useMarqueeAnimation(project);
+
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
 
     // Fetch the project
     useEffect(() => {
@@ -42,7 +47,18 @@ const SingleProjectPage:FC = () => {
     return (
         <>
             <Header />
-            <main className={ `px-4 ${ isMobile ? "pb-20" : "" }` }>
+            <main className={ ` ${ isMobile ? "pb-20" : "" }` }>
+                <header>
+                    <div ref={ marqueeRef } className="marquee flex gap-72">
+                        <div className="marquee-content flex gap-72 main-text w-full">
+                            <div className="name-marquee w-full">
+                                {project && project.title.rendered.split('').map((letter, index) => (
+                                    <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-8" : ""}` }>{ letter }</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </header>
             </main>
             <Footer />
         </>

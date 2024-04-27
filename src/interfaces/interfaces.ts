@@ -67,6 +67,7 @@ export interface ProjectInterface {
         sub_title: string;
         live_site_link: string;
         github_repo_link: string;
+        overview: string;
     };
     _embedded: Embedded;
 }

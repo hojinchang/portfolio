@@ -2,8 +2,8 @@ import { FC } from "react"
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import marqueeAnimation from "../global/marquee";
 import ScrollDown from "../components/header/ScrollDown";
+import { useMarqueeAnimation } from "../hooks/useMarquee";
 
 const HomeSection: FC = () => {
     // fade in animation for job titles
@@ -16,13 +16,13 @@ const HomeSection: FC = () => {
         })
     });
     
-    marqueeAnimation();
+    const marqueeRef = useMarqueeAnimation(true);
 
     return (
         <section id="home" className="h-screen relative">
             <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-6xl mx-auto">
-                <div className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
-                    <div className="marquee-content flex gap-52 main-text w-full">
+                <div ref={ marqueeRef } className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
+                    <div className="marquee-content flex gap-52 w-full">
                         <div className="name-marquee w-full">
                             <span className="marquee-letter inline-block">H</span>
                             <span className="marquee-letter inline-block">o</span>
