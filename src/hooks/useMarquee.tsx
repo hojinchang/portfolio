@@ -9,9 +9,12 @@ export const useMarqueeAnimation = (dependency?: any) => {
     function debounce(func: Function) {
         let timer: number | undefined;
 
-        return function () {
+        return function (event: Event) {
             if (timer) clearTimeout(timer);
-            timer = setTimeout(func, 500) as any; // Casting to any to satisfy the types
+            // timer = setTimeout(event, 500) as any; // Casting to any to satisfy the types
+            timer = setTimeout(() => {
+                func();
+            }, 500, event) as any; // Casting to any to satisfy the types
         };
     }
 
@@ -19,6 +22,8 @@ export const useMarqueeAnimation = (dependency?: any) => {
         if (!dependency || !marqueeRef.current) {
             return;
         }
+
+        console.log("RUNNING!")
     
         const marquee = marqueeRef.current;
         const marqueeContent = marquee.firstChild as HTMLDivElement;
@@ -26,8 +31,8 @@ export const useMarqueeAnimation = (dependency?: any) => {
         if (marquee && marqueeContent) {
             marquee.appendChild(marqueeContent.cloneNode(true));
             const contentWidth = parseFloat(getComputedStyle(marqueeContent).getPropertyValue("width"));
-
-            if (contentWidth < 600) {
+            
+            if (contentWidth < 1000) {
                 marquee.appendChild(marqueeContent.cloneNode(true));
             }
 
@@ -49,7 +54,7 @@ export const useMarqueeAnimation = (dependency?: any) => {
     
             gsap.fromTo(".marquee-letter", {
                 opacity: 0,
-                y: 150
+                y: 150,
             }, {
                 opacity: 1,
                 y: 0,
@@ -60,15 +65,19 @@ export const useMarqueeAnimation = (dependency?: any) => {
                         playMarquee();
                     }
                 }
-                
             });
+                  
 
-            window.addEventListener("resize", debounce(playMarquee));
-            // Clean up the event listener
+            const debouncedPlayMarquee = debounce(playMarquee);
+
+            window.addEventListener("resize", debouncedPlayMarquee);
+
             return () => {
-                window.removeEventListener("resize", debounce(playMarquee));
+                window.removeEventListener("resize", debouncedPlayMarquee);
                 if (tween) tween.kill();
             };
+            
+
         }
 
     }, [dependency]); // Effect runs on dependency change
