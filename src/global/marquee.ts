@@ -39,7 +39,7 @@ const marqueeAnimation = () => {
                 tween = gsap.fromTo(
                     marquee.children,
                     {x: 0},
-                    {x: distanceToTranslate, duration: 5, ease: "none", repeat: -1}
+                    {x: distanceToTranslate, duration: 10, ease: "none", repeat: -1}
                 );
         
                 tween.progress(progress);
@@ -49,8 +49,8 @@ const marqueeAnimation = () => {
             gsap.from(".marquee-letter", {
                 opacity: 0,
                 y: 150,
-                stagger: 0.075,
-                duration: 0.75,
+                stagger: 0.1,
+                duration: 1,
                 // Animate the marquee scrolling
                 onComplete: () => {
                     playMarquee();

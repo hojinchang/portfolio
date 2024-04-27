@@ -22,19 +22,19 @@ export const useMarqueeAnimation = (dependency?: any) => {
         if (!dependency || !marqueeRef.current) {
             return;
         }
-
-        console.log("RUNNING!")
     
         const marquee = marqueeRef.current;
         const marqueeContent = marquee.firstChild as HTMLDivElement;
         
         if (marquee && marqueeContent) {
-            marquee.appendChild(marqueeContent.cloneNode(true));
-            const contentWidth = parseFloat(getComputedStyle(marqueeContent).getPropertyValue("width"));
-            
-            if (contentWidth < 1000) {
-                marquee.appendChild(marqueeContent.cloneNode(true));
-            }
+
+            const fillMarquee = () => {
+                while (marquee.scrollWidth <= window.innerWidth * 2) {
+                    marquee.appendChild(marqueeContent.cloneNode(true));
+                }
+            };
+
+            fillMarquee();
 
             // Ensure the component updates with the new children before calculating styles
             let tween: gsap.core.Tween;
@@ -47,8 +47,8 @@ export const useMarqueeAnimation = (dependency?: any) => {
                 // Animate the marquee scrolling
                 tween = gsap.fromTo(
                     marquee.children,
-                    {x: 0},
-                    {x: distanceToTranslate, duration: 10, ease: "none", repeat: -1,}
+                    { x: 0 },
+                    { x: distanceToTranslate, duration: 10, ease: "none", repeat: -1 }
                 );
             }
     
@@ -67,22 +67,15 @@ export const useMarqueeAnimation = (dependency?: any) => {
                 }
             });
                   
-
             const debouncedPlayMarquee = debounce(playMarquee);
-
             window.addEventListener("resize", debouncedPlayMarquee);
-
             return () => {
                 window.removeEventListener("resize", debouncedPlayMarquee);
                 if (tween) tween.kill();
             };
-            
-
         }
-
     }, [dependency]); // Effect runs on dependency change
     
-
     return marqueeRef;
 };
 

@@ -13,6 +13,8 @@ import { projectsAPIPath } from "../global/wpAPIPath";
 import { ProjectInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 
+import marqueeAnimation from "../global/marquee";
+
 
 const SingleProjectPage:FC = () => {
     // Get project slug from query string
@@ -68,11 +70,11 @@ const SingleProjectPage:FC = () => {
             <Header />
             <main className={ ` ${ isMobile ? "pb-20" : "" }` }>
                 <header>
-                    <div ref={ marqueeRef } className="marquee flex gap-32 lg:gap-72">
-                        <div className="marquee-content flex gap-72 main-text w-full">
+                    <div ref={ marqueeRef } className="marquee flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
+                        <div className="marquee-content flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
                             <div className="name-marquee w-full">
                                 {project && project.title.rendered.split('').map((letter, index) => (
-                                    <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-8" : ""}` }>{ letter }</span>
+                                    <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
                                 ))}
                                 
                             </div>

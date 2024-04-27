@@ -15,7 +15,7 @@ const HomeSection: FC = () => {
             ease: "power1.out"
         })
     });
-    
+
     const marqueeRef = useMarqueeAnimation(true);
 
     return (
