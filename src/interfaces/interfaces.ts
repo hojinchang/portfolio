@@ -49,6 +49,7 @@ export interface AcfPost {
     title: {
         rendered: string;
     };
+
 }
 
 export interface Roles {
@@ -73,6 +74,7 @@ export interface ProjectInterface {
         live_site_link: string;
         github_repo_link: string;
         overview: string;
+        tech_stack: [number];
     };
     _embedded: Embedded;
 }
@@ -85,6 +87,7 @@ export interface TechStackInterface {
     content: {
         rendered: string;
     };
+    alt_text: string;
     _embedded: Embedded;
     "portfolio-tech-stack-category": [number];
 }

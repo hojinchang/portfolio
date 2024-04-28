@@ -10,13 +10,12 @@ import BackLink from "../components/BackLink";
 
 import { RootState } from "../store/store";
 import FeaturedImage from "../components/project_articles/FeaturedImage";
-import { projectsAPIPath } from "../global/wpAPIPath";
-import { ProjectInterface } from "../interfaces/interfaces";
+import { projectsAPIPath, techStackAPIPath } from "../global/wpAPIPath";
+import { ProjectInterface, TechStackInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/globals";
 
 import { Roles } from "../interfaces/interfaces";
-
 
 const SingleProjectPage:FC = () => {
     // Get project slug from query string
@@ -25,6 +24,7 @@ const SingleProjectPage:FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
     const [project, setProject] = useState<ProjectInterface | null>(null);
+    const [teckStack, setTeckStack] = useState<TechStackInterface[]>([]);
 
     const marqueeRef = useMarqueeAnimation(!loading && project);
 
@@ -33,15 +33,30 @@ const SingleProjectPage:FC = () => {
     //     window.scrollTo(0, 0);
     // }, []);
 
+    //  Reorder the tech stack response data in specified order
+    const reorderTechStack = (techStackData: TechStackInterface[], orderIds: number[]) => {
+        const techStackMap = new Map(techStackData.map(item => [item.id, item]));
+        return orderIds.map(id => techStackMap.get(id)).filter(item => item !== undefined) as TechStackInterface[];
+    };
 
     // Fetch the project
     useEffect(() => {
         const fetchProject = async() => {
             try {
+                // Get the project
                 const response = await axios.get(projectsAPIPath + `&slug=${projectName}`);
                 if (response.data && response.data.length > 0) {
+                    // Santize title to escape special characters
                     const data = response.data[0];
                     data.title.rendered = decodeHTMLEntities(data.title.rendered);
+
+                    // Get the tech stack cpt
+                    const techStackIds = data.acf.tech_stack;
+                    const techStackResponse = await axios.get(techStackAPIPath + `&include=${techStackIds.join(",")}`);
+                    if (techStackResponse.data) {
+                        const orderedTechStack = reorderTechStack(techStackResponse.data, techStackIds);
+                        setTeckStack(orderedTechStack);
+                    }
 
                     setProject(data);
                 }
@@ -126,15 +141,35 @@ const SingleProjectPage:FC = () => {
                                 </div>
                                 <div>
                                     <h2 className="font-semibold text-xl mb-3">ROLE</h2>
-                                    <div className="flex flex-col gap-2">
+                                    <ul className="flex flex-col gap-2">
                                         {( project._embedded["wp:term"][0].length > 0 ) ? (
                                             project._embedded["wp:term"][0].map((role: Roles) => (
-                                                <p key={ role.name } className="underline">{ role.name }</p>
+                                                <li key={ role.name } className="underline">{ role.name }</li>
                                             ))) : (
-                                                <p>NO ROLES FOUND</p>
+                                                <li>NO ROLES FOUND</li>
                                             )
                                         }
-                                    </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 className="font-semibold text-xl mb-5">TECH STACK</h2>
+                                <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                                    {( teckStack.length > 0 ) ? (
+                                        teckStack.map(( stack ) => (
+                                            <article key={ stack.id } className="flex gap-4 items-center w-full max-w-[18rem] xs:max-w-none bg-neutral-800 p-3 rounded-md shadow-all-shadow">
+                                                <div>
+                                                    <img className="block w-10 h-10" src={ stack._embedded["wp:featuredmedia"][0].source_url } alt={ stack._embedded["wp:featuredmedia"][0].alt_text }/>
+                                                </div>
+                                                <div>
+                                                    <p className="font-semibold text-sm md:text-base">{ stack.title.rendered }</p>
+                                                    <div className="text-xs md:text-sm text-neutral-400" dangerouslySetInnerHTML={{ __html: stack.content.rendered }}></div>
+                                                </div>
+                                            </article>
+                                        ))
+                                    ) : (
+                                        <p>NO TECH STACK FOUND</p>
+                                    )}
                                 </div>
                             </div>
                         </section>

@@ -9,7 +9,7 @@ const TechStack:FC<Props> = ({ stack }) => {
     return (
         <article className="flex gap-2 2xs:gap-4 items-center bg-neutral-800 p-3 rounded-md shadow-all-shadow">
             <div>
-                <img className="block w-8 h-8 rounded-md object-cover 3xs:object-contain sm:w-10 sm:h-10" src={ stack._embedded["wp:featuredmedia"][0].source_url }/>
+                <img className="block w-8 h-8 rounded-md object-cover 3xs:object-contain sm:w-10 sm:h-10" src={ stack._embedded["wp:featuredmedia"][0].source_url } alt={ stack._embedded["wp:featuredmedia"][0].alt_text }/>
             </div>
             <div>
                 <p className="font-semibold text-[10px] 2xs:text-sm sm:text-sm md:text-base">{ stack.title.rendered }</p>
