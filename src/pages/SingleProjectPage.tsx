@@ -93,8 +93,8 @@ const SingleProjectPage:FC = () => {
                 <>
                     {/* Gradient backdrop */}
                     <header className="pt-[5rem] pb-[3rem] relative">
-                        <div ref={ marqueeRef } className="marquee flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
-                            <div className="marquee-content flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
+                        <div ref={ marqueeRef } className="marquee marquee-gap">
+                            <div className="marquee-content marquee-gap">
                                 <div className="name-marquee w-full">
                                     {project && project.title.rendered.split('').map((letter, index) => (
                                         <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
@@ -107,7 +107,7 @@ const SingleProjectPage:FC = () => {
                     <main className={ `px-4 xs:px-8 ${ isMobile ? "pb-20" : "" }` }>
                         <section className="section-smaller">
                             <BackLink path="/projects" title="PROJECTS" />
-                            <div className="flex flex-col gap-12 md:flex-row md:justify-between">
+                            <section className="flex flex-col gap-12 md:flex-row md:justify-between">
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-6">PROJECT</p>
                                     <h1 className="text-[2.125rem] font-semibold lg:text-[2.625rem] leading-tight mb-4">{ project.title.rendered }</h1>
@@ -128,19 +128,19 @@ const SingleProjectPage:FC = () => {
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="mt-10 max-w-[750px] mx-auto">
+                            </section>
+                            <section className="mt-10 max-w-[750px] mx-auto">
                                 <figure>
                                     <FeaturedImage featuredImageObject={ project._embedded["wp:featuredmedia"][0] } />
                                 </figure>
-                            </div>
-                            <div className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2">
+                            </section>
+                            <section className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2">
                                 <div className="md:w-[70%]">
-                                    <h2 className="font-semibold text-xl mb-3">OVERVIEW</h2>
+                                    <h2 className="section-heading mb-3">OVERVIEW</h2>
                                     <p className="leading-relaxed">{ project.acf.overview }</p>
                                 </div>
                                 <div>
-                                    <h2 className="font-semibold text-xl mb-3">ROLE</h2>
+                                    <h2 className="section-heading mb-3">ROLE</h2>
                                     <ul className="flex flex-col gap-2">
                                         {( project._embedded["wp:term"][0].length > 0 ) ? (
                                             project._embedded["wp:term"][0].map((role: Roles) => (
@@ -151,9 +151,9 @@ const SingleProjectPage:FC = () => {
                                         }
                                     </ul>
                                 </div>
-                            </div>
-                            <div>
-                                <h2 className="font-semibold text-xl mb-5">TECH STACK</h2>
+                            </section>
+                            <section>
+                                <h2 className="section-heading mb-5">TECH STACK</h2>
                                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                                     {( teckStack.length > 0 ) ? (
                                         teckStack.map(( stack ) => (
@@ -171,7 +171,14 @@ const SingleProjectPage:FC = () => {
                                         <p>NO TECH STACK FOUND</p>
                                     )}
                                 </div>
-                            </div>
+                            </section>
+                            <section className="mt-8">
+                                <div className="grid grid-cols-1 md:grid-cols-3">
+                                    <button className="details-button">CONCEPT</button>
+                                    <button className="details-button">FEATURES</button>
+                                    <button className="details-button">REFLECTION</button>
+                                </div>
+                            </section>
                         </section>
                     </main>
                 </>
