@@ -16,11 +16,13 @@ const HomePage: FC = () => {
     return (
         <>
             <Header />
-            <main className={ `main flex flex-col gap-40 ${ isMobile ? "pb-20" : "" }` }>
+            <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                 <HomeSection />
-                <ProjectSection />
-                <AboutSection />
-                <TechStackSection />
+                <div className="flex flex-col gap-[20rem]">
+                    <ProjectSection />
+                    <AboutSection />
+                    <TechStackSection />
+                </div>
             </main>
             <Footer />
         </>

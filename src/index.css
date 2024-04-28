@@ -62,7 +62,7 @@ body {
 
 /* Sections */
 .section {
-    @apply flex flex-col w-full max-w-[1400px] mx-auto min-h-screen
+    @apply flex flex-col w-full max-w-[1400px] mx-auto
 }
 
 .section-smaller {
@@ -118,7 +118,7 @@ body {
 
 /* Single Project Page */
 .link-button {
-    @apply block px-4 py-2 bg-neutral-700 rounded-md transition duration-300 lg:hover:bg-neutral-600 lg:text-lg
+    @apply block px-4 py-2 bg-neutral-700 rounded-md transition duration-300 lg:hover:bg-neutral-600
 }
 
 .section-heading {

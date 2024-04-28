@@ -19,7 +19,7 @@ const HomeSection: FC = () => {
     const marqueeRef = useMarqueeAnimation(true);
 
     return (
-        <section id="home" className="h-screen relative">
+        <section id="home" className="h-screen relative mb-[10rem]">
             <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-6xl mx-auto">
                 <div ref={ marqueeRef } className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
                     <div className="marquee-content flex gap-52 w-full">

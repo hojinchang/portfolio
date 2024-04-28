@@ -97,7 +97,7 @@ const SingleProjectPage:FC = () => {
                             <div className="marquee-content marquee-gap">
                                 <div className="name-marquee w-full">
                                     {project && project.title.rendered.split('').map((letter, index) => (
-                                        <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
+                                        <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
                                     ))}
                                 </div>
                             </div>
@@ -109,17 +109,23 @@ const SingleProjectPage:FC = () => {
                             <BackLink path="/projects" title="PROJECTS" />
                             <section className="flex flex-col gap-12 md:flex-row md:justify-between">
                                 <div>
-                                    <p className="text-sm text-neutral-400 font-medium mb-6">PROJECT</p>
-                                    <h1 className="text-[2.125rem] font-semibold lg:text-[2.625rem] leading-tight mb-4">{ project.title.rendered }</h1>
+                                    <p className="text-sm text-neutral-400 font-medium mb-3 lg:mb-2">PROJECT</p>
+                                    <h1 className="text-[2.5rem] md:text-[3rem] font-semibold lg:text-[4rem] leading-tight mb-2">{ project.title.rendered }</h1>
                                     <p>{ project.acf.sub_title }</p>
                                 </div>
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-6">VIEW PROJECT</p>
                                     <div className="flex gap-8">
                                         <p>
-                                            <a className="link-button" href={ project.acf.live_site_link } target="_blank">
-                                                LIVE SITE
-                                            </a>
+                                            {project.acf.live_site_link ? (
+                                                <a className="link-button" href={project.acf.live_site_link} target="_blank">
+                                                    LIVE SITE
+                                                </a>
+                                            ) : (
+                                                <a className="link-button pointer-events-none opacity-50" href="#" onClick={(e) => e.preventDefault()}>
+                                                    IN PROGRESS
+                                                </a>
+                                            )}
                                         </p>
                                         <p >
                                             <a className="link-button" href={ project.acf.github_repo_link } target="_blank">

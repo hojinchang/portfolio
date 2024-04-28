@@ -22,19 +22,22 @@ export const useMarqueeAnimation = (dependency?: any) => {
         if (!dependency || !marqueeRef.current) {
             return;
         }
-    
+        
+        // Get the marquee container
         const marquee = marqueeRef.current;
+        // Get the marquee content
         const marqueeContent = marquee.firstChild as HTMLDivElement;
         
         if (marquee && marqueeContent) {
-
+            
             const fillMarquee = () => {
-                if (marquee.scrollWidth > window.innerWidth * 2) {
+                // Always append two child nodes initially
+                marquee.appendChild(marqueeContent.cloneNode(true));
+                marquee.appendChild(marqueeContent.cloneNode(true));
+            
+                // Check if more child nodes are needed and append them if necessary
+                while (marquee.scrollWidth <= window.innerWidth * 2) {
                     marquee.appendChild(marqueeContent.cloneNode(true));
-                } else {
-                    while (marquee.scrollWidth <= window.innerWidth * 2) {
-                        marquee.appendChild(marqueeContent.cloneNode(true));
-                    }
                 }
             };
 
@@ -63,13 +66,11 @@ export const useMarqueeAnimation = (dependency?: any) => {
                 opacity: 1,
                 y: 0,
                 stagger: 0.1,
-                duration: 1,
-                onComplete: () => {
-                    if (!gsap.isTweening(".marquee-letter")) {
-                        playMarquee();
-                    }
-                }
+                duration: 1
             });
+
+            // Start playMarquee horizontal scroll animation after 2.5 seconds delay
+            gsap.delayedCall(2.5, playMarquee);
                   
             const debouncedPlayMarquee = debounce(playMarquee);
             window.addEventListener("resize", debouncedPlayMarquee);

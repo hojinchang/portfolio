@@ -65,7 +65,7 @@ const AboutSection: FC = () => {
     }, [hasTitleAnimated]); // Re-run the effect when hasTitleAnimated changes
 
     return (
-        <section id="about" className="section">
+        <section id="about" className="section min-height-fit">
             <h2 ref={ titleRef } className="section-title">// ABOUT</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 
@@ -89,7 +89,7 @@ const AboutSection: FC = () => {
                             <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-200">Metrized Consulting Inc</h4>
                                 <ul className="about-article-list">
-                                    <li className="about-article-content-wrapper">Machine Learning Software Engineer - (Aug 2022 - Aug 2023)</li>
+                                    <li className="about-article-text">Machine Learning Software Engineer - (Aug 2022 - Aug 2023)</li>
                                     <li className="about-article-text">Machine Learning Software Engineer Co-op - (Aug 2021 - Aug 2022)</li>
                                 </ul>
                             </div>
