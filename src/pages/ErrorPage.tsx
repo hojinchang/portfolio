@@ -8,7 +8,7 @@ const ErrorPage: FC = () => {
     return (
         <>
             <Header />
-            <main className="flex items-center justify-center min-h-screen px-4">
+            <main className="flex items-center justify-center min-h-screen px-4 xs:px-8">
                 <section className="flex flex-col gap-8 text-center">
                     <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl">PAGE NOT FOUND</h1>
                     <div>

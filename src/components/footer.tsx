@@ -18,7 +18,7 @@ const Footer: FC = () => {
     }
 
     return (
-        <footer id="contact" className={ `relative px-4 pt-12 mt-48 bg-neutral-950 ${isMobile ? "pb-[1.5rem]" : "pb-[2.5rem]"}` }>
+        <footer id="contact" className={ `relative px-4 pt-12 mt-48 bg-neutral-950 xs:px-8 sm:px-12 ${isMobile ? "pb-[1.5rem]" : "pb-[2.5rem]"}` }>
             <div className="max-w-[1400px] mx-auto">
                 <div className="mb-10">
                     <h3 className="h3 mb-2">Before you go...</h3>

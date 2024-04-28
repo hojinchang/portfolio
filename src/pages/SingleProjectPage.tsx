@@ -9,6 +9,7 @@ import Footer from "../components/Footer";
 import BackLink from "../components/BackLink";
 
 import { RootState } from "../store/store";
+import FeaturedImage from "../components/project_articles/FeaturedImage";
 import { projectsAPIPath } from "../global/wpAPIPath";
 import { ProjectInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
@@ -82,10 +83,10 @@ const SingleProjectPage:FC = () => {
                         </div>
                         <div className="absolute left-0 right-0 top-0 h-full bg-gradient-to-b from-black via-black to-transparent opacity-60"></div>
                     </header>
-                    <main className={ `px-4 ${ isMobile ? "pb-20" : "" }` }>
+                    <main className={ `px-4 xs:px-8 ${ isMobile ? "pb-20" : "" }` }>
                         <section className="section-smaller">
                             <BackLink path="/projects" title="PROJECTS" />
-                            <div className="flex flex-col gap-12">
+                            <div className="flex flex-col gap-12 md:flex-row md:justify-between">
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-6">PROJECT</p>
                                     <h1 className="text-[2.125rem] font-semibold lg:text-[2.625rem] leading-none mb-4">{ project?.title.rendered }</h1>
@@ -107,7 +108,11 @@ const SingleProjectPage:FC = () => {
                                     </div>
                                 </div>
                             </div>
-
+                            <div className="my-8 max-w-[750px] mx-auto">
+                                <figure>
+                                    <FeaturedImage featuredImageObject={ project._embedded["wp:featuredmedia"][0] } />
+                                </figure>
+                            </div>
                         </section>
                     </main>
                 </>
