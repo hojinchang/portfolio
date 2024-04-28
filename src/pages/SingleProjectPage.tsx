@@ -13,6 +13,9 @@ import FeaturedImage from "../components/project_articles/FeaturedImage";
 import { projectsAPIPath } from "../global/wpAPIPath";
 import { ProjectInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
+import { decodeHTMLEntities } from "../global/globals";
+
+import { Roles } from "../interfaces/interfaces";
 
 
 const SingleProjectPage:FC = () => {
@@ -25,10 +28,10 @@ const SingleProjectPage:FC = () => {
 
     const marqueeRef = useMarqueeAnimation(!loading && project);
 
-    // Scroll to the top of the page when the page mounts
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+    // // Scroll to the top of the page when the page mounts
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    // }, []);
 
 
     // Fetch the project
@@ -37,7 +40,10 @@ const SingleProjectPage:FC = () => {
             try {
                 const response = await axios.get(projectsAPIPath + `&slug=${projectName}`);
                 if (response.data && response.data.length > 0) {
-                    setProject(response.data[0]);
+                    const data = response.data[0];
+                    data.title.rendered = decodeHTMLEntities(data.title.rendered);
+
+                    setProject(data);
                 }
             } catch(err) {
                 console.error("Error fetching projects:", err);
@@ -89,7 +95,7 @@ const SingleProjectPage:FC = () => {
                             <div className="flex flex-col gap-12 md:flex-row md:justify-between">
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-6">PROJECT</p>
-                                    <h1 className="text-[2.125rem] font-semibold lg:text-[2.625rem] leading-none mb-4">{ project?.title.rendered }</h1>
+                                    <h1 className="text-[2.125rem] font-semibold lg:text-[2.625rem] leading-tight mb-4">{ project.title.rendered }</h1>
                                     <p>{ project.acf.sub_title }</p>
                                 </div>
                                 <div>
@@ -108,10 +114,28 @@ const SingleProjectPage:FC = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="my-8 max-w-[750px] mx-auto">
+                            <div className="mt-10 max-w-[750px] mx-auto">
                                 <figure>
                                     <FeaturedImage featuredImageObject={ project._embedded["wp:featuredmedia"][0] } />
                                 </figure>
+                            </div>
+                            <div className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2">
+                                <div className="md:w-[70%]">
+                                    <h2 className="font-semibold text-xl mb-3">OVERVIEW</h2>
+                                    <p className="leading-relaxed">{ project.acf.overview }</p>
+                                </div>
+                                <div>
+                                    <h2 className="font-semibold text-xl mb-3">ROLE</h2>
+                                    <div className="flex flex-col gap-2">
+                                        {( project._embedded["wp:term"][0].length > 0 ) ? (
+                                            project._embedded["wp:term"][0].map((role: Roles) => (
+                                                <p key={ role.name } className="underline">{ role.name }</p>
+                                            ))) : (
+                                                <p>NO ROLES FOUND</p>
+                                            )
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </main>

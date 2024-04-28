@@ -51,9 +51,14 @@ export interface AcfPost {
     };
 }
 
+export interface Roles {
+    name: string;
+}
+
 export interface Embedded {
     "acf:post": AcfPost[];
     "wp:featuredmedia": FeaturedMedia[];
+    "wp:term": Roles[][];
 }
 
 // Define the structure of the Project object

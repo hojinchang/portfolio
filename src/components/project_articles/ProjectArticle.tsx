@@ -2,19 +2,13 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { ProjectInterface } from "../../interfaces/interfaces";
+import { decodeHTMLEntities } from "../../global/globals";
 
 interface ProjectArticleProps {
     project: ProjectInterface;
 }
 
 const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
-
-    // Function which decodes special characters
-    function decodeHTMLEntities(text: string) {
-        const textArea = document.createElement("textarea");
-        textArea.innerHTML = text;
-        return textArea.value;
-    }
 
     const projectTitle = decodeHTMLEntities(project.title.rendered);
 

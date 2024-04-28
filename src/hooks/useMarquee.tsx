@@ -29,8 +29,12 @@ export const useMarqueeAnimation = (dependency?: any) => {
         if (marquee && marqueeContent) {
 
             const fillMarquee = () => {
-                while (marquee.scrollWidth <= window.innerWidth * 2) {
+                if (marquee.scrollWidth > window.innerWidth * 2) {
                     marquee.appendChild(marqueeContent.cloneNode(true));
+                } else {
+                    while (marquee.scrollWidth <= window.innerWidth * 2) {
+                        marquee.appendChild(marqueeContent.cloneNode(true));
+                    }
                 }
             };
 
