@@ -95,7 +95,7 @@ const ProjectsPage: FC = () => {
     return (
         <>
             <Header />
-            <main className={ `px-4 xs:px-8 ${ isMobile ? "pb-20" : "" }` }>
+            <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                 <section className="max-w-[1280px] mx-auto mt-28 mb-16">
                     <BackLink path="/" title="HOME" />
                     <h1 ref={ titleRef } className="font-bold text-center mt-8 mb-12 text-5xl 2xs:text-6xl sm:text-7xl lg:text-8xl xl:text-9xl">PROJECTS</h1>

@@ -9,6 +9,10 @@ body {
     user-select: none;
 }
 
+.main {
+    @apply px-4 xs:px-8
+}
+
 .h3 {
     @apply text-xl font-semibold
 }
@@ -75,6 +79,23 @@ body {
 
 .text-highlight {
     @apply text-neutral-100 font-medium
+}
+
+/* About Section */
+.about-article {
+    @apply flex flex-col gap-2
+}
+
+.about-article-content-wrapper {
+    @apply flex flex-col gap-1
+}
+
+.about-article-text {
+    @apply text-neutral-300 leading-relaxed
+}
+
+.about-article-list {
+    @apply list-disc list-inside ml-4
 }
 
 .accordion {

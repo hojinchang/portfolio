@@ -104,7 +104,7 @@ const SingleProjectPage:FC = () => {
                         </div>
                         <div className="absolute left-0 right-0 top-0 h-full bg-gradient-to-b from-black via-black to-transparent opacity-60"></div>
                     </header>
-                    <main className={ `px-4 xs:px-8 ${ isMobile ? "pb-20" : "" }` }>
+                    <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                         <section className="section-smaller">
                             <BackLink path="/projects" title="PROJECTS" />
                             <section className="flex flex-col gap-12 md:flex-row md:justify-between">
