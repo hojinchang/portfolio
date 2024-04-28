@@ -66,23 +66,52 @@ const SingleProjectPage:FC = () => {
     return (
         <>
             <Header />
-            <main className={ `${ isMobile ? "pb-20" : "" }` }>
-                <header className="pt-[5rem] pb-[3rem] relative">
-                    <div ref={ marqueeRef } className="marquee flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
-                        <div className="marquee-content flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
-                            <div className="name-marquee w-full">
-                                {project && project.title.rendered.split('').map((letter, index) => (
-                                    <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
-                                ))}
+
+            {project &&
+                <>
+                    {/* Gradient backdrop */}
+                    <header className="pt-[5rem] pb-[3rem] relative">
+                        <div ref={ marqueeRef } className="marquee flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
+                            <div className="marquee-content flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
+                                <div className="name-marquee w-full">
+                                    {project && project.title.rendered.split('').map((letter, index) => (
+                                        <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-transparent opacity-60"></div>
-                </header>
-                <section className="section-smaller">
-                    <BackLink path="/projects" title="PROJECTS" />
-                </section>
-            </main>
+                        <div className="absolute left-0 right-0 top-0 h-full bg-gradient-to-b from-black via-black to-transparent opacity-60"></div>
+                    </header>
+                    <main className={ `px-4 ${ isMobile ? "pb-20" : "" }` }>
+                        <section className="section-smaller">
+                            <BackLink path="/projects" title="PROJECTS" />
+                            <div className="flex flex-col gap-12">
+                                <div>
+                                    <p className="text-sm text-neutral-400 font-medium mb-6">PROJECT</p>
+                                    <h1 className="text-[2.125rem] font-semibold lg:text-[2.625rem] leading-none mb-4">{ project?.title.rendered }</h1>
+                                    <p>{ project.acf.sub_title }</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-neutral-400 font-medium mb-6">VIEW PROJECT</p>
+                                    <div className="flex gap-8">
+                                        <p>
+                                            <a className="link-button" href={ project.acf.live_site_link } target="_blank">
+                                                LIVE SITE
+                                            </a>
+                                        </p>
+                                        <p >
+                                            <a className="link-button" href={ project.acf.github_repo_link } target="_blank">
+                                                GITHUB
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </main>
+                </>
+            }
             <Footer />
         </>
     )

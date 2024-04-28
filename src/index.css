@@ -62,7 +62,7 @@ body {
 }
 
 .section-smaller {
-    @apply flex flex-col w-full max-w-[1280px] mx-auto min-h-screen
+    @apply flex flex-col gap-12 w-full max-w-[1280px] mx-auto min-h-screen
 }
 
 .section-title {
@@ -92,6 +92,12 @@ body {
 .accordion-content.show,
 .heading-hero.show {
     @apply opacity-100
+}
+
+
+/* Single Project Page */
+.link-button {
+    @apply block px-4 py-2 bg-neutral-700 rounded-md transition duration-300 lg:hover:bg-neutral-600 lg:text-lg
 }
 
 
@@ -128,7 +134,7 @@ a, button {
     @apply scale-[1.4] bg-neutral-200;
 }
 
-
+/* Footer scroll up button */
 .scroll-up {
     animation-name: scroll-up;
     animation-duration: 3s;
