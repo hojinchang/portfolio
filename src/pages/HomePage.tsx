@@ -18,7 +18,7 @@ const HomePage: FC = () => {
             <Header />
             <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                 <HomeSection />
-                <div className="flex flex-col gap-[20rem]">
+                <div className="flex flex-col gap-[10rem] md:gap-[20rem]">
                     <ProjectSection />
                     <AboutSection />
                     <TechStackSection />

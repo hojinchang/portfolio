@@ -53,6 +53,7 @@ const SingleProjectPage:FC = () => {
                     // Get the tech stack cpt
                     const techStackIds = data.acf.tech_stack;
                     const techStackResponse = await axios.get(techStackAPIPath + `&include=${techStackIds.join(",")}`);
+                    
                     if (techStackResponse.data) {
                         const orderedTechStack = reorderTechStack(techStackResponse.data, techStackIds);
                         setTeckStack(orderedTechStack);
@@ -178,11 +179,11 @@ const SingleProjectPage:FC = () => {
                                     )}
                                 </div>
                             </section>
-                            <section className="mt-8">
+                            <section className="mt-8 shadow-all-shadow">
                                 <div className="grid grid-cols-1 md:grid-cols-3">
-                                    <button className="details-button">CONCEPT</button>
+                                    <button className="details-button rounded-tl-lg">CONCEPT</button>
                                     <button className="details-button">FEATURES</button>
-                                    <button className="details-button">REFLECTION</button>
+                                    <button className="details-button rounded-tr-lg">REFLECTION</button>
                                 </div>
                             </section>
                         </section>
