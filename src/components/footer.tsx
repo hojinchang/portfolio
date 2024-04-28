@@ -54,7 +54,8 @@ const Footer: FC = () => {
                 </div>
                 <div className="flex justify-end mt-16 md:mt-12">
                     <a className="scroll-up block p-3" onClick={ handleScrollUp }>
-                        <svg className="text-neutral-100" width="36" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
+                        <svg className="text-neutral-100" role="img" width="36" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
+                            <title>Scroll to top</title>
                             <path d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"/>
                         </svg>
                     </a>

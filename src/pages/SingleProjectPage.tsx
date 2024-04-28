@@ -3,17 +3,15 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-
 import Header from "../components/header/Header";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
+import BackLink from "../components/BackLink";
 
 import { RootState } from "../store/store";
 import { projectsAPIPath } from "../global/wpAPIPath";
 import { ProjectInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
-
-import marqueeAnimation from "../global/marquee";
 
 
 const SingleProjectPage:FC = () => {
@@ -68,19 +66,22 @@ const SingleProjectPage:FC = () => {
     return (
         <>
             <Header />
-            <main className={ ` ${ isMobile ? "pb-20" : "" }` }>
-                <header>
+            <main className={ `${ isMobile ? "pb-20" : "" }` }>
+                <header className="pt-[5rem] pb-[3rem] relative">
                     <div ref={ marqueeRef } className="marquee flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
                         <div className="marquee-content flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem] ">
                             <div className="name-marquee w-full">
                                 {project && project.title.rendered.split('').map((letter, index) => (
                                     <span key={ index } className={ `marquee-letter inline-block ${letter === " " ? "mx-2 sm:mx-3 md:mx-4 lg:mx-5 xl:mx-6" : ""}` }>{ letter }</span>
                                 ))}
-                                
                             </div>
                         </div>
                     </div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-transparent opacity-60"></div>
                 </header>
+                <section className="section-smaller">
+                    <BackLink path="/projects" title="PROJECTS" />
+                </section>
             </main>
             <Footer />
         </>

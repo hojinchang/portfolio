@@ -61,6 +61,10 @@ body {
     @apply flex flex-col w-full max-w-[1400px] mx-auto min-h-screen
 }
 
+.section-smaller {
+    @apply flex flex-col w-full max-w-[1280px] mx-auto min-h-screen
+}
+
 .section-title {
     @apply font-semibold text-2xl mb-2 lg:text-3xl
 }

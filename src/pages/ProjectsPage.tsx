@@ -8,6 +8,7 @@ import Header from "../components/header/Header";
 import ProjectArticle from "../components/project_articles/ProjectArticle";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
+import BackLink from "../components/BackLink";
 
 import { RootState } from "../store/store";
 import { ProjectInterface } from "../interfaces/interfaces";
@@ -95,7 +96,8 @@ const ProjectsPage: FC = () => {
         <>
             <Header />
             <main className={ `px-4 ${ isMobile ? "pb-20" : "" }` }>
-                <section className="max-w-[1400px] mx-auto mt-28 mb-16">
+                <section className="max-w-[1280px] mx-auto mt-28 mb-16">
+                    <BackLink path="/" title="HOME" />
                     <h1 ref={ titleRef } className="font-bold text-center mb-12 text-5xl 2xs:text-6xl sm:text-7xl lg:text-8xl xl:text-9xl">PROJECTS</h1>
                     <p ref={ descriptionRef } className="text-center text-neutral-400">Here is a showcase of all of my projects.</p>
                 </section>
