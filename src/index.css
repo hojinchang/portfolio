@@ -117,6 +117,10 @@ body {
 
 
 /* Single Project Page */
+.marquee-gap {
+    @apply flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem]
+}
+
 .link-button {
     @apply block px-4 py-2 bg-neutral-700 rounded-md transition duration-300 lg:hover:bg-neutral-600
 }
@@ -163,9 +167,15 @@ body {
     width: 50%;
 }
 
-.marquee-gap {
-    @apply flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem]
+
+.project-details-tab {
+    @apply flex flex-col gap-8 max-h-[450px] overflow-y-scroll py-12 px-6 2xs:px-8 xs:px-12 md:px-16 lg:px-24
 }
+
+.project-details-heading {
+    @apply text-lg font-medium uppercase mb-2
+}
+
 
 /* Cursor dot */
 .cursor-dot {

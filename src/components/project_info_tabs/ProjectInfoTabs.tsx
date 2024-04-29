@@ -38,7 +38,7 @@ const ProjectInfoTabs:FC<Props> = ({ project }) => {
                     </button>
                 ))}
             </div>
-            <div className="bg-neutral-800 py-8 px-20 rounded-b-lg">
+            <div className="bg-neutral-800 rounded-b-lg">
                 { activeTab === "concept" && <ConceptTab project={ project } /> }
                 { activeTab === "features" && <FeaturesTab project={ project } /> }
                 { activeTab === "reflection" && <ReflectionTab project={ project } /> }
