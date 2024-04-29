@@ -88,14 +88,14 @@ const AboutSection: FC = () => {
                             <h3 className="h3">{ "< WORK EXPERIENCE />" }</h3>
                             <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-200">Metrized Consulting Inc</h4>
-                                <ul className="about-article-list">
+                                <ul className="list">
                                     <li className="about-article-text">Machine Learning Software Engineer - (Aug 2022 - Aug 2023)</li>
                                     <li className="about-article-text">Machine Learning Software Engineer Co-op - (Aug 2021 - Aug 2022)</li>
                                 </ul>
                             </div>
                             <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-200">FIFO Innovations</h4>
-                                <ul className="about-article-list">
+                                <ul className="list">
                                     <li className="about-article-text">Mechanical Design Engineer Co-op - (Jan 2020 - Dec 2020)</li>
                                 </ul>
 
@@ -105,13 +105,13 @@ const AboutSection: FC = () => {
                             <h3 className="h3">{ "< EDUCATION />" }</h3>
                             <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-300">British Columbia Institute of Technology</h4>
-                                <ul className="about-article-list">
+                                <ul className="list">
                                     <li className="about-article-text">Front-End Web Developer Certificate <i>(with Distinction)</i> - (May 2024)</li>
                                 </ul>
                             </div>
                             <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-300">Simon Fraser University</h4>
-                                <ul className="about-article-list">
+                                <ul className="list">
                                     <li className="about-article-text">BASc. Mechatronic Systems Engineering <i>(with Distinction)</i> - (Aug 2022)</li>
                                 </ul>
                             </div>

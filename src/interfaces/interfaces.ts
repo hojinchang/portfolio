@@ -1,4 +1,4 @@
-export interface Sizes {
+interface Sizes {
     medium: {
         width: number;
         height: number;
@@ -21,45 +21,43 @@ export interface Sizes {
     };
 }
 
-export interface MediaDetails {
+interface MediaDetails {
     width: number;
     height: number;
     sizes: Sizes;
 }
 
-export interface FeaturedMedia {
+interface FeaturedMedia {
     media_details: MediaDetails;
     source_url: string;
     alt_text: string;
 }
 
-
-export interface ContentImages {
-    content_image: string;
-    content_video: number;
-}
-
-export interface Content {
-    content_title: string;
-    content_description: string;
-    content_images: ContentImages[];
-}
-
-export interface AcfPost {
+interface AcfPost {
     title: {
         rendered: string;
     };
-
 }
 
 export interface Roles {
     name: string;
 }
 
-export interface Embedded {
+interface Embedded {
     "acf:post": AcfPost[];
     "wp:featuredmedia": FeaturedMedia[];
     "wp:term": Roles[][];
+}
+
+interface ContentImages {
+    content_image: number;
+    content_video: number;
+}
+
+interface DetailsContent {
+    content_title: string;
+    content_description: [{list_item: string}];
+    content_images: ContentImages[];
 }
 
 // Define the structure of the Project object
@@ -75,6 +73,9 @@ export interface ProjectInterface {
         github_repo_link: string;
         overview: string;
         tech_stack: [number];
+        concept: DetailsContent[];
+        features: DetailsContent[];
+        reflection: DetailsContent[];
     };
     _embedded: Embedded;
 }

@@ -21,6 +21,10 @@ body {
     @apply transform transition duration-300 lg:hover:text-neutral-500
 }
 
+.list {
+    @apply list-disc list-inside ml-4
+}
+
 /* Nav styles */
 .nav-link-hover {
     @apply transform transition duration-300 lg:hover:scale-105
@@ -94,10 +98,6 @@ body {
     @apply text-neutral-300 leading-relaxed
 }
 
-.about-article-list {
-    @apply list-disc list-inside ml-4
-}
-
 .accordion {
     @apply flex justify-between items-center p-4 text-left w-full bg-neutral-800 transition duration-300 lg:hover:bg-neutral-750
 }
@@ -126,7 +126,7 @@ body {
 }
 
 .details-button {
-    @apply relative flex justify-center font-semibold text-xl p-3 bg-neutral-800 border border-neutral-600 transition-colors duration-300
+    @apply relative flex justify-center font-semibold text-xl p-3 border border-neutral-600 transition-colors duration-500
 }
 
 .details-button p {
@@ -144,6 +144,7 @@ body {
     background-color: #e5e5e5;
     width: 0;
     transition: width 0.3s ease-in-out;
+    border-radius: 50%;
 }
 
 .details-button p::before {

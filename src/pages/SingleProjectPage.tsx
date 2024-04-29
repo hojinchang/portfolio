@@ -7,7 +7,7 @@ import Header from "../components/header/Header";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
 import BackLink from "../components/BackLink";
-import ProjectInfoTabs from "../components/ProjectInfoTabs";
+import ProjectInfoTabs from "../components/project_info_tabs/ProjectInfoTabs";
 
 import { RootState } from "../store/store";
 import FeaturedImage from "../components/project_articles/FeaturedImage";
