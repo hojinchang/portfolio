@@ -7,6 +7,7 @@ import Header from "../components/header/Header";
 import Loading from "../components/Loading";
 import Footer from "../components/Footer";
 import BackLink from "../components/BackLink";
+import ProjectInfoTabs from "../components/ProjectInfoTabs";
 
 import { RootState } from "../store/store";
 import FeaturedImage from "../components/project_articles/FeaturedImage";
@@ -180,11 +181,7 @@ const SingleProjectPage:FC = () => {
                                 </div>
                             </section>
                             <section className="mt-8 shadow-all-shadow">
-                                <div className="grid grid-cols-1 md:grid-cols-3">
-                                    <button className="details-button rounded-tl-lg">CONCEPT</button>
-                                    <button className="details-button">FEATURES</button>
-                                    <button className="details-button rounded-tr-lg">REFLECTION</button>
-                                </div>
+                                <ProjectInfoTabs project={ project } />
                             </section>
                         </section>
                     </main>

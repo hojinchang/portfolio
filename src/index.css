@@ -126,13 +126,45 @@ body {
 }
 
 .details-button {
-    @apply font-semibold text-xl p-3 bg-neutral-800 border border-neutral-600
+    @apply relative flex justify-center font-semibold text-xl p-3 bg-neutral-800 border border-neutral-600 transition-colors duration-300
+}
+
+.details-button p {
+    position: relative;
+    width: fit-content;
+    padding: 0 0.5rem;
+}
+
+.details-button p::before, 
+.details-button p::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    height: 2px;
+    background-color: #e5e5e5;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.details-button p::before {
+    left: 50%;
+}
+
+.details-button p::after {
+    right: 50%;
+}
+
+.details-button.active p::before {
+    width: 50%;
+}
+
+.details-button.active p::after {
+    width: 50%;
 }
 
 .marquee-gap {
     @apply flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem]
 }
-
 
 /* Cursor dot */
 .cursor-dot {
