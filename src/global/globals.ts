@@ -1,3 +1,4 @@
+import { mediaAPIPath } from "./wpAPIPath";
 import { ProjectInterface } from "../interfaces/interfaces";
 
 const scrollOffset:number = 30;
@@ -9,13 +10,25 @@ function decodeHTMLEntities(text: string) {
     return textArea.value;
 }
 
+// Reverse the tech stack
 function reverseTechStackArray(project: ProjectInterface) {
     const techStackArray = [...project._embedded["acf:post"]];
     return techStackArray.reverse();
 }
 
+// Fetch media given its id
+const fetchMediaById = async(mediaId: number) => {
+    try {
+        const response = await fetch(mediaAPIPath + mediaId.toString());
+        return await response.json();
+    } catch(err) {
+        console.error(`Error fetching media: ${mediaId}`, err);
+    }
+}
+
 export {
     scrollOffset,
     decodeHTMLEntities,
-    reverseTechStackArray
+    reverseTechStackArray,
+    fetchMediaById
 }

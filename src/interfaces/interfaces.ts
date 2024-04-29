@@ -21,14 +21,14 @@ interface Sizes {
     };
 }
 
-interface MediaDetails {
+interface ImageDetails {
     width: number;
     height: number;
     sizes: Sizes;
 }
 
 interface FeaturedMedia {
-    media_details: MediaDetails;
+    media_details: ImageDetails;
     source_url: string;
     alt_text: string;
 }
@@ -80,6 +80,7 @@ export interface ProjectInterface {
     _embedded: Embedded;
 }
 
+// Define the structure of the Tech Stack object
 export interface TechStackInterface {
     id: number,
     title: {
@@ -91,4 +92,8 @@ export interface TechStackInterface {
     alt_text: string;
     _embedded: Embedded;
     "portfolio-tech-stack-category": [number];
+}
+
+export interface MediaDetails {
+    [key: number]: { url: string, alt: string };
 }
