@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { RootState } from "../../store/store";
 import FeaturedImage from "./FeaturedImage";
-import { decodeHTMLEntities, reverseTechStackArray } from "../../global/globals";
+import { decodeHTMLEntities, reverseTechStackArray } from "../../global/utilityFunctions";
 import { ProjectInterface } from "../../interfaces/interfaces";
 
 

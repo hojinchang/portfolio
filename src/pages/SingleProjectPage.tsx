@@ -14,7 +14,7 @@ import FeaturedImage from "../components/project_articles/FeaturedImage";
 import { projectsAPIPath, techStackAPIPath } from "../global/wpAPIPath";
 import { ProjectInterface, TechStackInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
-import { decodeHTMLEntities } from "../global/globals";
+import { decodeHTMLEntities } from "../global/utilityFunctions";
 
 import { Roles } from "../interfaces/interfaces";
 

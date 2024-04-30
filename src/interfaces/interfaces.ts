@@ -57,6 +57,7 @@ interface ContentImages {
 interface DetailsContent {
     content_title: string;
     content_description: [{list_item: string}];
+    content_code: string;
     content_images: ContentImages[];
 }
 

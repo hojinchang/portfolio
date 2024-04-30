@@ -16,7 +16,7 @@ const ReflectionTab:FC<Props> = ({ project }) => {
                     { (detail.content_description.length > 1) ? (
                         <ul className="list text-neutral-300">
                             { detail.content_description.map((description, descriptionIdx) => (
-                                <li key={ descriptionIdx }>{ description.list_item }</li>
+                                <li key={ descriptionIdx } dangerouslySetInnerHTML={{ __html: description.list_item }}></li>
                             )) }
                         </ul>
                     ) : (

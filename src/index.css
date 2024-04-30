@@ -22,7 +22,7 @@ body {
 }
 
 .list {
-    @apply flex flex-col gap-1 list-disc list-inside ml-4 leading-relaxed
+    @apply flex flex-col gap-2 list-disc list-inside ml-4 leading-relaxed
 }
 
 /* Nav styles */
@@ -167,9 +167,8 @@ body {
     width: 50%;
 }
 
-
 .project-details-tab {
-    @apply flex flex-col gap-8 max-h-[450px] overflow-y-scroll py-12 px-6 2xs:px-8 xs:px-12 md:px-16 lg:px-24
+    @apply flex flex-col gap-12 max-h-[600px] overflow-y-scroll py-12 px-6 2xs:px-8 xs:px-12 md:px-16 lg:px-24
 }
 
 .project-details-heading {

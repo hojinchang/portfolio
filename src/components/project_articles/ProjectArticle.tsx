@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { ProjectInterface } from "../../interfaces/interfaces";
-import { decodeHTMLEntities, reverseTechStackArray } from "../../global/globals";
+import { decodeHTMLEntities, reverseTechStackArray } from "../../global/utilityFunctions";
 
 interface ProjectArticleProps {
     project: ProjectInterface;
