@@ -58,7 +58,7 @@ const SingleProjectPage:FC = () => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     animateSectionEntry(sectionRef);
-                    observer.unobserve(entry.target);  // Optional: Unobserve after animation
+                    observer.unobserve(entry.target);  // Optionally stop observing after animation
                 }
             });
         }, {
@@ -66,17 +66,42 @@ const SingleProjectPage:FC = () => {
             rootMargin: "0px",
             threshold: 0.1
         });
-
+    
         if (sectionRef.current) {
             observer.observe(sectionRef.current);
         }
-
+    
         return () => {
             if (sectionRef.current) {
                 observer.unobserve(sectionRef.current);
             }
         };
     };
+
+    // const observeSection = (sectionRef: React.RefObject<HTMLElement>) => {
+    //     const observer = new IntersectionObserver((entries) => {
+    //         entries.forEach((entry) => {
+    //             if (entry.isIntersecting) {
+    //                 animateSectionEntry(sectionRef);
+    //                 observer.unobserve(entry.target);  // Optional: Unobserve after animation
+    //             }
+    //         });
+    //     }, {
+    //         root: null,
+    //         rootMargin: "0px",
+    //         threshold: 0.1
+    //     });
+
+    //     if (sectionRef.current) {
+    //         observer.observe(sectionRef.current);
+    //     }
+
+    //     return () => {
+    //         if (sectionRef.current) {
+    //             observer.unobserve(sectionRef.current);
+    //         }
+    //     };
+    // };
 
     // Apply animation after loading is completed
     useEffect(() => {
@@ -206,7 +231,7 @@ const SingleProjectPage:FC = () => {
                     <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                         <section className="section-smaller">
                             <BackLink path="/projects" title="PROJECTS" />
-                            <section ref={ sectionHeadingRef } className="flex flex-col gap-12 md:flex-row md:justify-between">
+                            <section ref={ sectionHeadingRef } className="flex flex-col gap-12 md:flex-row md:justify-between hidden-section">
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-3 lg:mb-2">PROJECT</p>
                                     <h1 className="text-[2.5rem] md:text-[3rem] font-semibold lg:text-[4rem] leading-tight mb-2">{ project.title.rendered }</h1>
@@ -234,12 +259,12 @@ const SingleProjectPage:FC = () => {
                                     </div>
                                 </div>
                             </section>
-                            <section ref={ sectionFeaturedImageRef } className="mt-10 max-w-[750px] mx-auto">
+                            <section ref={ sectionFeaturedImageRef } className="mt-10 max-w-[750px] mx-auto hidden-section">
                                 <figure>
                                     <FeaturedImage featuredImageObject={ project._embedded["wp:featuredmedia"][0] } />
                                 </figure>
                             </section>
-                            <section ref={ sectionOverviewRef } className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2">
+                            <section ref={ sectionOverviewRef } className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2 hidden-section">
                                 <div className="md:w-[70%]">
                                     <h2 className="section-heading mb-3">OVERVIEW</h2>
                                     <p className="leading-relaxed">{ project.acf.overview }</p>
@@ -257,7 +282,7 @@ const SingleProjectPage:FC = () => {
                                     </ul>
                                 </div>
                             </section>
-                            <section ref={ sectionTechStackRef }>
+                            <section ref={ sectionTechStackRef } className="hidden-section">
                                 <h2 className="section-heading mb-5">TECH STACK</h2>
                                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                                     {( teckStack.length > 0 ) ? (
@@ -277,10 +302,10 @@ const SingleProjectPage:FC = () => {
                                     )}
                                 </div>
                             </section>
-                            <section ref={ sectionDetailsRef } className="mt-8 shadow-all-shadow">
+                            <section ref={ sectionDetailsRef } className="mt-8 shadow-all-shadow hidden-section">
                                 <ProjectInfoTabs project={ project } />
                             </section>
-                            <section ref={ sectionMoreProjects } className="relative flex flex-col mt-32 max-w-[900px] w-full mx-auto">
+                            <section ref={ sectionMoreProjects } className="relative flex flex-col mt-32 max-w-[900px] w-full mx-auto hidden-section">
                                 <div className="flex flex-col justify-between mb-4">
                                     <h2 className="section-heading">MORE PROJECTS</h2>
                                     <p className="self-end">

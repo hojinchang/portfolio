@@ -125,6 +125,11 @@ body {
 
 
 /* Single Project Page */
+.hidden-section {
+    visibility: hidden;
+    opacity: 0;
+}
+  
 .marquee-gap {
     @apply flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem]
 }
@@ -208,16 +213,9 @@ body {
     display: flex;
 }
 
-/* @media (min-width: 768px) {
-    .slick-track {
-        gap: 60px;
-    }
-} */
-
 .slick-slide {
     display: flex;
     align-items: stretch;
-    /* width: calc(100% - 30px); */
 }
 
 @media (min-width: 768px) {
@@ -231,7 +229,6 @@ body {
         margin: 0 60px;
     }
 }
-
 
 
 /* Cursor dot */
