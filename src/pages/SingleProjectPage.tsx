@@ -17,6 +17,7 @@ import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/utilityFunctions";
 import animateSectionEntry from "../global/gsap_animations/animateSectionEntry";
 import ProjectArticle from "../components/project_articles/ProjectArticle";
+import MoreProjectsCarousel from "../components/MoreProjectsCarousel";
 
 
 const SingleProjectPage:FC = () => {
@@ -32,8 +33,9 @@ const SingleProjectPage:FC = () => {
     const [teckStack, setTeckStack] = useState<TechStackInterface[]>([]);
     const [additionalProjects, setAdditionalProjects] = useState<ProjectInterface[]>([]);
 
+    const [animateDirection, setAnimateDirection] = useState('');
+
     // References for GSAP animation
-    // const marqueeRef = useMarqueeAnimation(!loading && project);
     const marqueeRef = useMarqueeAnimation(!loading && project && project.title.rendered);
 
     const sectionHeadingRef = useRef<HTMLElement>(null);
@@ -51,7 +53,7 @@ const SingleProjectPage:FC = () => {
     const nextProject = () => {
         setCurrentProjectIdx((prevIndex) => (prevIndex + 1) % additionalProjects.length);
     };
-
+    
     const previousProject = () => {
         setCurrentProjectIdx((prevIndex) => (prevIndex - 1 + additionalProjects.length) % additionalProjects.length);
     };
@@ -297,26 +299,9 @@ const SingleProjectPage:FC = () => {
                                         <Link to="/projects" className="view-all-projects">{"< VIEW ALL PROJECTS />"}</Link>
                                     </p>
                                 </div>
-                                <div className="flex justify-center gap-2 md:gap-6 max-h-[550px]">
+                                <div className="flex justify-center gap-2 md:gap-6 max-h-[600px]">
                                     { additionalProjects.length > 0 ? (
-                                        <>
-                                            <button className="carousel-arrow left-1/4" onClick={ previousProject }>
-                                                <svg className="text-inherit" fill="currentColor" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                    <title>Carousel previous arrow</title>
-                                                    <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/>
-                                                </svg>
-                                            </button>
-                                            <div className="max-w-[500px] h-full">
-                                                <ProjectArticle project={additionalProjects[currentProjectIdx]} />
-                                            </div>
-                                            <button className="carousel-arrow right-1/4" onClick={ nextProject }>
-                                                <svg className="text-inherit" fill="currentColor" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                    <title>Carousel next arrow</title>
-                                                    <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
-                                                </svg>
-                                            </button>
-                                        </>
-
+                                        <MoreProjectsCarousel additionalProjects={ additionalProjects } />
                                     ) : (
                                         <h2 className="font-bold text-center text-2xl">NO PROJECTS FOUND</h2>
                                     ) }

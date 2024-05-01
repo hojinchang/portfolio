@@ -27,7 +27,7 @@ const ProjectInfoTabs:FC<Props> = ({ project }) => {
                         key={ tab }
                         className={ 
                             `details-button 
-                            ${index === 0 ? 'rounded-tl-lg' : index === 2 ? 'rounded-tr-lg' : ''} 
+                            ${index === 0 ? 'rounded-tl-lg rounded-tr-lg md:rounded-tr-none' : index === 2 ? 'md:rounded-tr-lg' : ''} 
                             ${activeTab === tab ? "active text-neutral-200 bg-neutral-800" : "text-neutral-500 bg-neutral-900"}` 
                         }
                         onClick={ () => handleTabClick(tab) }
