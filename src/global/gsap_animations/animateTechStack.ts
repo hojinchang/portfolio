@@ -9,7 +9,7 @@ const animateTechStack = (
     backEndStackRef: React.RefObject<HTMLElement>,
     programsStackRef: React.RefObject<HTMLElement>,
     hasAnimated: boolean,
-    setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
+    setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
     entries.forEach(( entry ) => {
         const currentScrollY = window.scrollY;
@@ -36,7 +36,6 @@ const animateTechStack = (
         }
         // Check if the element is no longer intersecting and the animation has played
         else if (!entry.isIntersecting && hasAnimated && isScrollingUp) {
-            // setHasAnimated(false);
             // Reset properties to make elements invisible again if they go out of view while scrolling up
             gsap.to([frontEndStackRef.current, backEndStackRef.current, programsStackRef.current], {
                 autoAlpha: 0,

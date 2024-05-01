@@ -84,65 +84,76 @@ const TechStackSection: FC = () => {
 
     // Watch where the scroll is based on the title border
     useEffect(() => {
-        // Create a new IntersectionObserver
-        const observer = new IntersectionObserver(( entries ) => {
-            animateHeadingIntersect(
-                entries,
-                titleBorderRef,
-                titleRef,
-                null,
-                contentWrapperRef,
-                hasTitleAnimated,
-                setHasTitleAnimated
-            );
-                
-        }, {
-            root: null, // Use the viewport as the root
-            rootMargin: "0px 0px -300px 0px",
-            threshold: 0.1 // Trigger when 10% of the element is visible
-         });
-    
-        // Observe the titleBorderRef element
-        if (titleBorderRef.current) {
-            observer.observe(titleBorderRef.current);
-        }
-    
-        // Cleanup stop observing the element when the component unmounts
-        return () => {
+        // Set a timeout timer since this animation triggers on inital page load
+        const timer = setTimeout(() => {
+            const observer = new IntersectionObserver(( entries ) => {
+                animateHeadingIntersect(
+                    entries,
+                    titleBorderRef,
+                    titleRef,
+                    null,
+                    null,
+                    hasTitleAnimated,
+                    setHasTitleAnimated
+                );
+                    
+            }, {
+                root: null, // Use the viewport as the root
+                rootMargin: "0px 0px -300px 0px",
+                threshold: 0.1 // Trigger when 10% of the element is visible
+             });
+        
+            // Observe the titleBorderRef element
             if (titleBorderRef.current) {
-                observer.unobserve(titleBorderRef.current);
+                observer.observe(titleBorderRef.current);
             }
-        };
+        
+            // Cleanup stop observing the element when the component unmounts
+            return () => {
+                if (titleBorderRef.current) {
+                    observer.unobserve(titleBorderRef.current);
+                }
+            };
+        }, 500);
+
+        return () => clearTimeout(timer);
+
     }, [hasTitleAnimated]);
     
     // Watch where the scroll is based on the title border
     useEffect(() => {
-        const observer = new IntersectionObserver(( entries ) => {
-            animateTechStack(
-                entries,
-                frontEndStackRef,
-                backEndStackRef,
-                programsStackRef,
-                hasStackAnimated,
-                setHasStackAnimated
-            );
-
-        }, {
-            root: null, 
-            rootMargin: "0px 0px -200px 0px", 
-            threshold: 0.1 
-         });
+        // Set a timeout timer since this animation triggers on inital page load
+        const timer = setTimeout(() => {
+            const observer = new IntersectionObserver(( entries ) => {
+                animateTechStack(
+                    entries,
+                    frontEndStackRef,
+                    backEndStackRef,
+                    programsStackRef,
+                    hasStackAnimated,
+                    setHasStackAnimated
+                );
     
-       
-        if (frontEndStackRef.current) {
-            observer.observe(frontEndStackRef.current);
-        }
-    
-        return () => {
+            }, {
+                root: null, 
+                rootMargin: "0px 0px -200px 0px", 
+                threshold: 0.1 
+             });
+        
+           
             if (frontEndStackRef.current) {
-                observer.unobserve(frontEndStackRef.current);
+                observer.observe(frontEndStackRef.current);
             }
-        };
+        
+            return () => {
+                if (frontEndStackRef.current) {
+                    observer.unobserve(frontEndStackRef.current);
+                }
+            };
+        }, 500);
+
+        return () => clearTimeout(timer);
+
     }, [hasStackAnimated]);
 
 
@@ -151,9 +162,9 @@ const TechStackSection: FC = () => {
             <h2 ref={ titleRef } className="section-title">// TECH STACK</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 
-            <div ref={ contentWrapperRef } className="flex flex-col gap-6 mt-2 hidden-section">
+            <div ref={ contentWrapperRef } className="flex flex-col gap-6 mt-2">
                 <div className="flex flex-col gap-8 lg:flex-row">
-                    <article ref={ frontEndStackRef } className="flex flex-col gap-2 lg:w-1/2">
+                    <article ref={ frontEndStackRef } className="flex flex-col gap-2 lg:w-1/2 hidden-section">
                         <h3 className="h3">{ "< Front-End />" }</h3>
                         {techStack.frontEnd.length > 0 && (
                             <div className="grid gap-2 grid-cols-2">
@@ -163,7 +174,7 @@ const TechStackSection: FC = () => {
                             </div>
                         )}
                     </article>
-                    <article ref={ backEndStackRef } className="flex flex-col gap-2 lg:w-1/2">
+                    <article ref={ backEndStackRef } className="flex flex-col gap-2 lg:w-1/2 hidden-section">
                         <h3 className="h3">{ "< Back-End />" }</h3>
                         {techStack.backEnd.length > 0 && (
                             <div className="grid gap-2 grid-cols-2">
@@ -175,7 +186,7 @@ const TechStackSection: FC = () => {
                     </article>
                 </div>
                 <div>
-                    <article ref={ programsStackRef } className="flex flex-col gap-2">
+                    <article ref={ programsStackRef } className="flex flex-col gap-2 hidden-section">
                         <h3 className="h3">{ "< Programs and Design />" }</h3>
                         {techStack.programsAndDesign.length > 0 && (
                             <div className="grid gap-2 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
