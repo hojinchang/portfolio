@@ -200,6 +200,10 @@ body {
     }
 }
 
+.carousel-arrow {
+    @apply absolute -bottom-12 sm:static p-2 text-neutral-200 transition duration-300 lg:hover:text-neutral-500
+}
+
 /* Cursor dot */
 .cursor-dot {
     @apply h-4 w-4 rounded-full fixed top-0 left-0 transform -translate-x-1/2 -translate-y-1/2 bg-neutral-300 z-30 pointer-events-none

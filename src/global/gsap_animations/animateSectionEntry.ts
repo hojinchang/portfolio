@@ -5,7 +5,7 @@ import gsap from "gsap";
 const animateSectionEntry = (sectionRef: React.RefObject<HTMLElement>) => {
     gsap.from(sectionRef.current, {
         opacity: 0,
-        y: 20,
+        y: 40,
         duration: 1,
         ease: "power1.out"
     });

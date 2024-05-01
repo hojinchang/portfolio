@@ -132,13 +132,13 @@ const ProjectSection: FC = () => {
             </p>
             <div ref={ contentWrapperRef } className="flex flex-col gap-6">
                 <div className="flex">
-                    {projects.length > 0 ? (
+                    { projects.length > 0 ? (
                         projects.map(( project, idx ) => {
                             const projectRef = projectRefs.current[idx];
                             return (
                                 <FeaturedProjectArticle
                                     key={ project.title.rendered }
-                                    idx={ idx }
+                                    idx={ project.id }
                                     project={ project }
                                     active={ activeProject[projectKeys[idx]] }
                                     articleRef={ projectRef?.articleRef }
@@ -152,15 +152,15 @@ const ProjectSection: FC = () => {
                     }
                 </div>
                 <div className="flex items-center gap-2 self-center">
-                    {projectKeys.map(( projectKey, idx ) => (
+                    { projectKeys.map(( projectKey, idx ) => (
                         <button
-                            key={idx}
+                            key={ idx }
                             className="pagination-wrapper" // Wrapper for the clickable area
-                            onClick={() => handlePaginationDots(projectKey)}
+                            onClick={ () => handlePaginationDots(projectKey) }
                         >
                             <div className={ `pagination-dot ${activeProject[projectKey] === true ? "active-pagination-dot" : ""}` }></div>
                         </button>
-                    ))}
+                    )) }
                 </div>
             </div>
         </section>

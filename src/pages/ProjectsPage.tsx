@@ -105,7 +105,7 @@ const ProjectsPage: FC = () => {
                     <div className="mx-auto grid gap-4 grid-cols-1 max-w-[400px] sm:max-w-none sm:grid-cols-2 lg:grid-cols-3">
                         {projects.length > 0 ? (
                             projects.map(( project, idx ) => (
-                                <div ref={ projectRefs.current[idx]} key={ project.title.rendered }>
+                                <div ref={ projectRefs.current[idx]} key={ project.id }>
                                     <ProjectArticle project={ project } />
                                 </div>
                             ))) : (

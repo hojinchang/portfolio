@@ -63,6 +63,7 @@ interface DetailsContent {
 
 // Define the structure of the Project object
 export interface ProjectInterface {
+    id: number,
     slug: string;
     title: {
         rendered: string;

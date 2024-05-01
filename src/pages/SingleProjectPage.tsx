@@ -16,6 +16,7 @@ import { Roles, ProjectInterface, TechStackInterface } from "../interfaces/inter
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/utilityFunctions";
 import animateSectionEntry from "../global/gsap_animations/animateSectionEntry";
+import ProjectArticle from "../components/project_articles/ProjectArticle";
 
 
 const SingleProjectPage:FC = () => {
@@ -24,17 +25,36 @@ const SingleProjectPage:FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile );
     const [loading, setLoading] = useState<boolean>(true);
 
+    const [currentProjectIdx, setCurrentProjectIdx] = useState<number>(0);
+
+    // Data from WP backend
     const [project, setProject] = useState<ProjectInterface | null>(null);
     const [teckStack, setTeckStack] = useState<TechStackInterface[]>([]);
-    const [additonalProjects, setAdditionalProjects] = useState<ProjectInterface[] | null>(null);
+    const [additionalProjects, setAdditionalProjects] = useState<ProjectInterface[]>([]);
 
-    const marqueeRef = useMarqueeAnimation(!loading && project);
+    // References for GSAP animation
+    // const marqueeRef = useMarqueeAnimation(!loading && project);
+    const marqueeRef = useMarqueeAnimation(!loading && project && project.title.rendered);
 
     const sectionHeadingRef = useRef<HTMLElement>(null);
     const sectionFeaturedImageRef = useRef<HTMLElement>(null);
     const sectionOverviewRef = useRef<HTMLElement>(null);
     const sectionTechStackRef = useRef<HTMLElement>(null);
     const sectionDetailsRef = useRef<HTMLElement>(null);
+    const sectionMoreProjects = useRef<HTMLElement>(null);
+
+    // Scroll to the top of the page when the page mounts
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [project]);
+
+    const nextProject = () => {
+        setCurrentProjectIdx((prevIndex) => (prevIndex + 1) % additionalProjects.length);
+    };
+
+    const previousProject = () => {
+        setCurrentProjectIdx((prevIndex) => (prevIndex - 1 + additionalProjects.length) % additionalProjects.length);
+    };
     
     //  Reorder the tech stack response data in specified order
     const reorderTechStack = (techStackData: TechStackInterface[], orderIds: number[]) => {
@@ -76,6 +96,7 @@ const SingleProjectPage:FC = () => {
             const overviewCleanup = observeSection(sectionOverviewRef);
             const techStackCleanup = observeSection(sectionTechStackRef);
             const detailsCleanup = observeSection(sectionDetailsRef);
+            const moreProjectsCleanup = observeSection(sectionMoreProjects);
 
             return () => {
                 headingCleanup();
@@ -83,31 +104,47 @@ const SingleProjectPage:FC = () => {
                 overviewCleanup();
                 techStackCleanup();
                 detailsCleanup();
+                moreProjectsCleanup();
             };
         }
     }, [loading, project]); 
 
-    // Scroll to the top of the page when the page mounts
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
     // Fetch the project
     useEffect(() => {
+        // Fetch all project IDs
+        const fetchAllProjectIds = async () => {
+            try {
+                const response = await axios.get(projectsAPIPath);
+                return response.data.map(( project: ProjectInterface ) => project.id);
+            } catch(err) {
+                console.error("Error fetching all project IDs:", err);
+            }
+        };
+
         // Fetch projects for MORE PROJECTS section
         const fetchAdditionalProjects = async(excludeId: number) => {
             try {
-                // Fetch 4 random projects while excluding the current
-                const response = await axios.get(additionalProjectsAPIPath + `?exclude=${excludeId}`);
-                // const response = await axios.get(additionalProjectsAPIPath);
+                // Fetch all project IDs
+                const allIds = await fetchAllProjectIds();
+
+                // Filter out the excluded ID and randomly select 4 IDs
+                const selectedIds = allIds.filter(( id: number ) => id !== excludeId)
+                                        .sort(() => 0.5 - Math.random())
+                                        .slice(0, 4);
+
+                // Fetch the selected projects
+                const response = await axios.get(additionalProjectsAPIPath + `&include=${selectedIds.join(',')}`);
+                
                 setAdditionalProjects(response.data);
             } catch(err) {
                 console.error("Error fetching additional projects:", err);
             }
         }
 
+        // Fetch the specific project and projects for MORE PROJECTS section
         const fetchProject = async() => {
             try {
+                setLoading(true);
                 // Get the project
                 const response = await axios.get(projectsAPIPath + `&slug=${projectName}`);
                 if (response.data && response.data.length > 0) {
@@ -145,6 +182,7 @@ const SingleProjectPage:FC = () => {
 
         return () => clearTimeout(timer);
     }, [projectName]);
+
 
 
     // Show loading animation
@@ -252,13 +290,36 @@ const SingleProjectPage:FC = () => {
                             <section ref={ sectionDetailsRef } className="mt-8 shadow-all-shadow">
                                 <ProjectInfoTabs project={ project } />
                             </section>
-                            <section className="flex flex-col mt-20">
-                                <h2 className="section-heading">MORE PROJECTS</h2>
-                                <p className="self-end">
-                                    <Link to="/projects" className="view-all-projects">{"< VIEW ALL PROJECTS />"}</Link>
-                                </p>
-                                <div>
+                            <section ref={ sectionMoreProjects } className="relative flex flex-col mt-32 max-w-[900px] w-full mx-auto">
+                                <div className="flex flex-col justify-between mb-4">
+                                    <h2 className="section-heading">MORE PROJECTS</h2>
+                                    <p className="self-end">
+                                        <Link to="/projects" className="view-all-projects">{"< VIEW ALL PROJECTS />"}</Link>
+                                    </p>
+                                </div>
+                                <div className="flex justify-center gap-2 md:gap-6 max-h-[550px]">
+                                    { additionalProjects.length > 0 ? (
+                                        <>
+                                            <button className="carousel-arrow left-1/4" onClick={ previousProject }>
+                                                <svg className="text-inherit" fill="currentColor" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                    <title>Carousel previous arrow</title>
+                                                    <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/>
+                                                </svg>
+                                            </button>
+                                            <div className="max-w-[500px] h-full">
+                                                <ProjectArticle project={additionalProjects[currentProjectIdx]} />
+                                            </div>
+                                            <button className="carousel-arrow right-1/4" onClick={ nextProject }>
+                                                <svg className="text-inherit" fill="currentColor" role="img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                    <title>Carousel next arrow</title>
+                                                    <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/>
+                                                </svg>
+                                            </button>
+                                        </>
 
+                                    ) : (
+                                        <h2 className="font-bold text-center text-2xl">NO PROJECTS FOUND</h2>
+                                    ) }
                                 </div>
                             </section>
                         </section>
