@@ -16,7 +16,6 @@ import { Roles, ProjectInterface, TechStackInterface } from "../interfaces/inter
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/utilityFunctions";
 import animateSectionEntry from "../global/gsap_animations/animateSectionEntry";
-import ProjectArticle from "../components/project_articles/ProjectArticle";
 import MoreProjectsCarousel from "../components/MoreProjectsCarousel";
 
 
@@ -26,14 +25,11 @@ const SingleProjectPage:FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile );
     const [loading, setLoading] = useState<boolean>(true);
 
-    const [currentProjectIdx, setCurrentProjectIdx] = useState<number>(0);
-
     // Data from WP backend
     const [project, setProject] = useState<ProjectInterface | null>(null);
     const [teckStack, setTeckStack] = useState<TechStackInterface[]>([]);
     const [additionalProjects, setAdditionalProjects] = useState<ProjectInterface[]>([]);
 
-    const [animateDirection, setAnimateDirection] = useState('');
 
     // References for GSAP animation
     const marqueeRef = useMarqueeAnimation(!loading && project && project.title.rendered);
@@ -50,14 +46,6 @@ const SingleProjectPage:FC = () => {
         window.scrollTo(0, 0);
     }, [project]);
 
-    const nextProject = () => {
-        setCurrentProjectIdx((prevIndex) => (prevIndex + 1) % additionalProjects.length);
-    };
-    
-    const previousProject = () => {
-        setCurrentProjectIdx((prevIndex) => (prevIndex - 1 + additionalProjects.length) % additionalProjects.length);
-    };
-    
     //  Reorder the tech stack response data in specified order
     const reorderTechStack = (techStackData: TechStackInterface[], orderIds: number[]) => {
         const techStackMap = new Map(techStackData.map(item => [item.id, item]));
