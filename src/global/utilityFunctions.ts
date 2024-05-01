@@ -31,11 +31,15 @@ const fetchProjectMedia = async(project:  ProjectInterface) => {
     // Loop through the features
     project.acf.features.forEach(feature => {
         // Loop through the possible content media (either content_image or content_video)
-        feature.content_images.forEach(media => {
-            if (media.content_image) mediaIds.push(media.content_image);
-            if (media.content_video) mediaIds.push(media.content_video);
-        });
+        if (feature.content_images) {
+            feature.content_images.forEach(media => {
+                if (media.content_image) mediaIds.push(media.content_image);
+                if (media.content_video) mediaIds.push(media.content_video);
+            });
+        }
     });
+
+    console.log(mediaIds);
 
     const uniqueMediaIds = [...new Set(mediaIds)];  // Remove duplicates
     const mediaDataPromises = uniqueMediaIds.map(id => fetchMediaById(id));

@@ -1,4 +1,4 @@
-const scrollOffset:number = 30;
+const scrollOffset:number = 60;
 
 export {
     scrollOffset,

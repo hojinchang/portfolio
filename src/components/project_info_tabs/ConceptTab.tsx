@@ -33,11 +33,6 @@ const ConceptTab:FC<Props> = ({ project }) => {
                             <li key={ descriptionIdx } dangerouslySetInnerHTML={{ __html: description.list_item }}></li>
                         )) }
                     </ul>
-                    { detail.content_code && (
-                        <SyntaxHighlighter language="javascript" style={ atomDark } className="block !mt-6">
-                            { detail.content_code }
-                        </SyntaxHighlighter>
-                    ) }
                     { detail.content_images && (detail.content_images.length > 0) && detail.content_images.map((media, mediaIdx) => (
                         <div className="flex flex-col gap-6 items-center mt-6" key={ mediaIdx }>
                             { media.content_image && mediaDetails[media.content_image] && (
@@ -50,6 +45,11 @@ const ConceptTab:FC<Props> = ({ project }) => {
                             ) }
                         </div>
                     )) }
+                    { detail.content_code && (
+                        <SyntaxHighlighter language="javascript" style={ atomDark } className="block !mt-6">
+                            { detail.content_code }
+                        </SyntaxHighlighter>
+                    ) }
                 </div>
             )) }
         </article>

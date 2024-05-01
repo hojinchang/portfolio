@@ -43,6 +43,11 @@ const ProjectSection: FC = () => {
 
     // Set the active project when user clicks pagination dots
     const handlePaginationDots = ( projectNumber: string ) => {
+        if (activeProject[projectNumber]) {
+            // If the project is already active, do nothing
+            return;
+        }
+
         const currentIdx = projectKeys.findIndex(key => activeProject[key]);        // Get the current project pagination idx
         const targetIdx = projectKeys.findIndex(key => key === projectNumber);      // Get the desired project pagination idx
 
