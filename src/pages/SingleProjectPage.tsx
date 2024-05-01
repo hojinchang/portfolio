@@ -15,7 +15,7 @@ import { projectsAPIPath, techStackAPIPath } from "../global/wpAPIPath";
 import { Roles, ProjectInterface, TechStackInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/utilityFunctions";
-import animateSingleProjectPage from "../global/gsap_animations/animateSingleProjectPage";
+import animateSectionEntry from "../global/gsap_animations/animateSectionEntry";
 
 
 const SingleProjectPage:FC = () => {
@@ -29,7 +29,6 @@ const SingleProjectPage:FC = () => {
 
     const marqueeRef = useMarqueeAnimation(!loading && project);
 
-    const backLinkRef = useRef<HTMLDivElement>(null);
     const sectionHeadingRef = useRef<HTMLElement>(null);
     const sectionFeaturedImageRef = useRef<HTMLElement>(null);
     const sectionOverviewRef = useRef<HTMLElement>(null);
@@ -41,6 +40,51 @@ const SingleProjectPage:FC = () => {
         const techStackMap = new Map(techStackData.map(item => [item.id, item]));
         return orderIds.map(id => techStackMap.get(id)).filter(item => item !== undefined) as TechStackInterface[];
     };
+
+    // GSAP animation observers
+    const observeSection = (sectionRef: React.RefObject<HTMLElement>) => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateSectionEntry(sectionRef);
+                    observer.unobserve(entry.target);  // Optional: Unobserve after animation
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.1
+        });
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    };
+
+    // Apply animation after loading is completed
+    useEffect(() => {
+        if (!loading && project) {
+            const headingCleanup = observeSection(sectionHeadingRef);
+            const imageCleanup = observeSection(sectionFeaturedImageRef);
+            const overviewCleanup = observeSection(sectionOverviewRef);
+            const techStackCleanup = observeSection(sectionTechStackRef);
+            const detailsCleanup = observeSection(sectionDetailsRef);
+
+            return () => {
+                headingCleanup();
+                imageCleanup();
+                overviewCleanup();
+                techStackCleanup();
+                detailsCleanup();
+            };
+        }
+    }, [loading, project]); 
 
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
@@ -85,37 +129,6 @@ const SingleProjectPage:FC = () => {
         return () => clearTimeout(timer);
     }, [projectName]);
 
-    // Apply animation after loading is completed
-    useEffect(() => {
-        if (!loading && project) {
-            const observer = new IntersectionObserver(( entries ) => {
-                animateSingleProjectPage(
-                    entries,
-                    backLinkRef,
-                    sectionHeadingRef,
-                    sectionFeaturedImageRef,
-                    sectionOverviewRef,
-                    sectionTechStackRef,
-                    sectionDetailsRef,
-                );
-            }, {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1
-            });
-
-            if (sectionHeadingRef.current) {
-                observer.observe(sectionHeadingRef.current);
-            }
-        
-            // Cleanup: Stop observing the element when the component unmounts
-            return () => {
-                if (sectionHeadingRef.current) {
-                    observer.unobserve(sectionHeadingRef.current);
-                }
-            };
-        }
-    }, [loading, project]); 
 
     // Show loading animation
     if (loading) {
@@ -147,7 +160,7 @@ const SingleProjectPage:FC = () => {
                     </header>
                     <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                         <section className="section-smaller">
-                            <BackLink path="/projects" title="PROJECTS" ref={ backLinkRef } />
+                            <BackLink path="/projects" title="PROJECTS" />
                             <section ref={ sectionHeadingRef } className="flex flex-col gap-12 md:flex-row md:justify-between">
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-3 lg:mb-2">PROJECT</p>
