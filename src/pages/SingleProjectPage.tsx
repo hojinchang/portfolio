@@ -30,7 +30,6 @@ const SingleProjectPage:FC = () => {
     const [teckStack, setTeckStack] = useState<TechStackInterface[]>([]);
     const [additionalProjects, setAdditionalProjects] = useState<ProjectInterface[]>([]);
 
-
     // References for GSAP animation
     const marqueeRef = useMarqueeAnimation(!loading && project && project.title.rendered);
 
@@ -77,31 +76,6 @@ const SingleProjectPage:FC = () => {
             }
         };
     };
-
-    // const observeSection = (sectionRef: React.RefObject<HTMLElement>) => {
-    //     const observer = new IntersectionObserver((entries) => {
-    //         entries.forEach((entry) => {
-    //             if (entry.isIntersecting) {
-    //                 animateSectionEntry(sectionRef);
-    //                 observer.unobserve(entry.target);  // Optional: Unobserve after animation
-    //             }
-    //         });
-    //     }, {
-    //         root: null,
-    //         rootMargin: "0px",
-    //         threshold: 0.1
-    //     });
-
-    //     if (sectionRef.current) {
-    //         observer.observe(sectionRef.current);
-    //     }
-
-    //     return () => {
-    //         if (sectionRef.current) {
-    //             observer.unobserve(sectionRef.current);
-    //         }
-    //     };
-    // };
 
     // Apply animation after loading is completed
     useEffect(() => {
@@ -287,7 +261,7 @@ const SingleProjectPage:FC = () => {
                                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                                     {( teckStack.length > 0 ) ? (
                                         teckStack.map(( stack ) => (
-                                            <article key={ stack.id } className="flex gap-4 items-center w-full max-w-[18rem] xs:max-w-none bg-neutral-800 p-3 rounded-md shadow-all-shadow">
+                                            <article key={ stack.id } className="mx-auto flex gap-4 items-center w-full max-w-[18rem] xs:max-w-none bg-neutral-800 p-3 rounded-md shadow-all-shadow">
                                                 <div>
                                                     <img className="block w-10 h-10" src={ stack._embedded["wp:featuredmedia"][0].source_url } alt={ stack._embedded["wp:featuredmedia"][0].alt_text }/>
                                                 </div>

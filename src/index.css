@@ -81,12 +81,17 @@ body {
     @apply flex flex-col gap-12 w-full max-w-[1280px] mx-auto min-h-screen
 }
 
+.hidden-section {
+    visibility: hidden;
+    opacity: 0;
+}
+
 .section-title {
-    @apply font-semibold text-2xl mb-2 lg:text-3xl
+    @apply font-semibold text-2xl mb-2 hidden-section lg:text-3xl
 }
 
 .section-border {
-    @apply border-b-2 border-neutral-200 mb-6
+    @apply border-b-2 border-neutral-200 mb-6 hidden-section
 }
 
 .text-highlight {
@@ -125,11 +130,6 @@ body {
 
 
 /* Single Project Page */
-.hidden-section {
-    visibility: hidden;
-    opacity: 0;
-}
-  
 .marquee-gap {
     @apply flex gap-[10rem] md:gap-[16rem] lg:gap-[20rem]
 }

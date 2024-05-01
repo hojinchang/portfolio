@@ -13,7 +13,7 @@ const MoreProjectsCarousel:FC<Props> = ({ additionalProjects }) => {
 
     const settings = {
         infinite: true,
-        speed: 800,
+        speed: 1000,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: false,

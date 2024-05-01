@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { RootState } from "../store/store";
@@ -12,6 +12,14 @@ import Footer from "../components/Footer";
 
 const HomePage: FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);
+
+    // Scroll to the top of the page when the page mounts
+    useEffect(() => {
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 100); // Adjust delay as necessary
+    }, []);
+    
 
     return (
         <>

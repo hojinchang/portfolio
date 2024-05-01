@@ -3,7 +3,6 @@ import gsap from "gsap";
 
 let lastScrollY = window.scrollY;  // Initialize lastScrollY at the top of your component
 
-// Function to handle intersection changes
 const animateHeadingIntersect = (
     entries: IntersectionObserverEntry[],
     titleBorderRef: React.RefObject<HTMLHeadingElement>,
@@ -13,22 +12,23 @@ const animateHeadingIntersect = (
     hasAnimated: boolean,
     setHasAnimated: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-    entries.forEach(( entry ) => {
+    entries.forEach((entry) => {
         const currentScrollY = window.scrollY;
         const isScrollingUp = currentScrollY < lastScrollY;
 
-        // Check if the element is intersecting the viewport and the animation hasn't played yet
         if (entry.isIntersecting && !hasAnimated) {
-            gsap.set([titleBorderRef.current, titleRef.current], { clearProps: "all" });
-            
-            // Play the animation using GSAP
-            gsap.fromTo(
-                titleBorderRef.current, {
+            // Set initial properties
+            gsap.set([titleBorderRef.current, titleRef.current, viewAllProjectsRef?.current, contentWrapperRef?.current], {
+                autoAlpha: 0  // This handles both opacity and visibility
+            });
+
+            // Animate elements into view
+            gsap.fromTo(titleBorderRef.current, {
+                autoAlpha: 0,
                 width: "0%",
-                opacity: 0
             }, {
+                autoAlpha: 1,
                 width: "100%",
-                opacity: 1,
                 duration: 1.75,
                 ease: "power1.out",
                 onComplete: () => {
@@ -36,41 +36,52 @@ const animateHeadingIntersect = (
                 }
             });
 
-            gsap.from(titleRef.current, {
-                opacity: 0,
+            gsap.fromTo(titleRef.current, {
                 x: -40,
+                autoAlpha: 0
+            }, {
+                x: 0,
+                autoAlpha: 1,
                 duration: 2,
                 ease: "power1.out"
             });
 
+            // Animate view all projects link and content wrapper
             if (viewAllProjectsRef) {
-                gsap.set(viewAllProjectsRef.current, { clearProps: "all" });
-                gsap.from(viewAllProjectsRef.current, {
-                    opacity: 0,
+                gsap.fromTo(viewAllProjectsRef.current, {
                     x: 40,
+                    autoAlpha: 0
+                }, {
+                    x: 0,
+                    autoAlpha: 1,
                     duration: 2,
                     ease: "power1.out"
                 });
             }
 
             if (contentWrapperRef) {
-                gsap.set(contentWrapperRef.current, { clearProps: "all" });
-                gsap.from(contentWrapperRef.current, {
-                    opacity: 0,
+                gsap.fromTo(contentWrapperRef.current, {
                     y: 40,
+                    autoAlpha: 0
+                }, {
+                    y: 0,
+                    autoAlpha: 1,
                     duration: 2,
                     ease: "power1.out"
-                }); 
+                });
             }
-        } 
-        // Check if the element is no longer intersecting and the animation has played
-        else if (!entry.isIntersecting && hasAnimated && isScrollingUp) {
-            setHasAnimated(false);
+        } else if (!entry.isIntersecting && hasAnimated && isScrollingUp) {
+            // Reset properties to make elements invisible again if they go out of view while scrolling up
+            gsap.to([titleBorderRef.current, titleRef.current, viewAllProjectsRef?.current, contentWrapperRef?.current], {
+                autoAlpha: 0,
+                onComplete: () => {
+                    setHasAnimated(false);
+                }
+            });
         }
 
         lastScrollY = currentScrollY;  // Update lastScrollY at the end of the function
     });
 };
-
 
 export default animateHeadingIntersect;

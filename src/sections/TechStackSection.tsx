@@ -91,7 +91,7 @@ const TechStackSection: FC = () => {
                 titleBorderRef,
                 titleRef,
                 null,
-                null,
+                contentWrapperRef,
                 hasTitleAnimated,
                 setHasTitleAnimated
             );
@@ -114,7 +114,7 @@ const TechStackSection: FC = () => {
             }
         };
     }, [hasTitleAnimated]);
-
+    
     // Watch where the scroll is based on the title border
     useEffect(() => {
         const observer = new IntersectionObserver(( entries ) => {
@@ -152,7 +152,7 @@ const TechStackSection: FC = () => {
             <h2 ref={ titleRef } className="section-title">// TECH STACK</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
 
-            <div ref={ contentWrapperRef } className="flex flex-col gap-6 mt-2">
+            <div ref={ contentWrapperRef } className="flex flex-col gap-6 mt-2 hidden-section">
                 <div className="flex flex-col gap-8 lg:flex-row">
                     <article ref={ frontEndStackRef } className="flex flex-col gap-2 lg:w-1/2">
                         <h3 className="h3">{ "< Front-End />" }</h3>
