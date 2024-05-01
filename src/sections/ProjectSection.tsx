@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { featuredProjectsAPIPath } from "../global/wpAPIPath";
-import handleHeadingIntersect  from "../global/handleHeadingIntersect";
-import animateProjectArticle from "../global/animateProjectArticle";
+import animateHeadingIntersect  from "../global/gsap_animations/animateHeadingIntersect";
+import animateProjectArticle from "../global/gsap_animations/animateProjectArticle";
 import { ProjectInterface } from "../interfaces/interfaces";
 import FeaturedProjectArticle from "../components/project_articles/FeaturedProjectArticle";
 
@@ -95,7 +95,7 @@ const ProjectSection: FC = () => {
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver(( entries ) => {
-            handleHeadingIntersect(
+            animateHeadingIntersect(
                 entries,
                 titleBorderRef,
                 titleRef,

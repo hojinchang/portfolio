@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -8,15 +8,15 @@ import Loading from "../components/Loading";
 import Footer from "../components/Footer";
 import BackLink from "../components/BackLink";
 import ProjectInfoTabs from "../components/project_info_tabs/ProjectInfoTabs";
+import FeaturedImage from "../components/project_articles/FeaturedImage";
 
 import { RootState } from "../store/store";
-import FeaturedImage from "../components/project_articles/FeaturedImage";
 import { projectsAPIPath, techStackAPIPath } from "../global/wpAPIPath";
-import { ProjectInterface, TechStackInterface } from "../interfaces/interfaces";
+import { Roles, ProjectInterface, TechStackInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/utilityFunctions";
+import animateSingleProjectPage from "../global/gsap_animations/animateSingleProjectPage";
 
-import { Roles } from "../interfaces/interfaces";
 
 const SingleProjectPage:FC = () => {
     // Get project slug from query string
@@ -29,16 +29,23 @@ const SingleProjectPage:FC = () => {
 
     const marqueeRef = useMarqueeAnimation(!loading && project);
 
-    // // Scroll to the top of the page when the page mounts
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    // }, []);
-
+    const backLinkRef = useRef<HTMLDivElement>(null);
+    const sectionHeadingRef = useRef<HTMLElement>(null);
+    const sectionFeaturedImageRef = useRef<HTMLElement>(null);
+    const sectionOverviewRef = useRef<HTMLElement>(null);
+    const sectionTechStackRef = useRef<HTMLElement>(null);
+    const sectionDetailsRef = useRef<HTMLElement>(null);
+    
     //  Reorder the tech stack response data in specified order
     const reorderTechStack = (techStackData: TechStackInterface[], orderIds: number[]) => {
         const techStackMap = new Map(techStackData.map(item => [item.id, item]));
         return orderIds.map(id => techStackMap.get(id)).filter(item => item !== undefined) as TechStackInterface[];
     };
+
+    // Scroll to the top of the page when the page mounts
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     // Fetch the project
     useEffect(() => {
@@ -78,6 +85,38 @@ const SingleProjectPage:FC = () => {
         return () => clearTimeout(timer);
     }, [projectName]);
 
+    // Apply animation after loading is completed
+    useEffect(() => {
+        if (!loading && project) {
+            const observer = new IntersectionObserver(( entries ) => {
+                animateSingleProjectPage(
+                    entries,
+                    backLinkRef,
+                    sectionHeadingRef,
+                    sectionFeaturedImageRef,
+                    sectionOverviewRef,
+                    sectionTechStackRef,
+                    sectionDetailsRef,
+                );
+            }, {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            });
+
+            if (sectionHeadingRef.current) {
+                observer.observe(sectionHeadingRef.current);
+            }
+        
+            // Cleanup: Stop observing the element when the component unmounts
+            return () => {
+                if (sectionHeadingRef.current) {
+                    observer.unobserve(sectionHeadingRef.current);
+                }
+            };
+        }
+    }, [loading, project]); 
+
     // Show loading animation
     if (loading) {
         return (
@@ -108,8 +147,8 @@ const SingleProjectPage:FC = () => {
                     </header>
                     <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                         <section className="section-smaller">
-                            <BackLink path="/projects" title="PROJECTS" />
-                            <section className="flex flex-col gap-12 md:flex-row md:justify-between">
+                            <BackLink path="/projects" title="PROJECTS" ref={ backLinkRef } />
+                            <section ref={ sectionHeadingRef } className="flex flex-col gap-12 md:flex-row md:justify-between">
                                 <div>
                                     <p className="text-sm text-neutral-400 font-medium mb-3 lg:mb-2">PROJECT</p>
                                     <h1 className="text-[2.5rem] md:text-[3rem] font-semibold lg:text-[4rem] leading-tight mb-2">{ project.title.rendered }</h1>
@@ -137,12 +176,12 @@ const SingleProjectPage:FC = () => {
                                     </div>
                                 </div>
                             </section>
-                            <section className="mt-10 max-w-[750px] mx-auto">
+                            <section ref={ sectionFeaturedImageRef } className="mt-10 max-w-[750px] mx-auto">
                                 <figure>
                                     <FeaturedImage featuredImageObject={ project._embedded["wp:featuredmedia"][0] } />
                                 </figure>
                             </section>
-                            <section className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2">
+                            <section ref={ sectionOverviewRef } className="flex flex-col gap-12 md:flex-row md:justify-between md:gap-2">
                                 <div className="md:w-[70%]">
                                     <h2 className="section-heading mb-3">OVERVIEW</h2>
                                     <p className="leading-relaxed">{ project.acf.overview }</p>
@@ -160,7 +199,7 @@ const SingleProjectPage:FC = () => {
                                     </ul>
                                 </div>
                             </section>
-                            <section>
+                            <section ref={ sectionTechStackRef }>
                                 <h2 className="section-heading mb-5">TECH STACK</h2>
                                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                                     {( teckStack.length > 0 ) ? (
@@ -180,7 +219,7 @@ const SingleProjectPage:FC = () => {
                                     )}
                                 </div>
                             </section>
-                            <section className="mt-8 shadow-all-shadow">
+                            <section ref={ sectionDetailsRef } className="mt-8 shadow-all-shadow">
                                 <ProjectInfoTabs project={ project } />
                             </section>
                         </section>

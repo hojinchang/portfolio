@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useRef } from "react"
 
-import handleHeadingIntersect from "../global/handleHeadingIntersect";
+import animateHeadingIntersect from "../global/gsap_animations/animateHeadingIntersect";
 import AboutAccordion from "../components/accordion/AboutAccordion";
 
 const AboutSection: FC = () => {
@@ -36,7 +36,7 @@ const AboutSection: FC = () => {
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver(( entries ) => {
-            handleHeadingIntersect(
+            animateHeadingIntersect(
                 entries,
                 titleBorderRef,
                 titleRef,

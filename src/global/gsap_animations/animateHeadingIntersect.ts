@@ -4,7 +4,7 @@ import gsap from "gsap";
 let lastScrollY = window.scrollY;  // Initialize lastScrollY at the top of your component
 
 // Function to handle intersection changes
-const handleHeadingIntersect = (
+const animateHeadingIntersect = (
     entries: IntersectionObserverEntry[],
     titleBorderRef: React.RefObject<HTMLHeadingElement>,
     titleRef: React.RefObject<HTMLHeadingElement>,
@@ -73,4 +73,4 @@ const handleHeadingIntersect = (
 };
 
 
-export default handleHeadingIntersect;
+export default animateHeadingIntersect;

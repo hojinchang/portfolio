@@ -1,8 +1,8 @@
 import { FC, useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-import handleHeadingIntersect from "../global/handleHeadingIntersect";
-import animateTechStack from "../global/animateTechStack";
+import animateHeadingIntersect from "../global/gsap_animations/animateHeadingIntersect";
+import animateTechStack from "../global/gsap_animations/animateTechStack";
 import { techStateCategoriesAPIPath, techStackAPIPath } from "../global/wpAPIPath";
 import { TechStackInterface } from "../interfaces/interfaces";
 
@@ -86,7 +86,7 @@ const TechStackSection: FC = () => {
     useEffect(() => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver(( entries ) => {
-            handleHeadingIntersect(
+            animateHeadingIntersect(
                 entries,
                 titleBorderRef,
                 titleRef,

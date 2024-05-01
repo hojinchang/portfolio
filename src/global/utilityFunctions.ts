@@ -24,8 +24,7 @@ const fetchMediaById = async(mediaId: number) => {
     }
 }
 
-
-
+// Get the source link and alt text for the project details media
 const fetchProjectMedia = async(project:  ProjectInterface) => {
     let mediaIds: number[] = [];
     // Loop through the features
@@ -38,8 +37,6 @@ const fetchProjectMedia = async(project:  ProjectInterface) => {
             });
         }
     });
-
-    console.log(mediaIds);
 
     const uniqueMediaIds = [...new Set(mediaIds)];  // Remove duplicates
     const mediaDataPromises = uniqueMediaIds.map(id => fetchMediaById(id));
