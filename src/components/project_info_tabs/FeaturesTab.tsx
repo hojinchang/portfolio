@@ -23,7 +23,7 @@ const FeaturesTab:FC<Props> = ({ project }) => {
     }, [project]);
 
     return (
-        <article className="project-details-tab">
+        <article className="project-details-tab project-details-fade-in">
             { project.acf.features && (project.acf.features.length > 0) && project.acf.features.map((detail, detailIdx) => (
                 <div key={ detailIdx }>
                     <h3 className="project-details-heading">{ detail.content_title }</h3>

@@ -9,7 +9,7 @@ interface Props {
 const ReflectionTab:FC<Props> = ({ project }) => {
 
     return (
-        <article className="project-details-tab">
+        <article className="project-details-tab project-details-fade-in">
             { project.acf.reflection.map((detail, detailIdx) => (
                 <div key={ detailIdx }>
                     <h3 className="project-details-heading">{ detail.content_title }</h3>

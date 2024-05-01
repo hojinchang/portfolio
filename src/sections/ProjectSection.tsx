@@ -128,7 +128,7 @@ const ProjectSection: FC = () => {
             <h2 ref={ titleRef } className="section-title">// FEATURED PROJECTS</h2>
             <div ref={ titleBorderRef } className="section-border"></div>
             <p ref={ viewAllProjectsRef } className="self-end">
-                <Link to="/projects" className="block font-medium p-4 lg:text-lg link-hover">{"< VIEW ALL PROJECTS />"}</Link>
+                <Link to="/projects" className="view-all-projects">{"< VIEW ALL PROJECTS />"}</Link>
             </p>
             <div ref={ contentWrapperRef } className="flex flex-col gap-6">
                 <div className="flex">

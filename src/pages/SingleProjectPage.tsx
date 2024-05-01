@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 import Header from "../components/header/Header";
@@ -11,7 +11,7 @@ import ProjectInfoTabs from "../components/project_info_tabs/ProjectInfoTabs";
 import FeaturedImage from "../components/project_articles/FeaturedImage";
 
 import { RootState } from "../store/store";
-import { projectsAPIPath, techStackAPIPath } from "../global/wpAPIPath";
+import { projectsAPIPath, techStackAPIPath, additionalProjectsAPIPath } from "../global/wpAPIPath";
 import { Roles, ProjectInterface, TechStackInterface } from "../interfaces/interfaces";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 import { decodeHTMLEntities } from "../global/utilityFunctions";
@@ -26,6 +26,7 @@ const SingleProjectPage:FC = () => {
 
     const [project, setProject] = useState<ProjectInterface | null>(null);
     const [teckStack, setTeckStack] = useState<TechStackInterface[]>([]);
+    const [additonalProjects, setAdditionalProjects] = useState<ProjectInterface[] | null>(null);
 
     const marqueeRef = useMarqueeAnimation(!loading && project);
 
@@ -93,6 +94,18 @@ const SingleProjectPage:FC = () => {
 
     // Fetch the project
     useEffect(() => {
+        // Fetch projects for MORE PROJECTS section
+        const fetchAdditionalProjects = async(excludeId: number) => {
+            try {
+                // Fetch 4 random projects while excluding the current
+                const response = await axios.get(additionalProjectsAPIPath + `?exclude=${excludeId}`);
+                // const response = await axios.get(additionalProjectsAPIPath);
+                setAdditionalProjects(response.data);
+            } catch(err) {
+                console.error("Error fetching additional projects:", err);
+            }
+        }
+
         const fetchProject = async() => {
             try {
                 // Get the project
@@ -104,13 +117,17 @@ const SingleProjectPage:FC = () => {
 
                     // Get the tech stack cpt
                     const techStackIds = data.acf.tech_stack;
+                    // Fetch the tech stack cpt
                     const techStackResponse = await axios.get(techStackAPIPath + `&include=${techStackIds.join(",")}`);
                     
+                    // Order the tech stack in the original order. Fetching fetches the cpt in random order
                     if (techStackResponse.data) {
                         const orderedTechStack = reorderTechStack(techStackResponse.data, techStackIds);
                         setTeckStack(orderedTechStack);
                     }
 
+                    // Fetch projects for MORE PROJECTS section
+                    fetchAdditionalProjects(data.id);
                     setProject(data);
                 }
             } catch(err) {
@@ -234,6 +251,15 @@ const SingleProjectPage:FC = () => {
                             </section>
                             <section ref={ sectionDetailsRef } className="mt-8 shadow-all-shadow">
                                 <ProjectInfoTabs project={ project } />
+                            </section>
+                            <section className="flex flex-col mt-20">
+                                <h2 className="section-heading">MORE PROJECTS</h2>
+                                <p className="self-end">
+                                    <Link to="/projects" className="view-all-projects">{"< VIEW ALL PROJECTS />"}</Link>
+                                </p>
+                                <div>
+
+                                </div>
                             </section>
                         </section>
                     </main>
