@@ -98,7 +98,7 @@ const TechStackSection: FC = () => {
                 
         }, {
             root: null, // Use the viewport as the root
-            rootMargin: "0px", // No margin around the root
+            rootMargin: "0px 0px -300px 0px",
             threshold: 0.1 // Trigger when 10% of the element is visible
          });
     
@@ -118,7 +118,6 @@ const TechStackSection: FC = () => {
     // Watch where the scroll is based on the title border
     useEffect(() => {
         const observer = new IntersectionObserver(( entries ) => {
-              
             animateTechStack(
                 entries,
                 frontEndStackRef,
@@ -130,7 +129,7 @@ const TechStackSection: FC = () => {
 
         }, {
             root: null, 
-            rootMargin: "0px", 
+            rootMargin: "0px 0px -200px 0px", 
             threshold: 0.1 
          });
     
@@ -145,7 +144,7 @@ const TechStackSection: FC = () => {
             }
         };
     }, [hasStackAnimated]);
-    
+
 
     return (
         <section id="tech-stack" className="section">

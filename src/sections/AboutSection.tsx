@@ -47,7 +47,7 @@ const AboutSection: FC = () => {
             )
         }, {
             root: null, // Use the viewport as the root
-            rootMargin: "0px", // No margin around the root
+            rootMargin: "0px 0px -300px 0px",
             threshold: 0.1 // Trigger when 10% of the element is visible
          });
     

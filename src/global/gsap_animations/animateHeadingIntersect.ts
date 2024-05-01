@@ -38,7 +38,7 @@ const animateHeadingIntersect = (
 
             gsap.fromTo(titleRef.current, {
                 x: -40,
-                autoAlpha: 0
+                autoAlpha: 0,
             }, {
                 x: 0,
                 autoAlpha: 1,
@@ -50,7 +50,7 @@ const animateHeadingIntersect = (
             if (viewAllProjectsRef) {
                 gsap.fromTo(viewAllProjectsRef.current, {
                     x: 40,
-                    autoAlpha: 0
+                    autoAlpha: 0,
                 }, {
                     x: 0,
                     autoAlpha: 1,
@@ -62,7 +62,7 @@ const animateHeadingIntersect = (
             if (contentWrapperRef) {
                 gsap.fromTo(contentWrapperRef.current, {
                     y: 40,
-                    autoAlpha: 0
+                    autoAlpha: 0,
                 }, {
                     y: 0,
                     autoAlpha: 1,
