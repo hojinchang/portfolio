@@ -15,7 +15,8 @@ export default {
       screens: {
         "3xs": "350px",
         "2xs": "450px",
-        "xs": "550px"
+        "xs": "550px",
+        "lg2": "1150px"
       },
       colors: {
         neutral: {
