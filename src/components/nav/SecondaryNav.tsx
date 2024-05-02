@@ -23,22 +23,22 @@ const SecondaryNav:FC = () => {
 
 
     return (
-        <nav className="fixed top-1/2 -translate-y-1/2 right-12 z-30">
-            <ul className="flex flex-col gap-4 text-sm font-medium text-neutral-300">
+        <nav id="secondary-nav" className="fixed top-1/2 -translate-y-1/2 right-[34px] z-30">
+            <ul className="flex flex-col text-sm font-medium text-neutral-300">
                 <li>
-                    <a href="#home" onClick={ handleNav }>00</a>
+                    <a href="#home" className="block p-3" onClick={ handleNav }>00</a>
                 </li>
                 <li>
-                    <a href="#projects" onClick={ handleNav }>01</a>
+                    <a href="#projects" className="block p-3" onClick={ handleNav }>01</a>
                 </li>
                 <li>
-                    <a href="#about" onClick={ handleNav }>02</a>
+                    <a href="#about" className="block p-3" onClick={ handleNav }>02</a>
                 </li>
                 <li>
-                    <a href="#tech-stack" onClick={ handleNav }>03</a>
+                    <a href="#tech-stack" className="block p-3" onClick={ handleNav }>03</a>
                 </li>
                 <li>
-                    <a href="#contact" onClick={ handleNav }>04</a>
+                    <a href="#contact" className="block p-3" onClick={ handleNav }>04</a>
                 </li>
             </ul>
         </nav>

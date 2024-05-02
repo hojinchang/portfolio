@@ -50,6 +50,30 @@ body {
     @apply text-[70px] 2xs:text-8xl font-semibold text-neutral-200 whitespace-nowrap md:text-[120px] lg:text-[160px]
 }
 
+/* Secondary Nav */
+#secondary-nav::before {
+    content: "";
+    position: absolute;
+    right: -8px;
+    height: 100%;
+    background-color: #737373;
+    width: 1px;
+    border-radius: 50%;
+}
+
+.details-button p::before, 
+.details-button p::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    height: 2px;
+    background-color: #e5e5e5;
+    width: 0;
+    transition: width 0.3s ease-in-out;
+    border-radius: 50%;
+}
+
+
 /* Scroll down indicator */
 .scroll-indicator {
     @apply block w-4 h-4 md:w-5 md:h-5 border-b-2 border-r-2 border-neutral-200 transform rotate-45 -my-2.5 animate-scrollDown
