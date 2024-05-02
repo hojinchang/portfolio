@@ -42,7 +42,7 @@ const CurrentTime:FC = () => {
 
     return (
         <article id="current-time" className="flex flex-col gap-1 absolute bottom-[112px] left-[16px] md:bottom-[80px] md:left-[32px] lg:left-[48px]">
-            <h4 className="font-semibold text-lg">Burnaby { weather && `- ${weather.temp.toFixed(0)}°C` }</h4>
+            <h4 className="font-semibold text-lg">Burnaby { weather && `| ${weather.temp.toFixed(0)}°C` }</h4>
             <p className="text-neutral-400">{ time.toLocaleDateString() }</p>
             <p className="text-neutral-400">{ time.toLocaleTimeString() }</p>
         </article>

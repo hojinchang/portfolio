@@ -1,18 +1,22 @@
 import { FC } from "react";
 
+import { scrollOffset } from "../../global/globals";
 
 const SecondaryNav:FC = () => {
     const handleNav = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        const targetId = e.currentTarget.getAttribute("href");
-        if (targetId) {
-            const targetElement = document.querySelector(targetId);
+        const sectionId = e.currentTarget.getAttribute("href");
+        if (sectionId) {
+            const section = document.querySelector(sectionId) as HTMLElement;
 
-            console.log(targetId);
-            console.log(targetElement);
-
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Smoothly scroll to the element
+            if (section) {
+                const sectionTop = section.offsetTop;
+                const scrollToPosition = sectionTop - scrollOffset;
+                // Scroll to that section with some offset
+                window.scrollTo({
+                    top: scrollToPosition,
+                    behavior: "smooth"
+                });
             }
         }
     } 
