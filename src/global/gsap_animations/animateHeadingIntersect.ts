@@ -71,8 +71,6 @@ const animateHeadingIntersect = (
                 });
             }
         } else if (!entry.isIntersecting && hasAnimated && isScrollingUp) {
-            console.log("RESETTING!", entry);
-
             // Reset properties to make elements invisible again if they go out of view while scrolling up
             gsap.to([titleBorderRef.current, titleRef.current, viewAllProjectsRef?.current, contentWrapperRef?.current], {
                 autoAlpha: 0,

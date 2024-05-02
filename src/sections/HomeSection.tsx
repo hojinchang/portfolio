@@ -1,12 +1,16 @@
-import { FC } from "react"
+import { FC, useState, useEffect } from "react"
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+import SecondaryNav from "../components/nav/SecondaryNav";
 import CurrentTime from "../components/CurrentTime";
 import ScrollDown from "../components/ScrollDown";
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 
 const HomeSection: FC = () => {
+    const [enableSecondaryNav, setEnableSecondaryNav] = useState<boolean>(false);
+    const marqueeRef = useMarqueeAnimation(true);
+
     // fade in animation for job titles
     useGSAP(() => {
         gsap.from("#job-titles", {
@@ -24,11 +28,23 @@ const HomeSection: FC = () => {
         });
     });
 
-    const marqueeRef = useMarqueeAnimation(true);
+    useEffect(() => {
+        const handleResize = () => {
+            setEnableSecondaryNav(window.innerWidth >= 1024);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    }, []);
+
+
 
     return (
         <section id="home" className="h-screen relative mb-[10rem]">
-            <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 max-w-6xl mx-auto">
+            <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 mx-auto max-w-6xl md:max-w-[575px] 2md:max-w-[650px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1152px]">
                 <div ref={ marqueeRef } className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
                     <div className="marquee-content flex gap-52 w-full">
                         <div className="name-marquee w-full">
@@ -52,6 +68,7 @@ const HomeSection: FC = () => {
                 </div>
             </div>
             <CurrentTime />
+            { enableSecondaryNav && <SecondaryNav /> }
             <ScrollDown />
         </section>
     )

@@ -16,7 +16,9 @@ export default {
         "3xs": "350px",
         "2xs": "450px",
         "xs": "550px",
-        "lg2": "1150px"
+        "2md": "900px",
+        "2lg": "1150px",
+        "1xl": "1400px",
       },
       colors: {
         neutral: {
