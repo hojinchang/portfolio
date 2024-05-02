@@ -19,6 +19,11 @@ interface Sizes {
         height: number;
         source_url: string;
     };
+    thumbnail: {
+        width: number;
+        height: number;
+        source_url: string;
+    }
 }
 
 interface ImageDetails {
