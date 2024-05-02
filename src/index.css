@@ -61,6 +61,18 @@ body {
     border-radius: 50%;
 }
 
+#secondary-nav::after {
+    content: "";
+    position: absolute;
+    right: -9px;
+    width: 3px;
+    background-color: #ffffff;
+    transition: top 0.3s ease, height 0.3s ease;
+    top: var(--highlighter-top, 0px);
+    height: var(--highlighter-height, 20px);
+    border-radius: 3px;
+}
+
 .details-button p::before, 
 .details-button p::after {
     content: "";
