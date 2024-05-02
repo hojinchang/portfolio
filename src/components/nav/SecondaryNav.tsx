@@ -31,28 +31,33 @@ const SecondaryNav:FC = () => {
             const navLinks = navElement?.querySelectorAll("a");
             // Include padding to scroll position
             const paddingOffset = 300;
+            // Current scroll position
             const scrollPosition = window.scrollY + scrollOffset + paddingOffset;
             // Check if user is near the bottom of the page
-            const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100; // Adjust 100px as needed
+            const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
 
             if (!navElement || !navLinks) {
                 return;
             }
 
-            sections.forEach((section, index) => {
+            sections.forEach((section, idx) => {
                 const sectionElement = document.getElementById(section);
 
                 if (!sectionElement) {
                     return;
                 }
 
-                if (
-                    ( (sectionElement.offsetTop <= scrollPosition) && (sectionElement.offsetTop + sectionElement.offsetHeight > scrollPosition) ) 
+                /*
+                    sectionElement.offsetTop - the vertical distance from the top of the document to the top of the section
+                    (sectionElement.offsetTop <= scrollPosition) - check if the top of the section has scrolled past the scrollPosition
+                    (sectionElement.offsetTop + sectionElement.offsetHeight > scrollPosition) - check if the bottom of the section is still below the adjusted scroll position (section is still on the screen)
+                */
+                if ( ((sectionElement.offsetTop <= scrollPosition) && (sectionElement.offsetTop + sectionElement.offsetHeight > scrollPosition)) 
                     || ( section === 'contact' && nearBottom )
                 ) {
                     // Calculate the top position of the active link for the highlighter
-                    let activeLinkTop = navLinks[index].offsetTop;
-                    let activeLinkHeight = navLinks[index].offsetHeight;
+                    let activeLinkTop = navLinks[idx].offsetTop;
+                    let activeLinkHeight = navLinks[idx].offsetHeight;
 
                     // Set the top position and height of the highlighter
                     navElement.style.setProperty("--highlighter-top", `${activeLinkTop}px`);

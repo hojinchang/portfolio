@@ -18,6 +18,7 @@ import { projectsAPIPath } from "../global/wpAPIPath";
 const ProjectsPage: FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);
     const [loading, setLoading] = useState<boolean>(true);
+    const [dataFetched, setDataFetched] = useState<boolean>(false);
 
     const [projects, setProjects] = useState<ProjectInterface[]>([]);
 
@@ -38,22 +39,28 @@ const ProjectsPage: FC = () => {
                 const response = await axios.get(projectsAPIPath);
                 if (response.data && response.data.length > 0) {
                     setProjects(response.data);
+                    // Create references to each of the projects. These references will be used for the GSAP animation
                     projectRefs.current = response.data.map(() => React.createRef<HTMLDivElement>());
                 }
+                
+                setDataFetched(true);
             } catch(err) {
                 console.error("Error fetching projects:", err);
                 setLoading(false);
             }
         }
         fetchProjects();
-
-        // Set loading timer
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1500);
-
-        return () => clearTimeout(timer);
     }, []);
+
+    useEffect(() => {
+        // Ensure loading stays true for at least 1500ms on fast networks
+        const timer = setTimeout(() => {
+            if (dataFetched) {
+                setLoading(false);
+            }
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, [dataFetched]);
 
     // Apply animation after loading is completed
     useEffect(() => {

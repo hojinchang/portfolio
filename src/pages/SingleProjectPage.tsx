@@ -24,6 +24,7 @@ const SingleProjectPage:FC = () => {
     const { projectName } = useParams<string>();
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile );
     const [loading, setLoading] = useState<boolean>(true);
+    const [dataFetched, setDataFetched] = useState<boolean>(false);
 
     // Data from WP backend
     const [project, setProject] = useState<ProjectInterface | null>(null);
@@ -76,27 +77,6 @@ const SingleProjectPage:FC = () => {
             }
         };
     };
-
-    // Apply animation after loading is completed
-    useEffect(() => {
-        if (!loading && project) {
-            const headingCleanup = observeSection(sectionHeadingRef);
-            const imageCleanup = observeSection(sectionFeaturedImageRef);
-            const overviewCleanup = observeSection(sectionOverviewRef);
-            const techStackCleanup = observeSection(sectionTechStackRef);
-            const detailsCleanup = observeSection(sectionDetailsRef);
-            const moreProjectsCleanup = observeSection(sectionMoreProjects);
-
-            return () => {
-                headingCleanup();
-                imageCleanup();
-                overviewCleanup();
-                techStackCleanup();
-                detailsCleanup();
-                moreProjectsCleanup();
-            };
-        }
-    }, [loading, project]); 
 
     // Fetch the project
     useEffect(() => {
@@ -156,6 +136,8 @@ const SingleProjectPage:FC = () => {
                     fetchAdditionalProjects(data.id);
                     setProject(data);
                 }
+
+                setDataFetched(true);
             } catch(err) {
                 console.error("Error fetching projects:", err);
                 setLoading(false);
@@ -163,16 +145,38 @@ const SingleProjectPage:FC = () => {
         }
 
         fetchProject();
-
-        // Set loading timer
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1500);
-
-        return () => clearTimeout(timer);
     }, [projectName]);
 
+    useEffect(() => {
+        // Ensure loading stays true for at least 1500ms on fast networks
+        const timer = setTimeout(() => {
+            if (dataFetched) {
+                setLoading(false);
+            }
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, [dataFetched]);
 
+    // Apply animation after loading is completed
+    useEffect(() => {
+        if (!loading && project) {
+            const headingCleanup = observeSection(sectionHeadingRef);
+            const imageCleanup = observeSection(sectionFeaturedImageRef);
+            const overviewCleanup = observeSection(sectionOverviewRef);
+            const techStackCleanup = observeSection(sectionTechStackRef);
+            const detailsCleanup = observeSection(sectionDetailsRef);
+            const moreProjectsCleanup = observeSection(sectionMoreProjects);
+
+            return () => {
+                headingCleanup();
+                imageCleanup();
+                overviewCleanup();
+                techStackCleanup();
+                detailsCleanup();
+                moreProjectsCleanup();
+            };
+        }
+    }, [loading, project]); 
 
     // Show loading animation
     if (loading) {
