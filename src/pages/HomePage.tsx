@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
 import { appTitle } from "../global/globals";
 import { RootState } from "../store/store";
@@ -14,10 +15,10 @@ import Footer from "../components/Footer";
 const HomePage: FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);
 
-    // Set the title of the page
-    useEffect(() => {
-        document.title = `${appTitle} - Full Stack Developer`;
-    }, []);
+    // // Set the title of the page
+    // useEffect(() => {
+    //     document.title = `${appTitle} - Full Stack Developer`;
+    // }, []);
 
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
@@ -27,7 +28,11 @@ const HomePage: FC = () => {
     }, []);
 
     return (
-        <>
+        <>  
+            <Helmet>
+                <title>{ `${appTitle} - Full Stack Developer` }</title>
+                <meta name="description" content="Discover my latest projects and explore my skills in Full-Stack Development, Machine Learning, and Computer Vision. Let's turn ideas into reality!" />
+            </Helmet>
             <Header />
             <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                 <HomeSection />

@@ -1,6 +1,7 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
 
 import Header from "../components/header/Header";
@@ -123,8 +124,8 @@ const SingleProjectPage:FC = () => {
                     const data = response.data[0];
                     data.title.rendered = decodeHTMLEntities(data.title.rendered);
                     
-                    // Set the title of the page
-                    document.title = `Project - ${data.title.rendered}`;
+                    // // Set the title of the page
+                    // document.title = `Project - ${data.title.rendered}`;
 
                     // Get the tech stack cpt
                     const techStackIds = data.acf.tech_stack;
@@ -197,8 +198,11 @@ const SingleProjectPage:FC = () => {
     
     return (
         <>
+            <Helmet>
+                <title>{ `Project - ${project?.title.rendered}` }</title>
+                <meta name="description" content={`Explore details about the project "${project?.title.rendered}" including overview, tech stack, roles, and more. Dive into innovative solutions and creative implementations.`} />
+            </Helmet>
             <Header />
-
             {project &&
                 <>
                     {/* Gradient backdrop */}

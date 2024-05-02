@@ -1,8 +1,8 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
-
 import gsap from "gsap";
 
 import Header from "../components/header/Header";
@@ -31,10 +31,10 @@ const ProjectsPage: FC = () => {
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const projectRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([]);
 
-    // Set the title of the page
-    useEffect(() => {
-        document.title = `Projects - ${appTitle}`;
-    }, []);
+    // // Set the title of the page
+    // useEffect(() => {
+    //     document.title = `Projects - ${appTitle}`;
+    // }, []);
 
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
@@ -112,7 +112,11 @@ const ProjectsPage: FC = () => {
     }
 
     return (
-        <>
+        <>  
+            <Helmet>
+                <title>{ `${appTitle} - Projects` }</title>
+                <meta name="description" content="Explore a showcase of my projects, including Full-Stack and Front-End Development. Get inspired by innovative solutions and creative implementations." />
+            </Helmet>
             <Header />
             <main className={ `main ${ isMobile ? "pb-20" : "" }` }>
                 <section className="max-w-[1280px] mx-auto mt-28 mb-16">
