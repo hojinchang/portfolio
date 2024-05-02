@@ -261,7 +261,7 @@ const SingleProjectPage:FC = () => {
                                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
                                     {( teckStack.length > 0 ) ? (
                                         teckStack.map(( stack ) => (
-                                            <article key={ stack.id } className="mx-auto flex gap-4 items-center w-full max-w-[18rem] xs:max-w-none bg-neutral-800 p-3 rounded-md shadow-all-shadow">
+                                            <article key={ stack.id } className="mx-auto flex gap-4 items-center w-full max-w-[18rem] xs:max-w-none bg-neutral-800 p-3 rounded-md shadow-all-shadow transition duration-300 lg:hover:scale-[1.02]">
                                                 <div>
                                                     <img className="block w-10 h-10" src={ stack._embedded["wp:featuredmedia"][0].source_url } alt={ stack._embedded["wp:featuredmedia"][0].alt_text }/>
                                                 </div>
