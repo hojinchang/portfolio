@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+import { appTitle } from "../global/globals";
 import { RootState } from "../store/store";
 
 import Header from "../components/header/Header";
@@ -13,13 +14,17 @@ import Footer from "../components/Footer";
 const HomePage: FC = () => {
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);
 
+    // Set the title of the page
+    useEffect(() => {
+        document.title = `${appTitle} - Full Stack Developer`;
+    }, []);
+
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
         setTimeout(() => {
             window.scrollTo(0, 0);
         }, 100); // Adjust delay as necessary
     }, []);
-    
 
     return (
         <>

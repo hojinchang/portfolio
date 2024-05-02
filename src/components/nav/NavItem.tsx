@@ -67,7 +67,7 @@ const NavItem: FC<Props> = ({
 
     return (
         <li>
-            <a onClick={ handleNavigate } className={ linkClassName }>
+            <a href={`/#${item}`} onClick={ handleNavigate } className={ linkClassName }>
                 <p className={ topTextClassName }>{`0${idx}`}</p>
                 <p className={ bottomTextClassName }><span>//</span>{ item.toUpperCase() }</p>
             </a>

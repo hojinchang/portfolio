@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import gsap from "gsap";
@@ -10,12 +11,15 @@ import Loading from "../components/Loading";
 import Footer from "../components/Footer";
 import BackLink from "../components/BackLink";
 
+import { appTitle } from "../global/globals";
 import { RootState } from "../store/store";
 import { ProjectInterface } from "../interfaces/interfaces";
 import { projectsAPIPath } from "../global/wpAPIPath";
 
 
 const ProjectsPage: FC = () => {
+    const navigate = useNavigate();
+
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile);
     const [loading, setLoading] = useState<boolean>(true);
     const [dataFetched, setDataFetched] = useState<boolean>(false);
@@ -26,6 +30,11 @@ const ProjectsPage: FC = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const projectRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([]);
+
+    // Set the title of the page
+    useEffect(() => {
+        document.title = `Projects - ${appTitle}`;
+    }, []);
 
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
@@ -41,8 +50,11 @@ const ProjectsPage: FC = () => {
                     setProjects(response.data);
                     // Create references to each of the projects. These references will be used for the GSAP animation
                     projectRefs.current = response.data.map(() => React.createRef<HTMLDivElement>());
+                } else {
+                    // Projects not found, navigate to 404 page
+                    navigate('/404');
                 }
-                
+
                 setDataFetched(true);
             } catch(err) {
                 console.error("Error fetching projects:", err);

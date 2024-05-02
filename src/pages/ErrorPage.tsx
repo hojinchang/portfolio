@@ -1,9 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Header from "../components/header/Header";
 
+import { appTitle } from "../global/globals";
+
 const ErrorPage: FC = () => {
+
+    // Set the title of the page
+    useEffect(() => {
+        document.title = `${appTitle} - 404`;
+    }, []);
 
     return (
         <>

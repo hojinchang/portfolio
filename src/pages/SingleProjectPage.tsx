@@ -1,6 +1,6 @@
 import { FC, useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 import Header from "../components/header/Header";
@@ -20,6 +20,8 @@ import MoreProjectsCarousel from "../components/MoreProjectsCarousel";
 
 
 const SingleProjectPage:FC = () => {
+    const navigate = useNavigate();
+
     // Get project slug from query string
     const { projectName } = useParams<string>();
     const isMobile = useSelector(( state: RootState ) => state.isMobile.isMobile );
@@ -120,6 +122,9 @@ const SingleProjectPage:FC = () => {
                     // Santize title to escape special characters
                     const data = response.data[0];
                     data.title.rendered = decodeHTMLEntities(data.title.rendered);
+                    
+                    // Set the title of the page
+                    document.title = `Project - ${data.title.rendered}`;
 
                     // Get the tech stack cpt
                     const techStackIds = data.acf.tech_stack;
@@ -135,8 +140,11 @@ const SingleProjectPage:FC = () => {
                     // Fetch projects for MORE PROJECTS section
                     fetchAdditionalProjects(data.id);
                     setProject(data);
+                } else {
+                    // Project not found, navigate to 404 page
+                    navigate('/404');
                 }
-
+                
                 setDataFetched(true);
             } catch(err) {
                 console.error("Error fetching projects:", err);

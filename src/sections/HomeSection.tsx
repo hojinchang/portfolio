@@ -32,7 +32,7 @@ const HomeSection: FC = () => {
         const handleResize = () => {
             setEnableSecondaryNav(window.innerWidth >= 1024);
         };
-        
+
         handleResize();
         window.addEventListener("resize", handleResize);
 
