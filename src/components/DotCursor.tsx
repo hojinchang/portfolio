@@ -72,20 +72,6 @@ const DotCursor: FC = () => {
         };
     }, []);
 
-    // // Detect touch devices and hide cursor permanently on them
-    // useEffect(() => {
-    //     const handleTouchStart = () => {
-    //         setIsVisible(false);  // Permanently hide cursor on touch devices
-    //     };
-
-    //     window.addEventListener("touchstart", handleTouchStart);
-
-    //     return () => {
-    //         window.removeEventListener("touchstart", handleTouchStart);
-    //     };
-    // }, []);
-
-
     return (
         <>
             {isVisible && (
