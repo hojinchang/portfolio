@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
 
-import NavItem from "./header/NavItem";
+import NavItem from "./nav/NavItem";
 import { RootState } from "../store/store";
 
 const Footer: FC = () => {

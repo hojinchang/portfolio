@@ -27,7 +27,7 @@ interface ImageDetails {
     sizes: Sizes;
 }
 
-interface FeaturedMedia {
+export interface FeaturedMedia {
     media_details: ImageDetails;
     source_url: string;
     alt_text: string;

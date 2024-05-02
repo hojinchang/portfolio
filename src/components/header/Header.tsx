@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
 import { RootState } from "../../store/store";
-import Nav from "./Nav";
+import Nav from "../nav/Nav";
 
 
 const Header: FC = () => {
