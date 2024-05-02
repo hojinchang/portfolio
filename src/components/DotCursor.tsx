@@ -13,6 +13,7 @@ const DotCursor: FC = () => {
     });
 
     const [isHovered, setIsHovered] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
 
     // Set the cursor and halo positions on mouse move
     useEffect(() => {
@@ -60,22 +61,40 @@ const DotCursor: FC = () => {
         };
     }, []);
 
+    // Detect touch devices and hide cursor permanently on them
+    useEffect(() => {
+        const handleTouchStart = () => {
+            setIsVisible(false);  // Permanently hide cursor on touch devices
+        };
+
+        window.addEventListener("touchstart", handleTouchStart);
+
+        return () => {
+            window.removeEventListener("touchstart", handleTouchStart);
+        };
+    }, []);
+
+
     return (
         <>
-            <motion.div 
-                className="cursor-dot z-50" 
-                style={{
-                    translateX: cursorPosition.x,
-                    translateY: cursorPosition.y,
-                }} 
-            />
-            <motion.div 
-                className={ `halo z-50 ${isHovered ? "hovered" : ""}` }  
-                style={{
-                    translateX: haloPosition.x,
-                    translateY: haloPosition.y,
-                }} 
-            />
+            {isVisible && (
+                <>
+                    <motion.div 
+                        className="cursor-dot z-50" 
+                        style={{
+                            translateX: cursorPosition.x,
+                            translateY: cursorPosition.y,
+                        }} 
+                    />
+                    <motion.div 
+                        className={ `halo z-50 ${isHovered ? "hovered" : ""}` }  
+                        style={{
+                            translateX: haloPosition.x,
+                            translateY: haloPosition.y,
+                        }} 
+                    />
+                </>
+            )}
         </>
     );
 };
