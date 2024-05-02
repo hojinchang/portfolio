@@ -124,8 +124,8 @@ const SingleProjectPage:FC = () => {
                     const data = response.data[0];
                     data.title.rendered = decodeHTMLEntities(data.title.rendered);
                     
-                    // // Set the title of the page
-                    // document.title = `Project - ${data.title.rendered}`;
+                    // Set the title of the page
+                    document.title = `Project - ${data.title.rendered}`;
 
                     // Get the tech stack cpt
                     const techStackIds = data.acf.tech_stack;
@@ -199,7 +199,6 @@ const SingleProjectPage:FC = () => {
     return (
         <>
             <Helmet>
-                <title>{ `Project - ${project?.title.rendered}` }</title>
                 <meta name="description" content={`Explore details about the project "${project?.title.rendered}" including overview, tech stack, roles, and more. Dive into innovative solutions and creative implementations.`} />
             </Helmet>
             <Header />

@@ -31,10 +31,10 @@ const ProjectsPage: FC = () => {
     const descriptionRef = useRef<HTMLParagraphElement>(null);
     const projectRefs = useRef<Array<React.RefObject<HTMLDivElement>>>([]);
 
-    // // Set the title of the page
-    // useEffect(() => {
-    //     document.title = `Projects - ${appTitle}`;
-    // }, []);
+    // Set the title of the page
+    useEffect(() => {
+        document.title = `${appTitle} - Projects`;
+    }, []);
 
     // Scroll to the top of the page when the page mounts
     useEffect(() => {
@@ -114,7 +114,6 @@ const ProjectsPage: FC = () => {
     return (
         <>  
             <Helmet>
-                <title>{ `${appTitle} - Projects` }</title>
                 <meta name="description" content="Explore a showcase of my projects, including Full-Stack and Front-End Development. Get inspired by innovative solutions and creative implementations." />
             </Helmet>
             <Header />
