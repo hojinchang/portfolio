@@ -92,7 +92,7 @@ const TechStackSection: FC = () => {
     
         const observer = new IntersectionObserver((entries) => {
             animateHeadingIntersect(
-                entries,
+                entries[0],
                 titleBorderRef,
                 titleRef,
                 null,
@@ -126,7 +126,7 @@ const TechStackSection: FC = () => {
         
         const observer = new IntersectionObserver(( entries ) => {
             animateTechStack(
-                entries,
+                entries[0],
                 frontEndStackRef,
                 backEndStackRef,
                 programsStackRef,
@@ -160,13 +160,10 @@ const TechStackSection: FC = () => {
             <div ref={ titleBorderRef } className="section-border"></div>
 
             <div ref={ contentWrapperRef } className="flex flex-col gap-8 lg:gap-10 mt-2 hidden-section">
-                {/* <div className="flex flex-col gap-8 lg:flex-row"> */}
                 <div className="flex flex-col gap-8 1xl:flex-row">
-                    {/* <article ref={ frontEndStackRef } className="flex flex-col gap-2 lg:w-1/2 hidden-section"> */}
                     <article ref={ frontEndStackRef } className="flex flex-col gap-2 1xl:w-1/2 hidden-section">
                         <h3 className="h3">{ "< Front-End />" }</h3>
                         {techStack.frontEnd.length > 0 && (
-                            // <div className="grid gap-2 grid-cols-2 lg:grid-cols-1 lg:w-9/12 1xl:grid-cols-2 1xl:w-full">
                             <div className="grid gap-2 grid-cols-2 ">
                                 {techStack.frontEnd.map(( stack ) => (
                                     <TechStack key={ stack.id } stack={ stack } />
@@ -174,11 +171,9 @@ const TechStackSection: FC = () => {
                             </div>
                         )}
                     </article>
-                    {/* <article ref={ backEndStackRef } className="flex flex-col gap-2 lg:w-1/2 hidden-section"> */}
                     <article ref={ backEndStackRef } className="flex flex-col gap-2 1xl:w-1/2 hidden-section">
                         <h3 className="h3">{ "< Back-End />" }</h3>
                         {techStack.backEnd.length > 0 && (
-                            // <div className="grid gap-2 grid-cols-2 lg:grid-cols-1 lg:w-9/12 1xl:grid-cols-2 1xl:w-full">
                             <div className="grid gap-2 grid-cols-2 ">
                                 {techStack.backEnd.map(( stack ) => (
                                     <TechStack key={ stack.id } stack={ stack } />

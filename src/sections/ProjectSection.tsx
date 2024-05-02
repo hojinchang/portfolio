@@ -96,7 +96,7 @@ const ProjectSection: FC = () => {
         // Create a new IntersectionObserver
         const observer = new IntersectionObserver(( entries ) => {
             animateHeadingIntersect(
-                entries,
+                entries[0],
                 titleBorderRef,
                 titleRef,
                 viewAllProjectsRef,
