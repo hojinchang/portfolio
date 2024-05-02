@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
+import ProjectLiveSiteLink from "./ProjectLiveSiteLink";
 import { RootState } from "../../store/store";
 import FeaturedImage from "./FeaturedImage";
 import { decodeHTMLEntities, reverseTechStackArray } from "../../global/utilityFunctions";
@@ -47,8 +47,8 @@ const FeaturedProjectArticle: FC<FeaturedProjectArticleProps> = ({ project, idx,
                     <p className="text-neutral-400 text-sm leading-normal lg:text-base">{ reversedTechStack.map((techStack) => techStack.title.rendered).join(" | ") }</p>
                 </div>
                 <div className="flex justify-center gap-8 2xs:gap-20 xs:gap-28 sm:gap-36 md:flex-col md:gap-0 md:items-end">
-                    <Link to={ `/project/${project.slug}` } className="underline p-2 lg:text-lg link-hover">VIEW MORE</Link>
-                    <Link to={ project.acf.live_site_link } target="_blank" className="underline p-2 lg:text-lg link-hover">LIVE SITE</Link>
+                    <a href={ `/project/${project.slug}` } className="underline p-2 lg:text-lg link-hover">VIEW MORE</a>
+                    <ProjectLiveSiteLink project={ project }/>
                 </div>
             </div>
         </article>

@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
 
+import ProjectLiveSiteLink from "./ProjectLiveSiteLink";
 import { ProjectInterface } from "../../interfaces/interfaces";
 import { decodeHTMLEntities, reverseTechStackArray } from "../../global/utilityFunctions";
 
@@ -30,8 +30,8 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
                     <p className="text-neutral-400 text-sm leading-normal">{ reversedTechStack.map(( techStack ) => techStack.title.rendered).join(" | ") }</p>
                 </div>
                 <div className="flex justify-center gap-8">
-                    <Link to={ `/project/${project.slug}` } className="underline p-2 link-hover">VIEW MORE</Link>
-                    <Link to={ project.acf.live_site_link } target="_blank" className="underline p-2 link-hover">LIVE SITE</Link>
+                    <a href={ `/project/${project.slug}` } className="underline p-2 lg:text-lg link-hover">VIEW MORE</a>
+                    <ProjectLiveSiteLink project={ project }/>
                 </div>
             </div>
         </article>

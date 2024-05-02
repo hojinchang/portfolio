@@ -27,12 +27,23 @@ const DotCursor: FC = () => {
                 x: e.clientX - 20,   // subtract the radius
                 y: e.clientY - 20
             });
+
+            setIsVisible(true);
         }
 
+        const touchStart = () => {
+            // Hide cursor shortly after touch begins to allow for quick toggle between touch and mouse
+            setTimeout(() => setIsVisible(false), 200);
+        };
+
         window.addEventListener("mousemove", moveCursor);
+        window.addEventListener("touchstart", touchStart);
+
 
         return () => {
             window.removeEventListener("mousemove", moveCursor);
+            window.removeEventListener("touchstart", touchStart);
+
         }
     }, []);
 
@@ -61,18 +72,18 @@ const DotCursor: FC = () => {
         };
     }, []);
 
-    // Detect touch devices and hide cursor permanently on them
-    useEffect(() => {
-        const handleTouchStart = () => {
-            setIsVisible(false);  // Permanently hide cursor on touch devices
-        };
+    // // Detect touch devices and hide cursor permanently on them
+    // useEffect(() => {
+    //     const handleTouchStart = () => {
+    //         setIsVisible(false);  // Permanently hide cursor on touch devices
+    //     };
 
-        window.addEventListener("touchstart", handleTouchStart);
+    //     window.addEventListener("touchstart", handleTouchStart);
 
-        return () => {
-            window.removeEventListener("touchstart", handleTouchStart);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener("touchstart", handleTouchStart);
+    //     };
+    // }, []);
 
 
     return (

@@ -11,7 +11,7 @@ const ScrollDown: FC = () => {
         const projectSection = document.getElementById("projects");
 
         if (projectSection) {
-            const sectionPosition = projectSection.getBoundingClientRect().top - scrollOffset;
+            const sectionPosition = projectSection.getBoundingClientRect().top + window.scrollY - scrollOffset;
 
             window.scrollTo({
                 top: sectionPosition,
