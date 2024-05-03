@@ -21,10 +21,12 @@ const Header: FC = () => {
                     : `pt-10 ${isHomePage && "bg-neutral-900 border-b border-neutral-700 shadow-bot-shadow"}`
                 }`
             }
-        >
-            <NavLink to="/" className="logo z-10 group">
-                <p className="inline text-3xl font-semibold text-neutral-200 transition duration-300 lg:group-hover:text-neutral-500"><span>{"< h "}</span><span className="animate-codeFlash">{"/>"}</span></p>
-            </NavLink>
+        >   
+            <div className="max-w-[1920px] mx-auto">
+                <NavLink to="/" className="logo z-10 group">
+                    <p className="inline text-3xl font-semibold text-neutral-200 transition duration-300 lg:group-hover:text-neutral-500"><span>{"< h "}</span><span className="animate-codeFlash">{"/>"}</span></p>
+                </NavLink>
+            </div>
             { isHomePage && <Nav /> }
         </header>
     )

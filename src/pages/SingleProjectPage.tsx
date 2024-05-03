@@ -206,7 +206,7 @@ const SingleProjectPage:FC = () => {
                 <>
                     {/* Gradient backdrop */}
                     <header className="pt-[5rem] pb-[3rem] relative">
-                        <div ref={ marqueeRef } className="marquee marquee-gap">
+                        <div ref={ marqueeRef } className="marquee marquee-gap max-w-[1920px] mx-auto overflow-hidden">
                             <div className="marquee-content marquee-gap">
                                 <div className="name-marquee w-full">
                                     {project && project.title.rendered.split('').map((letter, index) => (
