@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import SecondaryNav from "../components/nav/SecondaryNav";
 import CurrentTime from "../components/CurrentTime";
 import ScrollDown from "../components/ScrollDown";
+
 import { useMarqueeAnimation } from "../hooks/useMarquee";
 
 const HomeSection: FC = () => {
@@ -44,8 +45,8 @@ const HomeSection: FC = () => {
 
 
     return (
-        <section id="home" className="h-screen relative mb-[10rem]">
-            <div className="absolute top-1/2 left-0 right-0 transform -translate-y-2/3 mx-auto max-w-6xl md:max-w-[575px] 2md:max-w-[650px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1152px]">
+        <section id="home" className="relative h-screen mb-[10rem] max-w-[1920px] mx-auto">
+            <div className="absolute top-[40%] md:top-1/2 left-0 right-0 transform -translate-y-2/3 mx-auto max-w-6xl md:max-w-[575px] 2md:max-w-[650px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1152px]">
                 <div ref={ marqueeRef } className="marquee flex gap-52 overflow-hidden 2xs:pb-4 lg:pb-6">
                     <div className="marquee-content flex gap-52 w-full">
                         <div className="name-marquee w-full">

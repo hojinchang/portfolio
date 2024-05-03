@@ -3,6 +3,33 @@ import { FC, useEffect } from "react";
 import { scrollOffset } from "../../global/globals";
 
 const SecondaryNav:FC = () => {
+
+    useEffect(() => {
+        // Position the absolutely positioned secondary nav such that it is always at the edge of 1920px max-width
+        const updateNavPosition = () => {
+            const screenWidth = window.innerWidth;
+            const contentWidth = 1920;
+            const navElement = document.getElementById('secondary-nav');
+    
+            if (!navElement) return;
+    
+            if (screenWidth > contentWidth) {
+                const rightOffset = (screenWidth - contentWidth) / 2;
+                navElement.style.right = `${rightOffset}px`;
+            } else {
+                navElement.style.right = "34px"; // Reset to default position when screen is smaller
+            }
+        };
+    
+        updateNavPosition();
+        window.addEventListener('resize', updateNavPosition);
+    
+        return () => {
+            window.removeEventListener('resize', updateNavPosition);
+        };
+    }, []);
+    
+
     const handleNav = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
         const sectionId = e.currentTarget.getAttribute("href");
