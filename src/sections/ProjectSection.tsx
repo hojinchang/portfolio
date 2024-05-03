@@ -138,7 +138,7 @@ const ProjectSection: FC = () => {
                             return (
                                 <FeaturedProjectArticle
                                     key={ project.title.rendered }
-                                    idx={ project.id }
+                                    idx={ idx }
                                     project={ project }
                                     active={ activeProject[projectKeys[idx]] }
                                     articleRef={ projectRef?.articleRef }

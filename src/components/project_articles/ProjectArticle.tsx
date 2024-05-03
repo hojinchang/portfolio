@@ -21,7 +21,11 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
             {project.featured_media !== 0 && project._embedded && 
                 <div>
                     <figure>
-                        <img className="rounded-lg" src={ project._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large.source_url} />
+                        <img 
+                            className="rounded-lg" 
+                            src={ project._embedded["wp:featuredmedia"][0].media_details.sizes.medium_large.source_url}
+                            alt={ project._embedded["wp:featuredmedia"][0].alt_text }
+                        />
                     </figure>
                 </div>
             }
