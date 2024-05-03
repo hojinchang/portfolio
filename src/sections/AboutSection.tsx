@@ -18,7 +18,6 @@ const AboutSection: FC = () => {
         if (activeAccordion) {
             const timer = setTimeout(() => {
                 const accordionContent = document.getElementById(`content-${activeAccordion}`);
-                // const headingHero = document.getElementById(`hero-${activeAccordion}`);
                 const headingHero = document.querySelector(".heading-hero");
 
                 if (accordionContent && headingHero) {

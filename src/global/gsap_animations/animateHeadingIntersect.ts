@@ -28,7 +28,7 @@ const animateHeadingIntersect = (
         }, {
             autoAlpha: 1,
             width: "100%",
-            duration: 1.75,
+            duration: 1.5,
             ease: "power1.out",
             onComplete: () => {
                 setHasAnimated(true);
@@ -41,7 +41,7 @@ const animateHeadingIntersect = (
         }, {
             x: 0,
             autoAlpha: 1,
-            duration: 2,
+            duration: 1.5,
             ease: "power1.out"
         });
 
@@ -53,7 +53,7 @@ const animateHeadingIntersect = (
             }, {
                 x: 0,
                 autoAlpha: 1,
-                duration: 2,
+                duration: 1.5,
                 ease: "power1.out"
             });
         }
@@ -65,7 +65,7 @@ const animateHeadingIntersect = (
             }, {
                 y: 0,
                 autoAlpha: 1,
-                duration: 2,
+                duration: 1.5,
                 ease: "power1.out"
             });
         }

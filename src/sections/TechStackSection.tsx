@@ -52,7 +52,6 @@ const TechStackSection: FC = () => {
                 [cat.id]: cat.slug
             }), {});
 
-            setIsReadyForAnimation(true)
             setCategories(categoryMap);
         };
 
@@ -76,6 +75,7 @@ const TechStackSection: FC = () => {
                 post['portfolio-tech-stack-category'].some((catId: number) => categories[catId] === 'programs_and_design')
             );
 
+            setIsReadyForAnimation(true);
             setTechStack({ frontEnd, backEnd, programsAndDesign });
         };
 
