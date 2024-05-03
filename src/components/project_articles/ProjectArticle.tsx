@@ -14,8 +14,6 @@ const ProjectArticle: FC<ProjectArticleProps> = ({ project }) => {
     // Reverse the tech stack array
     const reversedTechStack = reverseTechStackArray(project);
 
-    console.log(project._embedded["wp:featuredmedia"][0]);
-
     return (
         <article className="project-article flex flex-col gap-4" >
             {project.featured_media !== 0 && project._embedded && 

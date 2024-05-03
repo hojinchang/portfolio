@@ -46,24 +46,26 @@ const NavItem: FC<Props> = ({
         // If there is a section specified in the query string, scroll to it
         const scrollToElement = () => {
             const params = new URLSearchParams(location.search);
-            const scrollTo = params.get('scrollTo');
+            const scrollTo = params.get("scrollTo");
             if (scrollTo) {
                 const element = document.getElementById(scrollTo);
                 if (element) {
-                    // Scroll to the top of the specified section with some offset
-                    const sectionTop = element.offsetTop;
-                    const scrollToPosition = sectionTop - scrollOffset;
-                    
-                    window.scrollTo({
-                        top: scrollToPosition,
-                        behavior: "smooth"
-                    });
+                    setTimeout(() => {
+                        const sectionTop = element.offsetTop;
+                        const scrollToPosition = sectionTop - scrollOffset;
+    
+                        window.scrollTo({
+                            top: scrollToPosition,
+                            behavior: "smooth"
+                        });
+                    }, 500);
                 }
             }
         };
 
         scrollToElement();
-    }, [location]);
+
+    }, [location, location.search]);
 
     return (
         <li>

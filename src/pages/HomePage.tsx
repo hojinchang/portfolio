@@ -24,7 +24,7 @@ const HomePage: FC = () => {
     useEffect(() => {
         setTimeout(() => {
             window.scrollTo(0, 0);
-        }, 100); // Adjust delay as necessary
+        }, 100);
     }, []);
 
     return (
