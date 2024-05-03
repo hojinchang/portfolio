@@ -58,6 +58,8 @@ const NavItem: FC<Props> = ({
                             top: scrollToPosition,
                             behavior: "smooth"
                         });
+
+                        navigate(location.pathname, { replace: true });
                     }, 500);
                 }
             }

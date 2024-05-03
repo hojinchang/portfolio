@@ -63,12 +63,20 @@ const DotCursor: FC = () => {
             }
         };
 
+        const handleMouseClick = (e: Event) => {
+            if ((e.target as Element).closest("a")) {
+                setIsHovered(false);
+            }
+        }
+
         document.addEventListener("mouseover", handleMouseOver);
         document.addEventListener("mouseout", handleMouseOut);
+        document.addEventListener("click", handleMouseClick);
 
         return () => {
             document.removeEventListener("mouseover", handleMouseOver);
             document.removeEventListener("mouseout", handleMouseOut);
+            document.removeEventListener("click", handleMouseClick);
         };
     }, []);
 

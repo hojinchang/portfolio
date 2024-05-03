@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 
 import NavItem from "./nav/NavItem";
 import { RootState } from "../store/store";
