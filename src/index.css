@@ -8,6 +8,11 @@ body {
     user-select: none;
 }
 
+a:focus, a:active
+button:focus, button:active {
+    outline: 2px solid white;
+}
+
 .main {
     @apply px-4 xs:px-8
 }
