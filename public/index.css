@@ -1422,6 +1422,11 @@ body {
           user-select: none;
 }
 
+a:focus, a:active
+button:focus, button:active {
+  outline: 2px solid white;
+}
+
 .main {
   padding-left: 1rem;
   padding-right: 1rem;
