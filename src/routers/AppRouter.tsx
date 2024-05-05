@@ -17,7 +17,7 @@ const AppRouter: FC = () => {
     useEffect(() => {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
-            dispatch( setIsMobile(screenWidth < 768) );
+            dispatch( setIsMobile(screenWidth < 768));
         };
 
         handleResize();
