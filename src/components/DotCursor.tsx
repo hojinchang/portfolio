@@ -12,8 +12,8 @@ const DotCursor: FC = () => {
         y: 0
     });
 
-    const [isHovered, setIsHovered] = useState(false);
-    const [isVisible, setIsVisible] = useState(true);
+    const [isHovered, setIsHovered] = useState(false);      // Tracking the hover state (hovering links and buttons) to show the cursor halo
+    const [isVisible, setIsVisible] = useState(true);       // Hide the dot cursor on mobile
 
     // Set the cursor and halo positions on mouse move
     useEffect(() => {
@@ -32,7 +32,7 @@ const DotCursor: FC = () => {
         }
 
         const touchStart = () => {
-            // Hide cursor shortly after touch begins to allow for quick toggle between touch and mouse
+            // Hide cursor shortly after touch begins. Normally, the dot cursor will linger where the touch was
             setTimeout(() => setIsVisible(false), 200);
         };
 
@@ -64,7 +64,7 @@ const DotCursor: FC = () => {
         };
 
         const handleMouseClick = (e: Event) => {
-            if ((e.target as Element).closest("a")) {
+            if ((e.target as Element).closest("a, button")) {
                 setIsHovered(false);
             }
         }

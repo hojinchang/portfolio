@@ -45,6 +45,7 @@ const NavItem: FC<Props> = ({
     useEffect(() => {
         // If there is a section specified in the query string, scroll to it
         const scrollToElement = () => {
+            // Get the sectionId from the query string from handleNavigate()
             const params = new URLSearchParams(location.search);
             const scrollTo = params.get("scrollTo");
             if (scrollTo) {

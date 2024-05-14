@@ -9,11 +9,12 @@ const SecondaryNav:FC = () => {
         const updateNavPosition = () => {
             const screenWidth = window.innerWidth;
             const contentWidth = 1920;
-            const navElement = document.getElementById('secondary-nav');
+            const navElement = document.getElementById("secondary-nav");
     
             if (!navElement) return;
     
             if (screenWidth > contentWidth) {
+                // Always align the secondary nav at the edge of the 1920px content width
                 const rightOffset = (screenWidth - contentWidth) / 2;
                 navElement.style.right = `${rightOffset}px`;
             } else {
@@ -56,16 +57,17 @@ const SecondaryNav:FC = () => {
             // Get the secondary nav and anchor tags
             const navElement = document.getElementById("secondary-nav");
             const navLinks = navElement?.querySelectorAll("a");
+
+            if (!navElement || !navLinks) {
+                return;
+            }
+
             // Include padding to scroll position
             const paddingOffset = 300;
             // Current scroll position
             const scrollPosition = window.scrollY + scrollOffset + paddingOffset;
             // Check if user is near the bottom of the page
             const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-
-            if (!navElement || !navLinks) {
-                return;
-            }
 
             sections.forEach((section, idx) => {
                 const sectionElement = document.getElementById(section);

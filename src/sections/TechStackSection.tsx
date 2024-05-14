@@ -53,6 +53,8 @@ const TechStackSection: FC = () => {
             }), {});
 
             setCategories(categoryMap);
+
+            console.log(categoryMap);
         };
 
         fetchCategories();

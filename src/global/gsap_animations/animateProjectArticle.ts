@@ -11,7 +11,6 @@ const animateProjectArticle = (
 ) => {
     const detailsRef = projectArticleRef.detailsRef.current;
     const imageRef = projectArticleRef.imageRef.current;
-
     const articleRef = projectArticleRef.articleRef.current;
 
     gsap.from(articleRef, {
