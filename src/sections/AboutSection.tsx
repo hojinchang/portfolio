@@ -103,13 +103,13 @@ const AboutSection: FC = () => {
                         <article className="about-article">
                             <h3 className="h3">{ "< EDUCATION />" }</h3>
                             <div className="about-article-content-wrapper">
-                                <h4 className="font-medium text-neutral-300">British Columbia Institute of Technology</h4>
+                                <h4 className="font-medium text-neutral-200">British Columbia Institute of Technology</h4>
                                 <ul className="list">
                                     <li className="about-article-text">Front-End Web Developer Certificate <i>(with Distinction)</i> - (May 2024)</li>
                                 </ul>
                             </div>
                             <div className="about-article-content-wrapper">
-                                <h4 className="font-medium text-neutral-300">Simon Fraser University</h4>
+                                <h4 className="font-medium text-neutral-200">Simon Fraser University</h4>
                                 <ul className="list">
                                     <li className="about-article-text">BASc. Mechatronic Systems Engineering <i>(with Distinction)</i> - (Aug 2022)</li>
                                 </ul>
