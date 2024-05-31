@@ -88,7 +88,7 @@ const AboutSection: FC = () => {
                             <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-200">LOGO.com</h4>
                                 <ul className="list">
-                                    <li className="about-article-text">Software Engineer - (June 2024 - Current)</li>
+                                    <li className="about-article-text">Software Engineer - (Jun 2024 - Current)</li>
                                 </ul>
                             </div>
                             <div className="about-article-content-wrapper">
