@@ -86,18 +86,17 @@ const AboutSection: FC = () => {
                         <article className="about-article">
                             <h3 className="h3">{ "< WORK EXPERIENCE />" }</h3>
                             <div className="about-article-content-wrapper">
+                                <h4 className="font-medium text-neutral-200">LOGO.com</h4>
+                                <ul className="list">
+                                    <li className="about-article-text">Software Engineer - (June 2024 - Current)</li>
+                                </ul>
+                            </div>
+                            <div className="about-article-content-wrapper">
                                 <h4 className="font-medium text-neutral-200">Metrized Consulting Inc</h4>
                                 <ul className="list">
                                     <li className="about-article-text">Machine Learning Software Engineer - (Aug 2022 - Aug 2023)</li>
                                     <li className="about-article-text">Machine Learning Software Engineer Co-op - (Aug 2021 - Aug 2022)</li>
                                 </ul>
-                            </div>
-                            <div className="about-article-content-wrapper">
-                                <h4 className="font-medium text-neutral-200">FIFO Innovations</h4>
-                                <ul className="list">
-                                    <li className="about-article-text">Mechanical Design Engineer Co-op - (Jan 2020 - Dec 2020)</li>
-                                </ul>
-
                             </div>
                         </article>
                         <article className="about-article">
